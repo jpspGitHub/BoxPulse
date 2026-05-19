@@ -6,6 +6,7 @@ Por ahora no impacta GitHub Projects, issues, labels ni milestones.
 
 | Feature | Priority |
 |---|---|
+| 000 - Bootstrap Environment Validation | P0 |
 | 001 - Project Setup | P0 |
 | 002 - Shared Domain Package | P0 |
 | 003 - Auth and Roles | P0 |
