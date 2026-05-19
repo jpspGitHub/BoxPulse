@@ -184,7 +184,7 @@ La fuente de verdad funcional está en:
 - `docs/ENTITIES.md`
 - `docs/API_CONTRACT.md`
 
-## 10. UI and Mockups
+## 10. UI, Mockups and Stitch
 
 Codex no debe inventar UX compleja si existe especificación previa.
 
@@ -194,17 +194,42 @@ Fuentes esperadas para UI:
 - `docs/MVP_SPEC.md`
 - prompts o diseños guardados en `docs/mockups` si existen
 - imágenes exportadas o referencias visuales si se agregan al repo
+- referencias de Stitch documentadas en `docs/mockups`
 
 Si se agregan mockups:
 
 ```txt
 docs/mockups
-  coach-flow.md
-  boxer-flow.md
+  stitch/
   images/
 ```
 
 Las imágenes no son obligatorias para implementar, pero si existen deben usarse como referencia visual.
+
+### Stitch Rules
+
+Los proyectos de Stitch deben tratarse como referencia visual y de flujo, no como fuente de arquitectura, backend, contratos API ni reglas de negocio.
+
+Si Codex usa MCP de Stitch o assets exportados desde Stitch:
+
+- debe descargar imágenes/código en `docs/mockups/stitch/<project-slug>/`
+- debe documentar el project ID y screen IDs
+- debe mantener una tabla de pantallas y su propósito
+- debe usar los mockups para layout, jerarquía visual, spacing y flujo
+- no debe reemplazar reglas de negocio de `docs/features/*.md`
+- no debe modificar entidades por inferencia desde mockups
+- no debe modificar endpoints por inferencia desde mockups
+- no debe usar código de Stitch como producción sin adaptación
+
+Si un mockup contradice la documentación funcional, seguir este orden de prioridad:
+
+1. `docs/features/*.md`
+2. `docs/MVP_SPEC.md`
+3. `docs/API_CONTRACT.md`
+4. `docs/ENTITIES.md`
+5. mockups de Stitch
+
+Si Stitch introduce una idea útil no documentada, reportarla como sugerencia y no implementarla automáticamente.
 
 En ausencia de mockups, priorizar:
 
