@@ -13,15 +13,21 @@ set -euo pipefail
 REPO_DIR="/ABSOLUTE/PATH/TO/BoxPulse"
 LOG_DIR="$REPO_DIR/logs"
 LOG_FILE="$LOG_DIR/codex-agent.log"
-LOCK_FILE="/tmp/boxpulse-codex-agent.lock"
+LOCK_DIR="/tmp/boxpulse-codex-agent.lock"
 
 mkdir -p "$LOG_DIR"
 
-exec 9>"$LOCK_FILE"
-if ! flock -n 9; then
+# macOS-compatible lock using mkdir.
+# mkdir is atomic: if the directory already exists, another run is active.
+if ! mkdir "$LOCK_DIR" 2>/dev/null; then
   echo "$(date) - Another BoxPulse Codex agent run is already active. Exiting." >> "$LOG_FILE"
   exit 0
 fi
+
+cleanup() {
+  rm -rf "$LOCK_DIR"
+}
+trap cleanup EXIT INT TERM
 
 {
   echo "========================================"
