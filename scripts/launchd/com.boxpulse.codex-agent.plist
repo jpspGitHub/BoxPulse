@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+ "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>Label</key>
+    <string>com.boxpulse.codex-agent</string>
+
+    <key>ProgramArguments</key>
+    <array>
+      <string>/bin/bash</string>
+      <string>/ABSOLUTE/PATH/TO/BoxPulse/scripts/run-next-ready-task.sh</string>
+    </array>
+
+    <!--
+      Interval in seconds.
+      1800 = every 30 minutes.
+    -->
+    <key>StartInterval</key>
+    <integer>1800</integer>
+
+    <!--
+      Automatically run when the LaunchAgent is loaded.
+    -->
+    <key>RunAtLoad</key>
+    <true/>
+
+    <!--
+      Update these paths before using locally.
+    -->
+    <key>StandardOutPath</key>
+    <string>/ABSOLUTE/PATH/TO/BoxPulse/logs/launchd.out.log</string>
+
+    <key>StandardErrorPath</key>
+    <string>/ABSOLUTE/PATH/TO/BoxPulse/logs/launchd.err.log</string>
+  </dict>
+</plist>
