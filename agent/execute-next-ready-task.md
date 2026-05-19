@@ -9,10 +9,12 @@ El agente debe:
 1. Buscar tareas en el GitHub Project.
 2. Filtrar solo las tareas con estado `Ready`.
 3. Tomar una sola tarea según prioridad y fecha de creación.
-4. Desarrollarla en una branch aparte.
-5. Correr las validaciones necesarias.
-6. Crear un Pull Request contra `dev/main` con detalle de cambios.
-7. No hacer merge del PR. El merge es manual.
+4. Mover la tarea a `In Progress` cuando empiece a trabajar.
+5. Desarrollarla en una branch aparte.
+6. Correr las validaciones necesarias.
+7. Crear un Pull Request contra `dev/main` con detalle de cambios.
+8. Mover la tarea a `In Review` cuando el PR quede creado.
+9. No hacer merge del PR. El merge es manual.
 
 ## Repository
 
@@ -77,6 +79,28 @@ Si no existe campo `Priority`, buscar prioridad en:
 
 Si no se puede determinar prioridad, asumir `P2` y reportarlo como warning.
 
+## Project Status Workflow
+
+Estados esperados:
+
+```txt
+Ready -> In Progress -> In Review -> Done
+```
+
+Reglas:
+
+- Solo tomar tareas en `Ready`.
+- Al seleccionar una tarea y antes de modificar código, moverla a `In Progress`.
+- Al crear el PR, moverla a `In Review`.
+- Nunca moverla a `Done`.
+- El estado `Done` queda reservado para después del merge manual y validación humana.
+
+Si el Project no permite actualizar el estado:
+
+- dejar comentario en la issue/item explicando el cambio de estado esperado
+- continuar solo si el alcance es claro
+- reportar el bloqueo parcial en la respuesta final
+
 ## Task Types
 
 El agente puede trabajar sobre:
@@ -87,6 +111,31 @@ El agente puede trabajar sobre:
 Si el Project item no tiene issue asociada, usar el contenido del item como fuente de alcance.
 
 Si existe issue asociada, la issue es la fuente principal de ejecución.
+
+## Ambiguity and Blocked Handling
+
+Si la task es ambigua, demasiado grande, contradictoria o no tiene suficiente información para implementarse con seguridad:
+
+1. No implementar.
+2. No crear branch de desarrollo.
+3. Agregar label `blocked` al ticket/issue si existe.
+4. Si no existe la label `blocked`, crearla si la herramienta lo permite.
+5. Agregar un comentario en el ticket/issue explicando qué información necesita el agente para continuar.
+6. Mantener o mover el estado a `Ready` solo si todavía no empezó trabajo.
+7. Si ya fue movida a `In Progress`, moverla a `Ready` o `Blocked` si el Project tiene ese estado.
+8. Reportar el bloqueo en la respuesta final.
+
+Comentario sugerido:
+
+```md
+El agente no puede avanzar de forma segura porque necesita la siguiente información:
+
+- ...
+
+Cuando esta información esté definida, quitar la label `blocked` y volver a dejar la tarea en `Ready`.
+```
+
+No improvisar decisiones funcionales importantes.
 
 ## Scope Rules
 
@@ -234,13 +283,21 @@ Describe brevemente qué se implementó.
 
 Marcar checks como realizados solo si realmente se ejecutaron.
 
-## Project Item Update
+## Project Item Update After PR
 
 Después de crear el PR:
 
 - No mover a `Done`.
 - Si el Project permite actualizar estado, mover la task a `In Review`.
-- Si no se puede actualizar el Project, dejar comentario en la issue/item indicando el PR creado.
+- Si no se puede actualizar el Project, dejar comentario en la issue/item indicando el PR creado y que debería pasar a `In Review`.
+
+Comentario sugerido:
+
+```md
+PR creado: <PR URL>
+
+La tarea queda lista para revisión manual. Estado esperado: `In Review`.
+```
 
 ## Failure Handling
 
@@ -254,7 +311,7 @@ Si no se puede acceder al GitHub Project, reportar claramente el bloqueo.
 
 Si no se puede determinar la task correcta, no improvisar. Reportar el problema.
 
-Si la task es demasiado grande o ambigua, no implementar. Reportar que necesita desglose.
+Si la task es demasiado grande o ambigua, usar el flujo `Ambiguity and Blocked Handling`.
 
 ## Final Response
 
@@ -262,6 +319,8 @@ Al finalizar, responder con:
 
 ```md
 ## Task seleccionada
+
+## Estado del Project
 
 ## Branch creada
 
@@ -278,9 +337,12 @@ Al finalizar, responder con:
 
 - Ejecutar una sola task por corrida.
 - Priorizar `Ready` por prioridad y fecha de creación.
+- Mover a `In Progress` al empezar.
 - Crear branch propia.
 - Correr checks.
 - Crear PR contra `dev/main`.
+- Mover a `In Review` cuando el PR esté creado.
 - No hacer merge.
 - No implementar scope extra.
 - No cerrar la tarea como Done automáticamente.
+- Ante ambigüedad, marcar `blocked` y comentar qué falta.
