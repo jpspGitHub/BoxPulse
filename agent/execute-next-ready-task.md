@@ -9,12 +9,13 @@ El agente debe:
 1. Buscar tareas en el GitHub Project.
 2. Filtrar solo las tareas con estado `Ready`.
 3. Tomar una sola tarea según prioridad y fecha de creación.
-4. Mover la tarea a `In Progress` cuando empiece a trabajar.
-5. Desarrollarla en una branch aparte.
-6. Correr las validaciones necesarias.
-7. Crear un Pull Request contra `dev/main` con detalle de cambios.
-8. Mover la tarea a `In Review` cuando el PR quede creado.
-9. No hacer merge del PR. El merge es manual.
+4. Sincronizar `dev/main` con remoto antes de crear branch.
+5. Mover la tarea a `In Progress` cuando empiece a trabajar.
+6. Desarrollarla en una branch aparte.
+7. Correr las validaciones necesarias.
+8. Crear un Pull Request contra `dev/main` con detalle de cambios.
+9. Mover la tarea a `In Review` cuando el PR quede creado.
+10. No hacer merge del PR. El merge es manual.
 
 ## Repository
 
@@ -137,6 +138,24 @@ Cuando esta información esté definida, quitar la label `blocked` y volver a de
 
 No improvisar decisiones funcionales importantes.
 
+## Git Sync Rules
+
+Antes de crear una branch o modificar archivos, el agente debe sincronizar la rama base con remoto.
+
+Comandos esperados:
+
+```bash
+git checkout dev/main
+git pull origin dev/main
+```
+
+Reglas:
+
+- No crear branch desde una versión desactualizada de `dev/main`.
+- Si `git pull` falla, no continuar.
+- Si hay cambios locales sin commitear, no pisarlos; reportar el bloqueo.
+- La branch de trabajo debe crearse después del pull exitoso.
+
 ## Scope Rules
 
 Implementar únicamente la task seleccionada.
@@ -156,7 +175,7 @@ Si aparece trabajo adicional necesario, reportarlo como follow-up y no implement
 
 ## Branch Rules
 
-Crear branch desde `dev/main`.
+Crear branch desde `dev/main` después de hacer pull.
 
 Formato de branch:
 
@@ -311,6 +330,8 @@ Si no se puede acceder al GitHub Project, reportar claramente el bloqueo.
 
 Si no se puede determinar la task correcta, no improvisar. Reportar el problema.
 
+Si `git pull origin dev/main` falla, no continuar y reportar el bloqueo.
+
 Si la task es demasiado grande o ambigua, usar el flujo `Ambiguity and Blocked Handling`.
 
 ## Final Response
@@ -337,8 +358,9 @@ Al finalizar, responder con:
 
 - Ejecutar una sola task por corrida.
 - Priorizar `Ready` por prioridad y fecha de creación.
+- Hacer `git pull origin dev/main` antes de crear branch.
 - Mover a `In Progress` al empezar.
-- Crear branch propia.
+- Crear branch propia desde `dev/main` actualizado.
 - Correr checks.
 - Crear PR contra `dev/main`.
 - Mover a `In Review` cuando el PR esté creado.
