@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@boxpulse/shared": "workspace:*",
+    "@supabase/supabase-js": "^2.106.1",
     "cors": "^2.8.5",
     "express": "^5.1.0",
     "zod": "^3.25.28"
