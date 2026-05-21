@@ -1,3 +1,4 @@
+import { BOXPULSE_APP_NAME } from "@boxpulse/shared/constants";
 import { StatusBar } from "expo-status-bar";
 import { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
@@ -28,7 +29,7 @@ export default function App() {
     <View style={styles.container}>
       <StatusBar style="light" />
       <View style={styles.panel}>
-        <Text style={styles.title}>BoxPulse Mobile is running</Text>
+        <Text style={styles.title}>{BOXPULSE_APP_NAME} Mobile is running</Text>
         <Text style={styles.status}>API status: {apiStatus}</Text>
       </View>
     </View>
