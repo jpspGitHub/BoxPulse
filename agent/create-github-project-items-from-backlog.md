@@ -181,12 +181,12 @@ No crear draft cards.
 Si el Project tiene un campo `Status`, usar:
 
 ```txt
-Ready
+Backlog
 ```
 
 Si el campo no existe, no inventar estado.
 
-Las tareas deben quedar listas para ser tomadas por el agente de ejecución.
+Las tareas creadas deben permanecer en `Backlog` para revisión manual antes de pasar a `Ready`.
 
 ## Reglas importantes
 
@@ -212,7 +212,7 @@ Las tareas deben quedar listas para ser tomadas por el agente de ejecución.
 6. Crear una GitHub Issue activa por feature.
 7. Agregar la issue al GitHub Project.
 8. Configurar prioridad obligatoriamente.
-9. Configurar estado `Ready` si el Project lo permite.
+9. Configurar estado `Backlog` si el Project lo permite.
 10. Entregar un resumen final.
 
 ## Resultado esperado
@@ -222,7 +222,7 @@ Al finalizar, reportar:
 ```md
 ## Created Items
 
-- [Feature] 001 - Project Setup — P0
+- [Feature] 001 - Project Setup — P0 — Backlog
 - ...
 
 ## Existing Items Skipped
@@ -235,7 +235,7 @@ Al finalizar, reportar:
 
 ## Next Recommended Step
 
-Generar issues técnicas pequeñas a partir de cada feature priorizada.
+Revisar manualmente las tareas en `Backlog` y mover a `Ready` solo las que apliquen para ejecución.
 ```
 
 ## Criterio de éxito
@@ -244,6 +244,7 @@ La tarea se considera exitosa si:
 
 - cada feature documentada tiene un item activo en el Project
 - cada item tiene prioridad configurada
+- cada item queda en estado `Backlog` para revisión manual
 - no existen draft items
 - no hay duplicados
-- el resultado final permite pasar luego a generación de issues técnicas
+- el resultado final permite revisar y luego pasar manualmente tareas a `Ready`
