@@ -1,5 +1,6 @@
 "use client";
 
+import { BOXPULSE_APP_NAME } from "@boxpulse/shared/constants";
 import { useEffect, useState } from "react";
 
 const apiBaseUrl =
@@ -28,7 +29,7 @@ export default function Home() {
   return (
     <main>
       <section className="status-panel" aria-label="BoxPulse web status">
-        <h1>BoxPulse Web is running</h1>
+        <h1>{BOXPULSE_APP_NAME} Web is running</h1>
         <p>API status: {apiStatus}</p>
       </section>
     </main>
