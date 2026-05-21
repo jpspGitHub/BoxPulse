@@ -7,10 +7,25 @@ MVP platform for boxing and combat sports gyms.
 ```bash
 pnpm install
 pnpm lint
+pnpm format
 pnpm typecheck
 pnpm test
 pnpm build
 ```
+
+## Workspace Structure
+
+```txt
+/api              Express API and backend entrypoints
+/apps/web         Next.js web app
+/apps/mobile      Expo mobile app
+/packages/shared  Shared TypeScript package
+/docs             Functional and technical documentation
+/agent            Codex task prompts
+```
+
+Use `pnpm` from the repository root. Package-specific commands should use workspace filters,
+for example `pnpm --filter @boxpulse/api dev`.
 
 ## Local Services
 

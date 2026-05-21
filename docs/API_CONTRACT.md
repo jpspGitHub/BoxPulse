@@ -67,9 +67,9 @@ Respuesta sugerida:
 
 # 6. Health
 
-| Method | Path | Auth | Roles | Description |
-|---|---|---|---|---|
-| GET | `/health` | no | public | Verifica estado del servicio. |
+| Method | Path      | Auth | Roles  | Description                   |
+| ------ | --------- | ---- | ------ | ----------------------------- |
+| GET    | `/health` | no   | public | Verifica estado del servicio. |
 
 ---
 
@@ -77,12 +77,12 @@ Respuesta sugerida:
 
 > Nota: si Supabase Auth cubre estos flujos directamente, estos endpoints pueden implementarse como wrappers o documentarse como client-side auth flows.
 
-| Method | Path | Auth | Roles | Description |
-|---|---|---|---|---|
-| POST | `/auth/login` | no | public | Inicia sesión. |
-| POST | `/auth/logout` | yes | all | Cierra sesión. |
-| GET | `/auth/me` | yes | all | Devuelve usuario actual, rol y gimnasio. |
-| POST | `/auth/change-password` | yes | all | Cambia contraseña del usuario actual. |
+| Method | Path                    | Auth | Roles  | Description                              |
+| ------ | ----------------------- | ---- | ------ | ---------------------------------------- |
+| POST   | `/auth/login`           | no   | public | Inicia sesión.                           |
+| POST   | `/auth/logout`          | yes  | all    | Cierra sesión.                           |
+| GET    | `/auth/me`              | yes  | all    | Devuelve usuario actual, rol y gimnasio. |
+| POST   | `/auth/change-password` | yes  | all    | Cambia contraseña del usuario actual.    |
 
 ## POST /auth/login
 
@@ -133,10 +133,10 @@ Respuesta sugerida:
 
 # 8. Gyms
 
-| Method | Path | Auth | Roles | Description |
-|---|---|---|---|---|
-| GET | `/gyms/current` | yes | admin, coach, boxer | Obtiene el gimnasio actual del usuario. |
-| PATCH | `/gyms/current` | yes | admin | Actualiza datos básicos del gimnasio. |
+| Method | Path            | Auth | Roles               | Description                             |
+| ------ | --------------- | ---- | ------------------- | --------------------------------------- |
+| GET    | `/gyms/current` | yes  | admin, coach, boxer | Obtiene el gimnasio actual del usuario. |
+| PATCH  | `/gyms/current` | yes  | admin               | Actualiza datos básicos del gimnasio.   |
 
 ## GET /gyms/current
 
@@ -158,14 +158,14 @@ Respuesta sugerida:
 
 Gestión de usuarios del gimnasio desde web admin.
 
-| Method | Path | Auth | Roles | Description |
-|---|---|---|---|---|
-| GET | `/admin/users` | yes | admin | Lista usuarios del gimnasio. |
-| POST | `/admin/users` | yes | admin | Crea usuario coach o boxer. |
-| GET | `/admin/users/{user_id}` | yes | admin | Obtiene detalle de usuario. |
-| PATCH | `/admin/users/{user_id}` | yes | admin | Edita datos básicos de usuario. |
-| POST | `/admin/users/{user_id}/activate` | yes | admin | Activa usuario. |
-| POST | `/admin/users/{user_id}/deactivate` | yes | admin | Desactiva usuario. |
+| Method | Path                                | Auth | Roles | Description                     |
+| ------ | ----------------------------------- | ---- | ----- | ------------------------------- |
+| GET    | `/admin/users`                      | yes  | admin | Lista usuarios del gimnasio.    |
+| POST   | `/admin/users`                      | yes  | admin | Crea usuario coach o boxer.     |
+| GET    | `/admin/users/{user_id}`            | yes  | admin | Obtiene detalle de usuario.     |
+| PATCH  | `/admin/users/{user_id}`            | yes  | admin | Edita datos básicos de usuario. |
+| POST   | `/admin/users/{user_id}/activate`   | yes  | admin | Activa usuario.                 |
+| POST   | `/admin/users/{user_id}/deactivate` | yes  | admin | Desactiva usuario.              |
 
 ## POST /admin/users
 
@@ -204,24 +204,24 @@ Gestión de usuarios del gimnasio desde web admin.
 
 # 10. Coach Profiles
 
-| Method | Path | Auth | Roles | Description |
-|---|---|---|---|---|
-| GET | `/coaches` | yes | admin | Lista coaches del gimnasio. |
-| GET | `/coaches/{coach_id}` | yes | admin, coach | Obtiene detalle de coach. |
-| PATCH | `/coaches/{coach_id}` | yes | admin, coach | Actualiza perfil de coach. |
+| Method | Path                  | Auth | Roles        | Description                 |
+| ------ | --------------------- | ---- | ------------ | --------------------------- |
+| GET    | `/coaches`            | yes  | admin        | Lista coaches del gimnasio. |
+| GET    | `/coaches/{coach_id}` | yes  | admin, coach | Obtiene detalle de coach.   |
+| PATCH  | `/coaches/{coach_id}` | yes  | admin, coach | Actualiza perfil de coach.  |
 
 ---
 
 # 11. Boxer Profiles
 
-| Method | Path | Auth | Roles | Description |
-|---|---|---|---|---|
-| GET | `/boxers` | yes | admin, coach | Lista boxeadores del gimnasio. |
-| GET | `/boxers/{boxer_id}` | yes | admin, coach | Obtiene detalle de boxeador. |
-| PATCH | `/boxers/{boxer_id}` | yes | admin, coach | Actualiza datos deportivos del boxeador. |
-| GET | `/boxers/me` | yes | boxer | Obtiene perfil del boxeador actual. |
-| PATCH | `/boxers/me` | yes | boxer | Actualiza perfil personal del boxeador actual. |
-| POST | `/boxers/me/avatar` | yes | boxer | Actualiza imagen/avatar del boxeador. |
+| Method | Path                 | Auth | Roles        | Description                                    |
+| ------ | -------------------- | ---- | ------------ | ---------------------------------------------- |
+| GET    | `/boxers`            | yes  | admin, coach | Lista boxeadores del gimnasio.                 |
+| GET    | `/boxers/{boxer_id}` | yes  | admin, coach | Obtiene detalle de boxeador.                   |
+| PATCH  | `/boxers/{boxer_id}` | yes  | admin, coach | Actualiza datos deportivos del boxeador.       |
+| GET    | `/boxers/me`         | yes  | boxer        | Obtiene perfil del boxeador actual.            |
+| PATCH  | `/boxers/me`         | yes  | boxer        | Actualiza perfil personal del boxeador actual. |
+| POST   | `/boxers/me/avatar`  | yes  | boxer        | Actualiza imagen/avatar del boxeador.          |
 
 ## GET /boxers/{boxer_id}
 
@@ -250,14 +250,14 @@ Gestión de usuarios del gimnasio desde web admin.
 
 # 12. Training Programs
 
-| Method | Path | Auth | Roles | Description |
-|---|---|---|---|---|
-| GET | `/training-programs` | yes | admin, coach | Lista programas del gimnasio. |
-| POST | `/training-programs` | yes | coach | Crea programa. |
-| GET | `/training-programs/{program_id}` | yes | admin, coach | Obtiene detalle de programa. |
-| PATCH | `/training-programs/{program_id}` | yes | coach | Edita programa. |
-| POST | `/training-programs/{program_id}/archive` | yes | coach | Archiva programa. |
-| POST | `/training-programs/{program_id}/activate` | yes | coach | Activa programa. |
+| Method | Path                                       | Auth | Roles        | Description                   |
+| ------ | ------------------------------------------ | ---- | ------------ | ----------------------------- |
+| GET    | `/training-programs`                       | yes  | admin, coach | Lista programas del gimnasio. |
+| POST   | `/training-programs`                       | yes  | coach        | Crea programa.                |
+| GET    | `/training-programs/{program_id}`          | yes  | admin, coach | Obtiene detalle de programa.  |
+| PATCH  | `/training-programs/{program_id}`          | yes  | coach        | Edita programa.               |
+| POST   | `/training-programs/{program_id}/archive`  | yes  | coach        | Archiva programa.             |
+| POST   | `/training-programs/{program_id}/activate` | yes  | coach        | Activa programa.              |
 
 ## POST /training-programs
 
@@ -276,13 +276,13 @@ Gestión de usuarios del gimnasio desde web admin.
 
 # 13. Training Sessions
 
-| Method | Path | Auth | Roles | Description |
-|---|---|---|---|---|
-| GET | `/training-programs/{program_id}/sessions` | yes | admin, coach, boxer | Lista sesiones de un programa. |
-| POST | `/training-programs/{program_id}/sessions` | yes | coach | Crea sesión dentro de programa. |
-| GET | `/training-sessions/{session_id}` | yes | admin, coach, boxer | Obtiene detalle de sesión. |
-| PATCH | `/training-sessions/{session_id}` | yes | coach | Edita sesión. |
-| DELETE | `/training-sessions/{session_id}` | yes | coach | Elimina sesión si no tiene uso histórico. |
+| Method | Path                                       | Auth | Roles               | Description                               |
+| ------ | ------------------------------------------ | ---- | ------------------- | ----------------------------------------- |
+| GET    | `/training-programs/{program_id}/sessions` | yes  | admin, coach, boxer | Lista sesiones de un programa.            |
+| POST   | `/training-programs/{program_id}/sessions` | yes  | coach               | Crea sesión dentro de programa.           |
+| GET    | `/training-sessions/{session_id}`          | yes  | admin, coach, boxer | Obtiene detalle de sesión.                |
+| PATCH  | `/training-sessions/{session_id}`          | yes  | coach               | Edita sesión.                             |
+| DELETE | `/training-sessions/{session_id}`          | yes  | coach               | Elimina sesión si no tiene uso histórico. |
 
 ## POST /training-programs/{program_id}/sessions
 
@@ -300,12 +300,12 @@ Gestión de usuarios del gimnasio desde web admin.
 
 # 14. Training Blocks
 
-| Method | Path | Auth | Roles | Description |
-|---|---|---|---|---|
-| GET | `/training-sessions/{session_id}/blocks` | yes | admin, coach, boxer | Lista bloques de una sesión. |
-| POST | `/training-sessions/{session_id}/blocks` | yes | coach | Crea bloque. |
-| PATCH | `/training-blocks/{block_id}` | yes | coach | Edita bloque. |
-| DELETE | `/training-blocks/{block_id}` | yes | coach | Elimina bloque si no tiene uso histórico. |
+| Method | Path                                     | Auth | Roles               | Description                               |
+| ------ | ---------------------------------------- | ---- | ------------------- | ----------------------------------------- |
+| GET    | `/training-sessions/{session_id}/blocks` | yes  | admin, coach, boxer | Lista bloques de una sesión.              |
+| POST   | `/training-sessions/{session_id}/blocks` | yes  | coach               | Crea bloque.                              |
+| PATCH  | `/training-blocks/{block_id}`            | yes  | coach               | Edita bloque.                             |
+| DELETE | `/training-blocks/{block_id}`            | yes  | coach               | Elimina bloque si no tiene uso histórico. |
 
 ## POST /training-sessions/{session_id}/blocks
 
@@ -326,10 +326,10 @@ Gestión de usuarios del gimnasio desde web admin.
 
 # 15. Timer Configs for Planned Sessions
 
-| Method | Path | Auth | Roles | Description |
-|---|---|---|---|---|
-| GET | `/training-sessions/{session_id}/timer-config` | yes | admin, coach, boxer | Obtiene configuración de timer. |
-| PUT | `/training-sessions/{session_id}/timer-config` | yes | coach | Crea o reemplaza configuración de timer. |
+| Method | Path                                           | Auth | Roles               | Description                              |
+| ------ | ---------------------------------------------- | ---- | ------------------- | ---------------------------------------- |
+| GET    | `/training-sessions/{session_id}/timer-config` | yes  | admin, coach, boxer | Obtiene configuración de timer.          |
+| PUT    | `/training-sessions/{session_id}/timer-config` | yes  | coach               | Crea o reemplaza configuración de timer. |
 
 ## PUT /training-sessions/{session_id}/timer-config
 
@@ -348,16 +348,16 @@ Gestión de usuarios del gimnasio desde web admin.
 
 # 16. Program Assignments
 
-| Method | Path | Auth | Roles | Description |
-|---|---|---|---|---|
-| GET | `/program-assignments` | yes | admin, coach | Lista asignaciones. |
-| POST | `/program-assignments` | yes | coach | Asigna programa a boxeador. |
-| GET | `/program-assignments/{assignment_id}` | yes | admin, coach, boxer | Obtiene detalle de asignación. |
-| PATCH | `/program-assignments/{assignment_id}` | yes | coach | Actualiza asignación. |
-| POST | `/program-assignments/{assignment_id}/complete` | yes | coach | Marca asignación como completada. |
-| POST | `/program-assignments/{assignment_id}/cancel` | yes | coach | Cancela asignación. |
-| GET | `/boxers/me/program-assignments` | yes | boxer | Lista asignaciones del boxeador actual. |
-| GET | `/boxers/me/active-program` | yes | boxer | Obtiene programa activo del boxeador actual. |
+| Method | Path                                            | Auth | Roles               | Description                                  |
+| ------ | ----------------------------------------------- | ---- | ------------------- | -------------------------------------------- |
+| GET    | `/program-assignments`                          | yes  | admin, coach        | Lista asignaciones.                          |
+| POST   | `/program-assignments`                          | yes  | coach               | Asigna programa a boxeador.                  |
+| GET    | `/program-assignments/{assignment_id}`          | yes  | admin, coach, boxer | Obtiene detalle de asignación.               |
+| PATCH  | `/program-assignments/{assignment_id}`          | yes  | coach               | Actualiza asignación.                        |
+| POST   | `/program-assignments/{assignment_id}/complete` | yes  | coach               | Marca asignación como completada.            |
+| POST   | `/program-assignments/{assignment_id}/cancel`   | yes  | coach               | Cancela asignación.                          |
+| GET    | `/boxers/me/program-assignments`                | yes  | boxer               | Lista asignaciones del boxeador actual.      |
+| GET    | `/boxers/me/active-program`                     | yes  | boxer               | Obtiene programa activo del boxeador actual. |
 
 ## POST /program-assignments
 
@@ -377,16 +377,16 @@ Gestión de usuarios del gimnasio desde web admin.
 
 Ejercicios reales iniciados por un coach desde mobile.
 
-| Method | Path | Auth | Roles | Description |
-|---|---|---|---|---|
-| GET | `/exercises` | yes | admin, coach | Lista ejercicios del gimnasio. |
-| POST | `/exercises` | yes | coach | Crea ejercicio en estado pendiente. |
-| GET | `/exercises/{exercise_id}` | yes | admin, coach, boxer | Obtiene detalle de ejercicio. |
-| PATCH | `/exercises/{exercise_id}` | yes | coach | Actualiza datos generales del ejercicio. |
-| POST | `/exercises/{exercise_id}/start` | yes | coach | Inicia ejercicio. |
-| POST | `/exercises/{exercise_id}/finish` | yes | coach | Finaliza y guarda resultado. |
-| POST | `/exercises/{exercise_id}/cancel` | yes | coach | Cancela ejercicio. |
-| POST | `/exercises/{exercise_id}/restart` | yes | coach | Reinicia ejercicio completo. |
+| Method | Path                               | Auth | Roles               | Description                              |
+| ------ | ---------------------------------- | ---- | ------------------- | ---------------------------------------- |
+| GET    | `/exercises`                       | yes  | admin, coach        | Lista ejercicios del gimnasio.           |
+| POST   | `/exercises`                       | yes  | coach               | Crea ejercicio en estado pendiente.      |
+| GET    | `/exercises/{exercise_id}`         | yes  | admin, coach, boxer | Obtiene detalle de ejercicio.            |
+| PATCH  | `/exercises/{exercise_id}`         | yes  | coach               | Actualiza datos generales del ejercicio. |
+| POST   | `/exercises/{exercise_id}/start`   | yes  | coach               | Inicia ejercicio.                        |
+| POST   | `/exercises/{exercise_id}/finish`  | yes  | coach               | Finaliza y guarda resultado.             |
+| POST   | `/exercises/{exercise_id}/cancel`  | yes  | coach               | Cancela ejercicio.                       |
+| POST   | `/exercises/{exercise_id}/restart` | yes  | coach               | Reinicia ejercicio completo.             |
 
 ## POST /exercises
 
@@ -426,12 +426,12 @@ Ejercicios reales iniciados por un coach desde mobile.
 
 # 18. Exercise Participants
 
-| Method | Path | Auth | Roles | Description |
-|---|---|---|---|---|
-| GET | `/exercises/{exercise_id}/participants` | yes | admin, coach, boxer | Lista participantes. |
-| POST | `/exercises/{exercise_id}/participants` | yes | coach | Agrega participantes. |
-| DELETE | `/exercises/{exercise_id}/participants/{boxer_id}` | yes | coach | Quita participante. |
-| PATCH | `/exercises/{exercise_id}/participants/{boxer_id}` | yes | coach | Actualiza estado del participante. |
+| Method | Path                                               | Auth | Roles               | Description                        |
+| ------ | -------------------------------------------------- | ---- | ------------------- | ---------------------------------- |
+| GET    | `/exercises/{exercise_id}/participants`            | yes  | admin, coach, boxer | Lista participantes.               |
+| POST   | `/exercises/{exercise_id}/participants`            | yes  | coach               | Agrega participantes.              |
+| DELETE | `/exercises/{exercise_id}/participants/{boxer_id}` | yes  | coach               | Quita participante.                |
+| PATCH  | `/exercises/{exercise_id}/participants/{boxer_id}` | yes  | coach               | Actualiza estado del participante. |
 
 ## POST /exercises/{exercise_id}/participants
 
@@ -449,14 +449,14 @@ Ejercicios reales iniciados por un coach desde mobile.
 
 Endpoints específicos para ejercicios por cronómetro.
 
-| Method | Path | Auth | Roles | Description |
-|---|---|---|---|---|
-| PUT | `/exercises/{exercise_id}/timer-config` | yes | coach | Crea o reemplaza configuración de timer del ejercicio. |
-| GET | `/exercises/{exercise_id}/timer-config` | yes | admin, coach, boxer | Obtiene configuración de timer del ejercicio. |
-| POST | `/exercises/{exercise_id}/timer/pause` | yes | coach | Pausa timer. |
-| POST | `/exercises/{exercise_id}/timer/resume` | yes | coach | Continúa timer. |
-| POST | `/exercises/{exercise_id}/timer/restart-round` | yes | coach | Reinicia round actual. |
-| POST | `/exercises/{exercise_id}/timer/next-round` | yes | coach | Pasa al siguiente round. |
+| Method | Path                                           | Auth | Roles               | Description                                            |
+| ------ | ---------------------------------------------- | ---- | ------------------- | ------------------------------------------------------ |
+| PUT    | `/exercises/{exercise_id}/timer-config`        | yes  | coach               | Crea o reemplaza configuración de timer del ejercicio. |
+| GET    | `/exercises/{exercise_id}/timer-config`        | yes  | admin, coach, boxer | Obtiene configuración de timer del ejercicio.          |
+| POST   | `/exercises/{exercise_id}/timer/pause`         | yes  | coach               | Pausa timer.                                           |
+| POST   | `/exercises/{exercise_id}/timer/resume`        | yes  | coach               | Continúa timer.                                        |
+| POST   | `/exercises/{exercise_id}/timer/restart-round` | yes  | coach               | Reinicia round actual.                                 |
+| POST   | `/exercises/{exercise_id}/timer/next-round`    | yes  | coach               | Pasa al siguiente round.                               |
 
 ## PUT /exercises/{exercise_id}/timer-config
 
@@ -490,11 +490,11 @@ Endpoints específicos para ejercicios por cronómetro.
 
 Endpoints específicos para ejercicios por repeticiones.
 
-| Method | Path | Auth | Roles | Description |
-|---|---|---|---|---|
-| PUT | `/exercises/{exercise_id}/repetition-config` | yes | coach | Crea o reemplaza configuración de repeticiones. |
-| GET | `/exercises/{exercise_id}/repetition-config` | yes | admin, coach, boxer | Obtiene configuración de repeticiones. |
-| POST | `/exercises/{exercise_id}/repetitions/restart-timer` | yes | coach | Reinicia timer ascendente del ejercicio. |
+| Method | Path                                                 | Auth | Roles               | Description                                     |
+| ------ | ---------------------------------------------------- | ---- | ------------------- | ----------------------------------------------- |
+| PUT    | `/exercises/{exercise_id}/repetition-config`         | yes  | coach               | Crea o reemplaza configuración de repeticiones. |
+| GET    | `/exercises/{exercise_id}/repetition-config`         | yes  | admin, coach, boxer | Obtiene configuración de repeticiones.          |
+| POST   | `/exercises/{exercise_id}/repetitions/restart-timer` | yes  | coach               | Reinicia timer ascendente del ejercicio.        |
 
 ## PUT /exercises/{exercise_id}/repetition-config
 
@@ -511,12 +511,12 @@ Endpoints específicos para ejercicios por repeticiones.
 
 # 21. Workout Completions
 
-| Method | Path | Auth | Roles | Description |
-|---|---|---|---|---|
-| GET | `/workout-completions` | yes | admin, coach | Lista entrenamientos completados. |
-| POST | `/workout-completions` | yes | coach, boxer | Crea registro de entrenamiento completado. |
-| GET | `/boxers/{boxer_id}/workout-completions` | yes | admin, coach | Lista completados de un boxeador. |
-| GET | `/boxers/me/workout-completions` | yes | boxer | Lista completados del boxeador actual. |
+| Method | Path                                     | Auth | Roles        | Description                                |
+| ------ | ---------------------------------------- | ---- | ------------ | ------------------------------------------ |
+| GET    | `/workout-completions`                   | yes  | admin, coach | Lista entrenamientos completados.          |
+| POST   | `/workout-completions`                   | yes  | coach, boxer | Crea registro de entrenamiento completado. |
+| GET    | `/boxers/{boxer_id}/workout-completions` | yes  | admin, coach | Lista completados de un boxeador.          |
+| GET    | `/boxers/me/workout-completions`         | yes  | boxer        | Lista completados del boxeador actual.     |
 
 ## POST /workout-completions
 
@@ -537,13 +537,13 @@ Endpoints específicos para ejercicios por repeticiones.
 
 # 22. Progress Entries
 
-| Method | Path | Auth | Roles | Description |
-|---|---|---|---|---|
-| GET | `/boxers/{boxer_id}/progress-entries` | yes | admin, coach | Lista progreso de un boxeador. |
-| GET | `/boxers/me/progress-entries` | yes | boxer | Lista progreso del boxeador actual. |
-| POST | `/boxers/me/progress-entries` | yes | boxer | Crea registro de progreso propio. |
-| PATCH | `/boxers/me/progress-entries/{entry_id}` | yes | boxer | Edita registro propio. |
-| DELETE | `/boxers/me/progress-entries/{entry_id}` | yes | boxer | Elimina registro propio si está permitido. |
+| Method | Path                                     | Auth | Roles        | Description                                |
+| ------ | ---------------------------------------- | ---- | ------------ | ------------------------------------------ |
+| GET    | `/boxers/{boxer_id}/progress-entries`    | yes  | admin, coach | Lista progreso de un boxeador.             |
+| GET    | `/boxers/me/progress-entries`            | yes  | boxer        | Lista progreso del boxeador actual.        |
+| POST   | `/boxers/me/progress-entries`            | yes  | boxer        | Crea registro de progreso propio.          |
+| PATCH  | `/boxers/me/progress-entries/{entry_id}` | yes  | boxer        | Edita registro propio.                     |
+| DELETE | `/boxers/me/progress-entries/{entry_id}` | yes  | boxer        | Elimina registro propio si está permitido. |
 
 ## POST /boxers/me/progress-entries
 
@@ -567,12 +567,12 @@ Endpoints específicos para ejercicios por repeticiones.
 
 # 23. Attendance Records
 
-| Method | Path | Auth | Roles | Description |
-|---|---|---|---|---|
-| GET | `/attendance-records` | yes | admin, coach | Lista asistencias del gimnasio. |
-| POST | `/attendance-records` | yes | admin, coach | Crea asistencia manual. |
-| GET | `/boxers/{boxer_id}/attendance-records` | yes | admin, coach | Lista asistencias de un boxeador. |
-| GET | `/boxers/me/attendance-records` | yes | boxer | Lista asistencias propias. |
+| Method | Path                                    | Auth | Roles        | Description                       |
+| ------ | --------------------------------------- | ---- | ------------ | --------------------------------- |
+| GET    | `/attendance-records`                   | yes  | admin, coach | Lista asistencias del gimnasio.   |
+| POST   | `/attendance-records`                   | yes  | admin, coach | Crea asistencia manual.           |
+| GET    | `/boxers/{boxer_id}/attendance-records` | yes  | admin, coach | Lista asistencias de un boxeador. |
+| GET    | `/boxers/me/attendance-records`         | yes  | boxer        | Lista asistencias propias.        |
 
 ## POST /attendance-records
 
@@ -592,12 +592,12 @@ Endpoints específicos para ejercicios por repeticiones.
 
 > Esta sección puede implementarse como entidad separada o como parte de perfiles/ejercicios. Para el MVP, se documenta el contrato previsto.
 
-| Method | Path | Auth | Roles | Description |
-|---|---|---|---|---|
-| GET | `/boxers/{boxer_id}/coach-notes` | yes | admin, coach | Lista observaciones del coach. |
-| POST | `/boxers/{boxer_id}/coach-notes` | yes | coach | Crea observación. |
-| PATCH | `/coach-notes/{note_id}` | yes | coach | Edita observación propia. |
-| DELETE | `/coach-notes/{note_id}` | yes | coach | Elimina observación propia si está permitido. |
+| Method | Path                             | Auth | Roles        | Description                                   |
+| ------ | -------------------------------- | ---- | ------------ | --------------------------------------------- |
+| GET    | `/boxers/{boxer_id}/coach-notes` | yes  | admin, coach | Lista observaciones del coach.                |
+| POST   | `/boxers/{boxer_id}/coach-notes` | yes  | coach        | Crea observación.                             |
+| PATCH  | `/coach-notes/{note_id}`         | yes  | coach        | Edita observación propia.                     |
+| DELETE | `/coach-notes/{note_id}`         | yes  | coach        | Elimina observación propia si está permitido. |
 
 ## POST /boxers/{boxer_id}/coach-notes
 
@@ -616,10 +616,10 @@ Endpoints específicos para ejercicios por repeticiones.
 
 ## Admin Dashboard
 
-| Method | Path | Auth | Roles | Description |
-|---|---|---|---|---|
-| GET | `/dashboards/admin/summary` | yes | admin | Resumen general del gimnasio. |
-| GET | `/dashboards/admin/recent-activity` | yes | admin | Actividad reciente. |
+| Method | Path                                | Auth | Roles | Description                   |
+| ------ | ----------------------------------- | ---- | ----- | ----------------------------- |
+| GET    | `/dashboards/admin/summary`         | yes  | admin | Resumen general del gimnasio. |
+| GET    | `/dashboards/admin/recent-activity` | yes  | admin | Actividad reciente.           |
 
 ### GET /dashboards/admin/summary
 
@@ -636,10 +636,10 @@ Endpoints específicos para ejercicios por repeticiones.
 
 ## Coach Dashboard
 
-| Method | Path | Auth | Roles | Description |
-|---|---|---|---|---|
-| GET | `/dashboards/coach/summary` | yes | coach | Resumen operativo del coach. |
-| GET | `/dashboards/coach/recent-activity` | yes | coach | Actividad reciente de boxeadores. |
+| Method | Path                                | Auth | Roles | Description                       |
+| ------ | ----------------------------------- | ---- | ----- | --------------------------------- |
+| GET    | `/dashboards/coach/summary`         | yes  | coach | Resumen operativo del coach.      |
+| GET    | `/dashboards/coach/recent-activity` | yes  | coach | Actividad reciente de boxeadores. |
 
 ### GET /dashboards/coach/summary
 
@@ -654,10 +654,10 @@ Endpoints específicos para ejercicios por repeticiones.
 
 ## Boxer Dashboard
 
-| Method | Path | Auth | Roles | Description |
-|---|---|---|---|---|
-| GET | `/dashboards/boxer/summary` | yes | boxer | Resumen personal del boxeador. |
-| GET | `/dashboards/boxer/progress-analytics` | yes | boxer | Análisis simple entre actividad y progreso. |
+| Method | Path                                   | Auth | Roles | Description                                 |
+| ------ | -------------------------------------- | ---- | ----- | ------------------------------------------- |
+| GET    | `/dashboards/boxer/summary`            | yes  | boxer | Resumen personal del boxeador.              |
+| GET    | `/dashboards/boxer/progress-analytics` | yes  | boxer | Análisis simple entre actividad y progreso. |
 
 ### GET /dashboards/boxer/summary
 

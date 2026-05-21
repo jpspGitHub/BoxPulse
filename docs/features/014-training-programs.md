@@ -20,9 +20,11 @@ Permitir que el coach cree programas de entrenamiento reutilizables.
 ## Program Structure
 
 Program:
+
 - sessions
 
 Session:
+
 - blocks
 - timer configuration
 
