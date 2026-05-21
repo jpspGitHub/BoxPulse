@@ -7,5 +7,5 @@
     "noEmit": true,
     "types": ["react"]
   },
-  "include": ["App.tsx", "env.d.ts", "index.ts"]
+  "include": ["App.tsx", "env.d.ts", "index.ts", "lib/**/*.ts"]
 }
