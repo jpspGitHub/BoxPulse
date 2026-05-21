@@ -29,6 +29,10 @@ main {
   padding: 32px;
 }
 
+.guard-page {
+  background: #101820;
+}
+
 .status-panel {
   width: min(100%, 520px);
   border: 1px solid #2a3947;
