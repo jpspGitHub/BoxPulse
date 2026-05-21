@@ -28,12 +28,13 @@ Por ahora no impacta GitHub Projects, issues, labels ni milestones.
 
 Estas prioridades aplican a tareas ejecutables derivadas de features grandes.
 
-| Task                                  | Parent Feature       | Priority |
-| ------------------------------------- | -------------------- | -------- |
-| Configure Supabase auth foundation    | 003 - Auth and Roles | P0       |
-| Create shared auth domain contracts   | 003 - Auth and Roles | P0       |
-| Create web auth session provider      | 003 - Auth and Roles | P0       |
-| Create mobile auth session provider   | 003 - Auth and Roles | P0       |
-| Implement role and active-user guards | 003 - Auth and Roles | P0       |
-| Protect admin web routes              | 003 - Auth and Roles | P0       |
-| Protect mobile coach and boxer routes | 003 - Auth and Roles | P0       |
+| Task                                  | Parent Feature                      | Priority |
+| ------------------------------------- | ----------------------------------- | -------- |
+| Add dummy mobile login screen         | 000 - Bootstrap Environment Validation | P0    |
+| Configure Supabase auth foundation    | 003 - Auth and Roles                | P0       |
+| Create shared auth domain contracts   | 003 - Auth and Roles                | P0       |
+| Create web auth session provider      | 003 - Auth and Roles                | P0       |
+| Create mobile auth session provider   | 003 - Auth and Roles                | P0       |
+| Implement role and active-user guards | 003 - Auth and Roles                | P0       |
+| Protect admin web routes              | 003 - Auth and Roles                | P0       |
+| Protect mobile coach and boxer routes | 003 - Auth and Roles                | P0       |
