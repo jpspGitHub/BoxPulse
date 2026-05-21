@@ -1,10 +1,14 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 
+import { canAccessWithRole, hasAllowedRole, isActiveAuthUser } from "../auth/index.js";
 import {
+  authSessionSchema,
+  currentAuthUserSchema,
   exerciseRepetitionConfigSchema,
   exerciseSchema,
   exerciseTimerConfigSchema,
+  loginRequestSchema,
   progressEntrySchema,
   userRoleSchema
 } from "./index.js";
@@ -19,6 +23,72 @@ test("userRoleSchema accepts the supported MVP roles", () => {
   assert.equal(userRoleSchema.parse("admin"), "admin");
   assert.equal(userRoleSchema.parse("coach"), "coach");
   assert.equal(userRoleSchema.parse("boxer"), "boxer");
+});
+
+test("loginRequestSchema validates the auth login contract", () => {
+  assert.equal(
+    loginRequestSchema.safeParse({
+      email: "coach@gym.com",
+      password: "secret"
+    }).success,
+    true
+  );
+
+  assert.equal(
+    loginRequestSchema.safeParse({
+      email: "not-an-email",
+      password: ""
+    }).success,
+    false
+  );
+});
+
+test("authSessionSchema validates access token and active auth user shape", () => {
+  const result = authSessionSchema.safeParse({
+    access_token: "jwt",
+    user: {
+      id: "00000000-0000-4000-8000-000000000010",
+      email: "coach@gym.com",
+      role: "coach",
+      gym_id: "00000000-0000-4000-8000-000000000011",
+      is_active: true
+    }
+  });
+
+  assert.equal(result.success, true);
+});
+
+test("currentAuthUserSchema validates the auth me contract", () => {
+  const result = currentAuthUserSchema.safeParse({
+    id: "00000000-0000-4000-8000-000000000010",
+    email: "coach@gym.com",
+    role: "coach",
+    gym_id: "00000000-0000-4000-8000-000000000011",
+    profile: {
+      id: "00000000-0000-4000-8000-000000000012",
+      first_name: "Nicolas",
+      last_name: "Cabrera",
+      avatar_url: null
+    }
+  });
+
+  assert.equal(result.success, true);
+});
+
+test("auth helpers validate roles and inactive users", () => {
+  const coach = {
+    id: "00000000-0000-4000-8000-000000000010",
+    email: "coach@gym.com",
+    role: "coach" as const,
+    gym_id: "00000000-0000-4000-8000-000000000011",
+    is_active: true
+  };
+
+  assert.equal(isActiveAuthUser(coach), true);
+  assert.equal(hasAllowedRole(coach, ["admin"]), false);
+  assert.equal(hasAllowedRole(coach, ["admin", "coach"]), true);
+  assert.equal(canAccessWithRole(coach, ["coach"]), true);
+  assert.equal(canAccessWithRole({ ...coach, is_active: false }, ["coach"]), false);
 });
 
 test("exerciseSchema rejects unsupported exercise modes", () => {

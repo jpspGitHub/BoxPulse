@@ -46,6 +46,41 @@ export const userSchema = baseEntitySchema.extend({
   is_active: z.boolean()
 });
 
+export const authUserSchema = z.object({
+  id: uuidSchema,
+  email: z.string().email(),
+  role: userRoleSchema,
+  gym_id: uuidSchema,
+  is_active: z.boolean()
+});
+
+export const authProfileSummarySchema = z.object({
+  id: uuidSchema,
+  first_name: z.string().trim().min(1),
+  last_name: z.string().trim().min(1),
+  avatar_url: z.string().url().optional().nullable()
+});
+
+export const authSessionSchema = z.object({
+  access_token: z.string().trim().min(1),
+  user: authUserSchema
+});
+
+export const loginRequestSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(1)
+});
+
+export const loginResponseSchema = authSessionSchema;
+
+export const currentAuthUserSchema = z.object({
+  id: uuidSchema,
+  email: z.string().email(),
+  role: userRoleSchema,
+  gym_id: uuidSchema,
+  profile: authProfileSummarySchema
+});
+
 export const gymSchema = baseEntitySchema.extend({
   name: z.string().trim().min(1),
   slug: z.string().trim().min(1)
@@ -185,6 +220,11 @@ export const attendanceRecordSchema = z.object({
 });
 
 export type UserRoleInput = z.infer<typeof userRoleSchema>;
+export type AuthUserInput = z.infer<typeof authUserSchema>;
+export type AuthSessionInput = z.infer<typeof authSessionSchema>;
+export type LoginRequestInput = z.infer<typeof loginRequestSchema>;
+export type LoginResponseInput = z.infer<typeof loginResponseSchema>;
+export type CurrentAuthUserInput = z.infer<typeof currentAuthUserSchema>;
 export type ExerciseInput = z.infer<typeof exerciseSchema>;
 export type ExerciseTimerConfigInput = z.infer<typeof exerciseTimerConfigSchema>;
 export type ExerciseRepetitionConfigInput = z.infer<typeof exerciseRepetitionConfigSchema>;

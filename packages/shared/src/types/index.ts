@@ -41,6 +41,34 @@ export interface User extends BaseEntity {
   is_active: boolean;
 }
 
+export interface AuthUser {
+  id: Uuid;
+  email: string;
+  role: UserRole;
+  gym_id: Uuid;
+  is_active: boolean;
+}
+
+export interface AuthProfileSummary {
+  id: Uuid;
+  first_name: string;
+  last_name: string;
+  avatar_url?: string | null;
+}
+
+export interface AuthSession {
+  access_token: string;
+  user: AuthUser;
+}
+
+export interface CurrentAuthUser {
+  id: Uuid;
+  email: string;
+  role: UserRole;
+  gym_id: Uuid;
+  profile: AuthProfileSummary;
+}
+
 export interface Gym extends BaseEntity {
   name: string;
   slug: string;
