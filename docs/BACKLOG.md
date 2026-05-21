@@ -37,6 +37,16 @@ Features/documentos relacionados:
 
 - [003 - Auth and Roles](./features/003-auth-and-roles.md)
 
+Tareas ejecutables derivadas:
+
+- [Task] Configure Supabase auth foundation
+- [Task] Create shared auth domain contracts
+- [Task] Create web auth session provider
+- [Task] Create mobile auth session provider
+- [Task] Implement role and active-user guards
+- [Task] Protect admin web routes
+- [Task] Protect mobile coach and boxer routes
+
 ## Fase 3 - Admin Web
 
 Objetivo: permitir que el gimnasio gestione usuarios y tenga una vista básica de operación.
@@ -90,18 +100,24 @@ Features/documentos relacionados:
 1. Bootstrap Environment Validation
 2. Project Setup
 3. Shared Domain Package
-4. Auth and Roles
-5. Admin User Management
-6. Coach Start Exercise
-7. Coach Timer Exercise
-8. Coach Repetition Exercise
-9. Boxer Progress Tracking
-10. Boxer Profile Management
-11. Boxer Attendance and Workout History
-12. Training Programs
-13. Program Assignments
-14. Dashboards
-15. MVP Validation
+4. Configure Supabase auth foundation
+5. Create shared auth domain contracts
+6. Create web auth session provider
+7. Create mobile auth session provider
+8. Implement role and active-user guards
+9. Protect admin web routes
+10. Protect mobile coach and boxer routes
+11. Admin User Management
+12. Coach Start Exercise
+13. Coach Timer Exercise
+14. Coach Repetition Exercise
+15. Boxer Progress Tracking
+16. Boxer Profile Management
+17. Boxer Attendance and Workout History
+18. Training Programs
+19. Program Assignments
+20. Dashboards
+21. MVP Validation
 
 ## Convención para issues
 
