@@ -1,7 +1,13 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 
-import { canAccessWithRole, hasAllowedRole, isActiveAuthUser } from "../auth/index.js";
+import {
+  authorizeAuthUser,
+  canAccessWithRole,
+  hasAllowedRole,
+  isActiveAuthUser,
+  requireActiveAuthUser
+} from "../auth/index.js";
 import {
   authSessionSchema,
   currentAuthUserSchema,
@@ -89,6 +95,45 @@ test("auth helpers validate roles and inactive users", () => {
   assert.equal(hasAllowedRole(coach, ["admin", "coach"]), true);
   assert.equal(canAccessWithRole(coach, ["coach"]), true);
   assert.equal(canAccessWithRole({ ...coach, is_active: false }, ["coach"]), false);
+});
+
+test("auth authorization helpers return explicit access decisions", () => {
+  const boxer = {
+    id: "00000000-0000-4000-8000-000000000010",
+    email: "boxer@gym.com",
+    role: "boxer" as const,
+    gym_id: "00000000-0000-4000-8000-000000000011",
+    is_active: true
+  };
+
+  assert.deepEqual(requireActiveAuthUser(null), {
+    error: {
+      code: "unauthenticated",
+      message: "Authentication is required"
+    },
+    ok: false
+  });
+
+  assert.deepEqual(requireActiveAuthUser({ ...boxer, is_active: false }), {
+    error: {
+      code: "inactive_user",
+      message: "Inactive users cannot access BoxPulse"
+    },
+    ok: false
+  });
+
+  assert.deepEqual(authorizeAuthUser(boxer, ["admin"]), {
+    error: {
+      code: "forbidden_role",
+      message: "User role is not allowed to access this resource"
+    },
+    ok: false
+  });
+
+  assert.deepEqual(authorizeAuthUser(boxer, ["boxer"]), {
+    ok: true,
+    user: boxer
+  });
 });
 
 test("exerciseSchema rejects unsupported exercise modes", () => {
