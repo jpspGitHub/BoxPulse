@@ -3,9 +3,11 @@ import { StatusBar } from "expo-status-bar";
 import { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 
+import { AuthSessionProvider } from "./lib/auth-session";
+
 const apiBaseUrl = process.env.EXPO_PUBLIC_API_BASE_URL ?? "http://localhost:3001/api/v1";
 
-export default function App() {
+function AppContent() {
   const [apiStatus, setApiStatus] = useState("checking");
 
   useEffect(() => {
@@ -33,6 +35,14 @@ export default function App() {
         <Text style={styles.status}>API status: {apiStatus}</Text>
       </View>
     </View>
+  );
+}
+
+export default function App() {
+  return (
+    <AuthSessionProvider>
+      <AppContent />
+    </AuthSessionProvider>
   );
 }
 
