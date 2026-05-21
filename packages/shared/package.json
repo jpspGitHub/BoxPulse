@@ -21,6 +21,10 @@
     "./types": {
       "types": "./src/types/index.ts",
       "default": "./dist/types/index.js"
+    },
+    "./auth": {
+      "types": "./src/auth/index.ts",
+      "default": "./dist/auth/index.js"
     }
   },
   "scripts": {
