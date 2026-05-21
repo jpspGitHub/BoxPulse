@@ -21,13 +21,13 @@ Representa la cuenta base de autenticación del sistema.
 
 > Nota: si se usa Supabase Auth, parte de esta información puede vivir en `auth.users`. Esta entidad representa la vista/perfil de dominio necesario para BoxPulse.
 
-| Property | Type | Required | Description |
-|---|---|---:|---|
-| id | uuid | yes | Identificador único del usuario. |
-| email | string | yes | Email usado para login. |
-| is_active | boolean | yes | Indica si el usuario puede acceder al sistema. |
-| created_at | timestamp | yes | Fecha de creación. |
-| updated_at | timestamp | yes | Fecha de última actualización. |
+| Property   | Type      | Required | Description                                    |
+| ---------- | --------- | -------: | ---------------------------------------------- |
+| id         | uuid      |      yes | Identificador único del usuario.               |
+| email      | string    |      yes | Email usado para login.                        |
+| is_active  | boolean   |      yes | Indica si el usuario puede acceder al sistema. |
+| created_at | timestamp |      yes | Fecha de creación.                             |
+| updated_at | timestamp |      yes | Fecha de última actualización.                 |
 
 ---
 
@@ -35,13 +35,13 @@ Representa la cuenta base de autenticación del sistema.
 
 Representa un gimnasio de boxeo o deportes de combate.
 
-| Property | Type | Required | Description |
-|---|---|---:|---|
-| id | uuid | yes | Identificador único del gimnasio. |
-| name | string | yes | Nombre del gimnasio. |
-| slug | string | yes | Identificador legible para URLs o futura multitenancy. |
-| created_at | timestamp | yes | Fecha de creación. |
-| updated_at | timestamp | yes | Fecha de última actualización. |
+| Property   | Type      | Required | Description                                            |
+| ---------- | --------- | -------: | ------------------------------------------------------ |
+| id         | uuid      |      yes | Identificador único del gimnasio.                      |
+| name       | string    |      yes | Nombre del gimnasio.                                   |
+| slug       | string    |      yes | Identificador legible para URLs o futura multitenancy. |
+| created_at | timestamp |      yes | Fecha de creación.                                     |
+| updated_at | timestamp |      yes | Fecha de última actualización.                         |
 
 ---
 
@@ -49,14 +49,14 @@ Representa un gimnasio de boxeo o deportes de combate.
 
 Representa la relación entre un usuario y un gimnasio, incluyendo su rol dentro de ese gimnasio.
 
-| Property | Type | Required | Description |
-|---|---|---:|---|
-| id | uuid | yes | Identificador único de la membresía. |
-| gym_id | uuid | yes | Referencia a `gyms.id`. |
-| user_id | uuid | yes | Referencia a `users.id`. |
-| role | enum | yes | Rol del usuario dentro del gimnasio. Valores: `admin`, `coach`, `boxer`. |
-| created_at | timestamp | yes | Fecha de creación. |
-| updated_at | timestamp | yes | Fecha de última actualización. |
+| Property   | Type      | Required | Description                                                              |
+| ---------- | --------- | -------: | ------------------------------------------------------------------------ |
+| id         | uuid      |      yes | Identificador único de la membresía.                                     |
+| gym_id     | uuid      |      yes | Referencia a `gyms.id`.                                                  |
+| user_id    | uuid      |      yes | Referencia a `users.id`.                                                 |
+| role       | enum      |      yes | Rol del usuario dentro del gimnasio. Valores: `admin`, `coach`, `boxer`. |
+| created_at | timestamp |      yes | Fecha de creación.                                                       |
+| updated_at | timestamp |      yes | Fecha de última actualización.                                           |
 
 ## Business Rules
 
@@ -70,18 +70,18 @@ Representa la relación entre un usuario y un gimnasio, incluyendo su rol dentro
 
 Perfil deportivo/operativo de un coach.
 
-| Property | Type | Required | Description |
-|---|---|---:|---|
-| id | uuid | yes | Identificador único del perfil de coach. |
-| user_id | uuid | yes | Referencia a `users.id`. |
-| gym_id | uuid | yes | Referencia a `gyms.id`. |
-| first_name | string | yes | Nombre del coach. |
-| last_name | string | yes | Apellido del coach. |
-| phone | string | no | Teléfono de contacto. |
-| avatar_url | string | no | URL de imagen/avatar. |
-| notes | text | no | Notas internas sobre el coach. |
-| created_at | timestamp | yes | Fecha de creación. |
-| updated_at | timestamp | yes | Fecha de última actualización. |
+| Property   | Type      | Required | Description                              |
+| ---------- | --------- | -------: | ---------------------------------------- |
+| id         | uuid      |      yes | Identificador único del perfil de coach. |
+| user_id    | uuid      |      yes | Referencia a `users.id`.                 |
+| gym_id     | uuid      |      yes | Referencia a `gyms.id`.                  |
+| first_name | string    |      yes | Nombre del coach.                        |
+| last_name  | string    |      yes | Apellido del coach.                      |
+| phone      | string    |       no | Teléfono de contacto.                    |
+| avatar_url | string    |       no | URL de imagen/avatar.                    |
+| notes      | text      |       no | Notas internas sobre el coach.           |
+| created_at | timestamp |      yes | Fecha de creación.                       |
+| updated_at | timestamp |      yes | Fecha de última actualización.           |
 
 ---
 
@@ -89,22 +89,22 @@ Perfil deportivo/operativo de un coach.
 
 Perfil deportivo de un boxeador.
 
-| Property | Type | Required | Description |
-|---|---|---:|---|
-| id | uuid | yes | Identificador único del perfil de boxeador. |
-| user_id | uuid | yes | Referencia a `users.id`. |
-| gym_id | uuid | yes | Referencia a `gyms.id`. |
-| first_name | string | yes | Nombre del boxeador. |
-| last_name | string | yes | Apellido del boxeador. |
-| phone | string | no | Teléfono de contacto. |
-| avatar_url | string | no | URL de imagen/avatar. |
-| birth_date | date | no | Fecha de nacimiento. |
-| height | decimal | no | Altura del boxeador. |
-| initial_weight | decimal | no | Peso inicial registrado. |
-| level | enum | no | Nivel deportivo. Valores sugeridos: `beginner`, `intermediate`, `advanced`. |
-| notes | text | no | Notas generales sobre el boxeador. |
-| created_at | timestamp | yes | Fecha de creación. |
-| updated_at | timestamp | yes | Fecha de última actualización. |
+| Property       | Type      | Required | Description                                                                 |
+| -------------- | --------- | -------: | --------------------------------------------------------------------------- |
+| id             | uuid      |      yes | Identificador único del perfil de boxeador.                                 |
+| user_id        | uuid      |      yes | Referencia a `users.id`.                                                    |
+| gym_id         | uuid      |      yes | Referencia a `gyms.id`.                                                     |
+| first_name     | string    |      yes | Nombre del boxeador.                                                        |
+| last_name      | string    |      yes | Apellido del boxeador.                                                      |
+| phone          | string    |       no | Teléfono de contacto.                                                       |
+| avatar_url     | string    |       no | URL de imagen/avatar.                                                       |
+| birth_date     | date      |       no | Fecha de nacimiento.                                                        |
+| height         | decimal   |       no | Altura del boxeador.                                                        |
+| initial_weight | decimal   |       no | Peso inicial registrado.                                                    |
+| level          | enum      |       no | Nivel deportivo. Valores sugeridos: `beginner`, `intermediate`, `advanced`. |
+| notes          | text      |       no | Notas generales sobre el boxeador.                                          |
+| created_at     | timestamp |      yes | Fecha de creación.                                                          |
+| updated_at     | timestamp |      yes | Fecha de última actualización.                                              |
 
 ---
 
@@ -112,17 +112,17 @@ Perfil deportivo de un boxeador.
 
 Programa de entrenamiento creado por un coach.
 
-| Property | Type | Required | Description |
-|---|---|---:|---|
-| id | uuid | yes | Identificador único del programa. |
-| gym_id | uuid | yes | Referencia a `gyms.id`. |
-| coach_id | uuid | yes | Referencia a `coach_profiles.id`. |
-| name | string | yes | Nombre del programa. |
-| description | text | no | Descripción del programa. |
-| level | enum | yes | Nivel objetivo. Valores: `beginner`, `intermediate`, `advanced`. |
-| status | enum | yes | Estado del programa. Valores: `draft`, `active`, `archived`. |
-| created_at | timestamp | yes | Fecha de creación. |
-| updated_at | timestamp | yes | Fecha de última actualización. |
+| Property    | Type      | Required | Description                                                      |
+| ----------- | --------- | -------: | ---------------------------------------------------------------- |
+| id          | uuid      |      yes | Identificador único del programa.                                |
+| gym_id      | uuid      |      yes | Referencia a `gyms.id`.                                          |
+| coach_id    | uuid      |      yes | Referencia a `coach_profiles.id`.                                |
+| name        | string    |      yes | Nombre del programa.                                             |
+| description | text      |       no | Descripción del programa.                                        |
+| level       | enum      |      yes | Nivel objetivo. Valores: `beginner`, `intermediate`, `advanced`. |
+| status      | enum      |      yes | Estado del programa. Valores: `draft`, `active`, `archived`.     |
+| created_at  | timestamp |      yes | Fecha de creación.                                               |
+| updated_at  | timestamp |      yes | Fecha de última actualización.                                   |
 
 ## Business Rules
 
@@ -136,15 +136,15 @@ Programa de entrenamiento creado por un coach.
 
 Sesión dentro de un programa de entrenamiento.
 
-| Property | Type | Required | Description |
-|---|---|---:|---|
-| id | uuid | yes | Identificador único de la sesión. |
-| program_id | uuid | yes | Referencia a `training_programs.id`. |
-| name | string | yes | Nombre de la sesión. |
-| description | text | no | Descripción de la sesión. |
-| order_index | integer | yes | Orden de la sesión dentro del programa. |
-| created_at | timestamp | yes | Fecha de creación. |
-| updated_at | timestamp | yes | Fecha de última actualización. |
+| Property    | Type      | Required | Description                             |
+| ----------- | --------- | -------: | --------------------------------------- |
+| id          | uuid      |      yes | Identificador único de la sesión.       |
+| program_id  | uuid      |      yes | Referencia a `training_programs.id`.    |
+| name        | string    |      yes | Nombre de la sesión.                    |
+| description | text      |       no | Descripción de la sesión.               |
+| order_index | integer   |      yes | Orden de la sesión dentro del programa. |
+| created_at  | timestamp |      yes | Fecha de creación.                      |
+| updated_at  | timestamp |      yes | Fecha de última actualización.          |
 
 ---
 
@@ -152,18 +152,18 @@ Sesión dentro de un programa de entrenamiento.
 
 Bloque de trabajo dentro de una sesión de entrenamiento.
 
-| Property | Type | Required | Description |
-|---|---|---:|---|
-| id | uuid | yes | Identificador único del bloque. |
-| session_id | uuid | yes | Referencia a `training_sessions.id`. |
-| type | enum | yes | Tipo de bloque. |
-| name | string | yes | Nombre del bloque. |
-| description | text | no | Descripción del bloque. |
-| duration_seconds | integer | no | Duración estimada en segundos. |
-| order_index | integer | yes | Orden del bloque dentro de la sesión. |
-| coach_notes | text | no | Notas del coach. |
-| created_at | timestamp | yes | Fecha de creación. |
-| updated_at | timestamp | yes | Fecha de última actualización. |
+| Property         | Type      | Required | Description                           |
+| ---------------- | --------- | -------: | ------------------------------------- |
+| id               | uuid      |      yes | Identificador único del bloque.       |
+| session_id       | uuid      |      yes | Referencia a `training_sessions.id`.  |
+| type             | enum      |      yes | Tipo de bloque.                       |
+| name             | string    |      yes | Nombre del bloque.                    |
+| description      | text      |       no | Descripción del bloque.               |
+| duration_seconds | integer   |       no | Duración estimada en segundos.        |
+| order_index      | integer   |      yes | Orden del bloque dentro de la sesión. |
+| coach_notes      | text      |       no | Notas del coach.                      |
+| created_at       | timestamp |      yes | Fecha de creación.                    |
+| updated_at       | timestamp |      yes | Fecha de última actualización.        |
 
 ## Suggested Block Types
 
@@ -185,16 +185,16 @@ Bloque de trabajo dentro de una sesión de entrenamiento.
 
 Configuración de cronómetro asociada a una sesión de entrenamiento planificada.
 
-| Property | Type | Required | Description |
-|---|---|---:|---|
-| id | uuid | yes | Identificador único de la configuración. |
-| session_id | uuid | yes | Referencia a `training_sessions.id`. |
-| rounds | integer | yes | Cantidad de rounds. |
-| round_duration_seconds | integer | yes | Duración de cada round en segundos. |
-| rest_duration_seconds | integer | yes | Duración del descanso en segundos. |
-| preparation_seconds | integer | no | Tiempo de preparación inicial. |
-| created_at | timestamp | yes | Fecha de creación. |
-| updated_at | timestamp | yes | Fecha de última actualización. |
+| Property               | Type      | Required | Description                              |
+| ---------------------- | --------- | -------: | ---------------------------------------- |
+| id                     | uuid      |      yes | Identificador único de la configuración. |
+| session_id             | uuid      |      yes | Referencia a `training_sessions.id`.     |
+| rounds                 | integer   |      yes | Cantidad de rounds.                      |
+| round_duration_seconds | integer   |      yes | Duración de cada round en segundos.      |
+| rest_duration_seconds  | integer   |      yes | Duración del descanso en segundos.       |
+| preparation_seconds    | integer   |       no | Tiempo de preparación inicial.           |
+| created_at             | timestamp |      yes | Fecha de creación.                       |
+| updated_at             | timestamp |      yes | Fecha de última actualización.           |
 
 ---
 
@@ -202,16 +202,16 @@ Configuración de cronómetro asociada a una sesión de entrenamiento planificad
 
 Asignación de un programa de entrenamiento a un boxeador.
 
-| Property | Type | Required | Description |
-|---|---|---:|---|
-| id | uuid | yes | Identificador único de la asignación. |
-| program_id | uuid | yes | Referencia a `training_programs.id`. |
-| boxer_id | uuid | yes | Referencia a `boxer_profiles.id`. |
-| coach_id | uuid | yes | Referencia a `coach_profiles.id`. |
-| start_date | date | yes | Fecha de inicio del programa asignado. |
-| status | enum | yes | Estado. Valores: `active`, `completed`, `canceled`. |
-| created_at | timestamp | yes | Fecha de creación. |
-| updated_at | timestamp | yes | Fecha de última actualización. |
+| Property   | Type      | Required | Description                                         |
+| ---------- | --------- | -------: | --------------------------------------------------- |
+| id         | uuid      |      yes | Identificador único de la asignación.               |
+| program_id | uuid      |      yes | Referencia a `training_programs.id`.                |
+| boxer_id   | uuid      |      yes | Referencia a `boxer_profiles.id`.                   |
+| coach_id   | uuid      |      yes | Referencia a `coach_profiles.id`.                   |
+| start_date | date      |      yes | Fecha de inicio del programa asignado.              |
+| status     | enum      |      yes | Estado. Valores: `active`, `completed`, `canceled`. |
+| created_at | timestamp |      yes | Fecha de creación.                                  |
+| updated_at | timestamp |      yes | Fecha de última actualización.                      |
 
 ## Business Rules
 
@@ -224,20 +224,20 @@ Asignación de un programa de entrenamiento a un boxeador.
 
 Representa un ejercicio iniciado por un coach desde mobile.
 
-| Property | Type | Required | Description |
-|---|---|---:|---|
-| id | uuid | yes | Identificador único del ejercicio. |
-| gym_id | uuid | yes | Referencia a `gyms.id`. |
-| coach_id | uuid | yes | Referencia a `coach_profiles.id`. |
-| type | enum | yes | Tipo de ejercicio. |
-| mode | enum | yes | Modalidad del ejercicio. Valores: `timer`, `repetitions`. |
-| status | enum | yes | Estado. Valores: `pending`, `in_progress`, `completed`, `canceled`. |
-| started_at | timestamp | no | Fecha/hora de inicio. |
-| finished_at | timestamp | no | Fecha/hora de finalización. |
-| canceled_at | timestamp | no | Fecha/hora de cancelación. |
-| notes | text | no | Notas generales del ejercicio. |
-| created_at | timestamp | yes | Fecha de creación. |
-| updated_at | timestamp | yes | Fecha de última actualización. |
+| Property    | Type      | Required | Description                                                         |
+| ----------- | --------- | -------: | ------------------------------------------------------------------- |
+| id          | uuid      |      yes | Identificador único del ejercicio.                                  |
+| gym_id      | uuid      |      yes | Referencia a `gyms.id`.                                             |
+| coach_id    | uuid      |      yes | Referencia a `coach_profiles.id`.                                   |
+| type        | enum      |      yes | Tipo de ejercicio.                                                  |
+| mode        | enum      |      yes | Modalidad del ejercicio. Valores: `timer`, `repetitions`.           |
+| status      | enum      |      yes | Estado. Valores: `pending`, `in_progress`, `completed`, `canceled`. |
+| started_at  | timestamp |       no | Fecha/hora de inicio.                                               |
+| finished_at | timestamp |       no | Fecha/hora de finalización.                                         |
+| canceled_at | timestamp |       no | Fecha/hora de cancelación.                                          |
+| notes       | text      |       no | Notas generales del ejercicio.                                      |
+| created_at  | timestamp |      yes | Fecha de creación.                                                  |
+| updated_at  | timestamp |      yes | Fecha de última actualización.                                      |
 
 ## Suggested Exercise Types
 
@@ -264,16 +264,16 @@ Representa un ejercicio iniciado por un coach desde mobile.
 
 Configuración de cronómetro para un ejercicio real iniciado por el coach.
 
-| Property | Type | Required | Description |
-|---|---|---:|---|
-| id | uuid | yes | Identificador único de la configuración. |
-| exercise_id | uuid | yes | Referencia a `exercises.id`. |
-| rounds | integer | yes | Cantidad de rounds. |
-| round_duration_seconds | integer | yes | Duración del round. |
-| rest_duration_seconds | integer | yes | Duración del descanso. |
-| preparation_seconds | integer | no | Tiempo de preparación inicial. |
-| created_at | timestamp | yes | Fecha de creación. |
-| updated_at | timestamp | yes | Fecha de última actualización. |
+| Property               | Type      | Required | Description                              |
+| ---------------------- | --------- | -------: | ---------------------------------------- |
+| id                     | uuid      |      yes | Identificador único de la configuración. |
+| exercise_id            | uuid      |      yes | Referencia a `exercises.id`.             |
+| rounds                 | integer   |      yes | Cantidad de rounds.                      |
+| round_duration_seconds | integer   |      yes | Duración del round.                      |
+| rest_duration_seconds  | integer   |      yes | Duración del descanso.                   |
+| preparation_seconds    | integer   |       no | Tiempo de preparación inicial.           |
+| created_at             | timestamp |      yes | Fecha de creación.                       |
+| updated_at             | timestamp |      yes | Fecha de última actualización.           |
 
 ---
 
@@ -281,14 +281,14 @@ Configuración de cronómetro para un ejercicio real iniciado por el coach.
 
 Configuración de repeticiones para un ejercicio real iniciado por el coach.
 
-| Property | Type | Required | Description |
-|---|---|---:|---|
-| id | uuid | yes | Identificador único de la configuración. |
-| exercise_id | uuid | yes | Referencia a `exercises.id`. |
-| repetitions | integer | yes | Cantidad de repeticiones. |
-| sets | integer | no | Cantidad de series. |
-| created_at | timestamp | yes | Fecha de creación. |
-| updated_at | timestamp | yes | Fecha de última actualización. |
+| Property    | Type      | Required | Description                              |
+| ----------- | --------- | -------: | ---------------------------------------- |
+| id          | uuid      |      yes | Identificador único de la configuración. |
+| exercise_id | uuid      |      yes | Referencia a `exercises.id`.             |
+| repetitions | integer   |      yes | Cantidad de repeticiones.                |
+| sets        | integer   |       no | Cantidad de series.                      |
+| created_at  | timestamp |      yes | Fecha de creación.                       |
+| updated_at  | timestamp |      yes | Fecha de última actualización.           |
 
 ---
 
@@ -296,14 +296,14 @@ Configuración de repeticiones para un ejercicio real iniciado por el coach.
 
 Relación entre un ejercicio y los boxeadores participantes.
 
-| Property | Type | Required | Description |
-|---|---|---:|---|
-| id | uuid | yes | Identificador único del participante en el ejercicio. |
-| exercise_id | uuid | yes | Referencia a `exercises.id`. |
-| boxer_id | uuid | yes | Referencia a `boxer_profiles.id`. |
-| status | enum | yes | Estado del participante. Valores sugeridos: `selected`, `present`, `completed`, `removed`. |
-| created_at | timestamp | yes | Fecha de creación. |
-| updated_at | timestamp | yes | Fecha de última actualización. |
+| Property    | Type      | Required | Description                                                                                |
+| ----------- | --------- | -------: | ------------------------------------------------------------------------------------------ |
+| id          | uuid      |      yes | Identificador único del participante en el ejercicio.                                      |
+| exercise_id | uuid      |      yes | Referencia a `exercises.id`.                                                               |
+| boxer_id    | uuid      |      yes | Referencia a `boxer_profiles.id`.                                                          |
+| status      | enum      |      yes | Estado del participante. Valores sugeridos: `selected`, `present`, `completed`, `removed`. |
+| created_at  | timestamp |      yes | Fecha de creación.                                                                         |
+| updated_at  | timestamp |      yes | Fecha de última actualización.                                                             |
 
 ## Business Rules
 
@@ -316,16 +316,16 @@ Relación entre un ejercicio y los boxeadores participantes.
 
 Registro de entrenamiento o sesión completada por un boxeador.
 
-| Property | Type | Required | Description |
-|---|---|---:|---|
-| id | uuid | yes | Identificador único del registro. |
-| assignment_id | uuid | no | Referencia a `program_assignments.id`, si aplica. |
-| session_id | uuid | no | Referencia a `training_sessions.id`, si aplica. |
-| boxer_id | uuid | yes | Referencia a `boxer_profiles.id`. |
-| exercise_id | uuid | no | Referencia a `exercises.id`, si la finalización proviene de un ejercicio real. |
-| completed_at | timestamp | yes | Fecha/hora de finalización. |
-| notes | text | no | Notas del entrenamiento completado. |
-| created_at | timestamp | yes | Fecha de creación. |
+| Property      | Type      | Required | Description                                                                    |
+| ------------- | --------- | -------: | ------------------------------------------------------------------------------ |
+| id            | uuid      |      yes | Identificador único del registro.                                              |
+| assignment_id | uuid      |       no | Referencia a `program_assignments.id`, si aplica.                              |
+| session_id    | uuid      |       no | Referencia a `training_sessions.id`, si aplica.                                |
+| boxer_id      | uuid      |      yes | Referencia a `boxer_profiles.id`.                                              |
+| exercise_id   | uuid      |       no | Referencia a `exercises.id`, si la finalización proviene de un ejercicio real. |
+| completed_at  | timestamp |      yes | Fecha/hora de finalización.                                                    |
+| notes         | text      |       no | Notas del entrenamiento completado.                                            |
+| created_at    | timestamp |      yes | Fecha de creación.                                                             |
 
 ## Business Rules
 
@@ -338,20 +338,20 @@ Registro de entrenamiento o sesión completada por un boxeador.
 
 Registro de progreso físico cargado por el boxeador.
 
-| Property | Type | Required | Description |
-|---|---|---:|---|
-| id | uuid | yes | Identificador único del registro. |
-| boxer_id | uuid | yes | Referencia a `boxer_profiles.id`. |
-| weight | decimal | no | Peso. |
-| height | decimal | no | Altura. |
-| waist | decimal | no | Cintura. |
-| chest | decimal | no | Pecho. |
-| arm | decimal | no | Brazo. |
-| leg | decimal | no | Pierna. |
-| body_fat_percentage | decimal | no | Porcentaje de grasa corporal. |
-| notes | text | no | Observaciones. |
-| entry_date | date | yes | Fecha del registro de progreso. |
-| created_at | timestamp | yes | Fecha de creación. |
+| Property            | Type      | Required | Description                       |
+| ------------------- | --------- | -------: | --------------------------------- |
+| id                  | uuid      |      yes | Identificador único del registro. |
+| boxer_id            | uuid      |      yes | Referencia a `boxer_profiles.id`. |
+| weight              | decimal   |       no | Peso.                             |
+| height              | decimal   |       no | Altura.                           |
+| waist               | decimal   |       no | Cintura.                          |
+| chest               | decimal   |       no | Pecho.                            |
+| arm                 | decimal   |       no | Brazo.                            |
+| leg                 | decimal   |       no | Pierna.                           |
+| body_fat_percentage | decimal   |       no | Porcentaje de grasa corporal.     |
+| notes               | text      |       no | Observaciones.                    |
+| entry_date          | date      |      yes | Fecha del registro de progreso.   |
+| created_at          | timestamp |      yes | Fecha de creación.                |
 
 ## Business Rules
 
@@ -365,15 +365,15 @@ Registro de progreso físico cargado por el boxeador.
 
 Registro de asistencia de un boxeador al gimnasio.
 
-| Property | Type | Required | Description |
-|---|---|---:|---|
-| id | uuid | yes | Identificador único del registro. |
-| gym_id | uuid | yes | Referencia a `gyms.id`. |
-| boxer_id | uuid | yes | Referencia a `boxer_profiles.id`. |
-| coach_id | uuid | no | Referencia a `coach_profiles.id`, si aplica. |
-| source | enum | yes | Fuente de la asistencia. Valores: `manual`, `exercise_participation`. |
-| attended_at | timestamp | yes | Fecha/hora de asistencia. |
-| created_at | timestamp | yes | Fecha de creación. |
+| Property    | Type      | Required | Description                                                           |
+| ----------- | --------- | -------: | --------------------------------------------------------------------- |
+| id          | uuid      |      yes | Identificador único del registro.                                     |
+| gym_id      | uuid      |      yes | Referencia a `gyms.id`.                                               |
+| boxer_id    | uuid      |      yes | Referencia a `boxer_profiles.id`.                                     |
+| coach_id    | uuid      |       no | Referencia a `coach_profiles.id`, si aplica.                          |
+| source      | enum      |      yes | Fuente de la asistencia. Valores: `manual`, `exercise_participation`. |
+| attended_at | timestamp |      yes | Fecha/hora de asistencia.                                             |
+| created_at  | timestamp |      yes | Fecha de creación.                                                    |
 
 ## Business Rules
 

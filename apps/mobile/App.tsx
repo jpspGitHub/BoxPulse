@@ -2,8 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 
-const apiBaseUrl =
-  process.env.EXPO_PUBLIC_API_BASE_URL ?? "http://localhost:3001/api/v1";
+const apiBaseUrl = process.env.EXPO_PUBLIC_API_BASE_URL ?? "http://localhost:3001/api/v1";
 
 export default function App() {
   const [apiStatus, setApiStatus] = useState("checking");
