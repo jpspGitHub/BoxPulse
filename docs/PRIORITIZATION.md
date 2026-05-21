@@ -23,3 +23,17 @@ Por ahora no impacta GitHub Projects, issues, labels ni milestones.
 | 014 - Training Programs                    | P1       |
 | 015 - Program Assignments                  | P1       |
 | 016 - MVP Validation                       | P0       |
+
+## Task Breakdown Priorities
+
+Estas prioridades aplican a tareas ejecutables derivadas de features grandes.
+
+| Task                                  | Parent Feature       | Priority |
+| ------------------------------------- | -------------------- | -------- |
+| Configure Supabase auth foundation    | 003 - Auth and Roles | P0       |
+| Create shared auth domain contracts   | 003 - Auth and Roles | P0       |
+| Create web auth session provider      | 003 - Auth and Roles | P0       |
+| Create mobile auth session provider   | 003 - Auth and Roles | P0       |
+| Implement role and active-user guards | 003 - Auth and Roles | P0       |
+| Protect admin web routes              | 003 - Auth and Roles | P0       |
+| Protect mobile coach and boxer routes | 003 - Auth and Roles | P0       |
