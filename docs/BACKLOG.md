@@ -20,6 +20,10 @@ Features/documentos relacionados:
 
 - [000 - Bootstrap Environment Validation](./features/000-bootstrap-environment-validation.md)
 
+Tareas ejecutables derivadas:
+
+- [Task] Add dummy mobile login screen
+
 ## Fase 1 - Foundation
 
 Objetivo: preparar el repositorio para desarrollo incremental.
@@ -98,26 +102,27 @@ Features/documentos relacionados:
 ## Orden recomendado de implementación
 
 1. Bootstrap Environment Validation
-2. Project Setup
-3. Shared Domain Package
-4. Configure Supabase auth foundation
-5. Create shared auth domain contracts
-6. Create web auth session provider
-7. Create mobile auth session provider
-8. Implement role and active-user guards
-9. Protect admin web routes
-10. Protect mobile coach and boxer routes
-11. Admin User Management
-12. Coach Start Exercise
-13. Coach Timer Exercise
-14. Coach Repetition Exercise
-15. Boxer Progress Tracking
-16. Boxer Profile Management
-17. Boxer Attendance and Workout History
-18. Training Programs
-19. Program Assignments
-20. Dashboards
-21. MVP Validation
+2. Add dummy mobile login screen
+3. Project Setup
+4. Shared Domain Package
+5. Configure Supabase auth foundation
+6. Create shared auth domain contracts
+7. Create web auth session provider
+8. Create mobile auth session provider
+9. Implement role and active-user guards
+10. Protect admin web routes
+11. Protect mobile coach and boxer routes
+12. Admin User Management
+13. Coach Start Exercise
+14. Coach Timer Exercise
+15. Coach Repetition Exercise
+16. Boxer Progress Tracking
+17. Boxer Profile Management
+18. Boxer Attendance and Workout History
+19. Training Programs
+20. Program Assignments
+21. Dashboards
+22. MVP Validation
 
 ## Convención para issues
 
