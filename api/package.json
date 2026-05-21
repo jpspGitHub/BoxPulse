@@ -8,7 +8,7 @@
     "start": "node dist/index.js",
     "build": "tsc -p tsconfig.json",
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "test": "node --test"
+    "test": "pnpm run build && node --test dist/auth-guard.test.js"
   },
   "dependencies": {
     "@boxpulse/shared": "workspace:*",
