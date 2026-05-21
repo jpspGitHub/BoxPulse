@@ -58,6 +58,7 @@ No modificar prioridades salvo que exista una contradicción evidente entre docu
 
 Crear items para estas features si existen en la documentación:
 
+- 000 - Bootstrap Environment Validation
 - 001 - Project Setup
 - 002 - Shared Domain Package
 - 003 - Auth and Roles
@@ -118,6 +119,10 @@ Criterios de aceptación tomados del markdown de la feature.
 
 Lista de issues sugeridas tomadas del markdown de la feature.
 
+## Priority
+
+P0/P1/P2
+
 ## Source Docs
 
 - docs/features/<file>.md
@@ -127,15 +132,19 @@ Lista de issues sugeridas tomadas del markdown de la feature.
 
 ## Prioridad
 
+La prioridad es obligatoria.
+
 La prioridad debe tomarse únicamente desde `docs/PRIORITIZATION.md`.
 
-Valores esperados:
+Valores permitidos:
 
 - P0
 - P1
 - P2
 
-Si el GitHub Project tiene un campo `Priority`, setearlo con ese valor.
+Cada tarea creada debe tener prioridad configurada.
+
+Si el GitHub Project tiene un campo `Priority`, configurarlo obligatoriamente.
 
 Si el campo `Priority` no existe o no es editable desde la herramienta disponible, agregar la prioridad al body del item:
 
@@ -145,19 +154,39 @@ Si el campo `Priority` no existe o no es editable desde la herramienta disponibl
 P0
 ```
 
+No crear tareas sin prioridad.
+
+Si no se puede determinar prioridad:
+
+- no crear la tarea
+- reportar warning
+- pedir corrección documental
+
 No usar labels como sustituto de prioridad salvo que el proyecto ya use explícitamente labels para eso.
 
 ## Estado inicial
 
-Todos los items deben quedar en estado inicial/backlog.
+Todos los items deben quedar activos.
+
+No crear draft items.
+
+Cada tarea creada debe ser:
+
+- una GitHub Issue activa
+- agregada al GitHub Project
+- visible en el Project
+
+No crear draft cards.
 
 Si el Project tiene un campo `Status`, usar:
 
 ```txt
-Backlog
+Ready
 ```
 
 Si el campo no existe, no inventar estado.
+
+Las tareas deben quedar listas para ser tomadas por el agente de ejecución.
 
 ## Reglas importantes
 
@@ -180,10 +209,11 @@ Si el campo no existe, no inventar estado.
 3. Leer todos los archivos en `docs/features`.
 4. Crear una lista normalizada de features.
 5. Verificar si ya existen issues/items equivalentes.
-6. Crear un item por feature.
-7. Setear prioridad si el Project lo permite.
-8. Setear estado inicial `Backlog` si el Project lo permite.
-9. Entregar un resumen final.
+6. Crear una GitHub Issue activa por feature.
+7. Agregar la issue al GitHub Project.
+8. Configurar prioridad obligatoriamente.
+9. Configurar estado `Ready` si el Project lo permite.
+10. Entregar un resumen final.
 
 ## Resultado esperado
 
@@ -212,7 +242,8 @@ Generar issues técnicas pequeñas a partir de cada feature priorizada.
 
 La tarea se considera exitosa si:
 
-- cada feature documentada tiene un item en el Project
-- la prioridad está representada
+- cada feature documentada tiene un item activo en el Project
+- cada item tiene prioridad configurada
+- no existen draft items
 - no hay duplicados
 - el resultado final permite pasar luego a generación de issues técnicas
