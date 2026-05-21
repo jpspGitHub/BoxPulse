@@ -4,10 +4,21 @@ import { useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 
 import { AuthSessionProvider } from "./lib/auth-session";
+import { MobileRoleGuard, type MobileAppRole } from "./lib/mobile-role-guard";
 
 const apiBaseUrl = process.env.EXPO_PUBLIC_API_BASE_URL ?? "http://localhost:3001/api/v1";
 
-function AppContent() {
+function getRoleTitle(role: MobileAppRole) {
+  return role === "coach" ? "Experiencia coach" : "Experiencia boxer";
+}
+
+function getRoleDescription(role: MobileAppRole) {
+  return role === "coach"
+    ? "Acceso mobile habilitado para operar entrenamientos."
+    : "Acceso mobile habilitado para consultar progreso y actividad.";
+}
+
+function AppContent({ role }: { role: MobileAppRole }) {
   const [apiStatus, setApiStatus] = useState("checking");
 
   useEffect(() => {
@@ -31,7 +42,9 @@ function AppContent() {
     <View style={styles.container}>
       <StatusBar style="light" />
       <View style={styles.panel}>
-        <Text style={styles.title}>{BOXPULSE_APP_NAME} Mobile is running</Text>
+        <Text style={styles.title}>{getRoleTitle(role)}</Text>
+        <Text style={styles.description}>{getRoleDescription(role)}</Text>
+        <Text style={styles.appName}>{BOXPULSE_APP_NAME} Mobile is running</Text>
         <Text style={styles.status}>API status: {apiStatus}</Text>
       </View>
     </View>
@@ -41,7 +54,7 @@ function AppContent() {
 export default function App() {
   return (
     <AuthSessionProvider>
-      <AppContent />
+      <MobileRoleGuard>{(role) => <AppContent role={role} />}</MobileRoleGuard>
     </AuthSessionProvider>
   );
 }
@@ -61,6 +74,17 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 24,
     width: "100%"
+  },
+  appName: {
+    color: "#d7dee7",
+    fontSize: 16,
+    marginBottom: 12
+  },
+  description: {
+    color: "#f8fafc",
+    fontSize: 18,
+    lineHeight: 24,
+    marginBottom: 16
   },
   status: {
     color: "#d7dee7",
