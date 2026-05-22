@@ -1,12 +1,52 @@
 import { BOXPULSE_APP_NAME } from "@boxpulse/shared/constants";
 import { StatusBar } from "expo-status-bar";
 import { useEffect, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 
 import { AuthSessionProvider } from "./lib/auth-session";
 import { MobileRoleGuard, type MobileAppRole } from "./lib/mobile-role-guard";
 
 const apiBaseUrl = process.env.EXPO_PUBLIC_API_BASE_URL ?? "http://localhost:3001/api/v1";
+
+function DummyLoginScreen({ onContinue }: { onContinue: () => void }) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  return (
+    <View style={styles.container}>
+      <StatusBar style="light" />
+      <View style={styles.panel}>
+        <Text style={styles.title}>{BOXPULSE_APP_NAME}</Text>
+        <Text style={styles.description}>Login mobile de validación</Text>
+        <TextInput
+          autoCapitalize="none"
+          inputMode="email"
+          onChangeText={setEmail}
+          placeholder="Email"
+          placeholderTextColor="#92a2b3"
+          style={styles.input}
+          value={email}
+        />
+        <TextInput
+          onChangeText={setPassword}
+          placeholder="Password"
+          placeholderTextColor="#92a2b3"
+          secureTextEntry
+          style={styles.input}
+          value={password}
+        />
+        <Pressable
+          accessibilityRole="button"
+          onPress={onContinue}
+          style={({ pressed }) => [styles.button, pressed && styles.buttonPressed]}
+        >
+          <Text style={styles.buttonText}>Ingresar</Text>
+        </Pressable>
+        <Text style={styles.helperText}>Pantalla dummy sin autenticación real.</Text>
+      </View>
+    </View>
+  );
+}
 
 function getRoleTitle(role: MobileAppRole) {
   return role === "coach" ? "Experiencia coach" : "Experiencia boxer";
@@ -52,6 +92,12 @@ function AppContent({ role }: { role: MobileAppRole }) {
 }
 
 export default function App() {
+  const [isDummyLoginComplete, setIsDummyLoginComplete] = useState(false);
+
+  if (!isDummyLoginComplete) {
+    return <DummyLoginScreen onContinue={() => setIsDummyLoginComplete(true)} />;
+  }
+
   return (
     <AuthSessionProvider>
       <MobileRoleGuard>{(role) => <AppContent role={role} />}</MobileRoleGuard>
@@ -85,6 +131,38 @@ const styles = StyleSheet.create({
     fontSize: 18,
     lineHeight: 24,
     marginBottom: 16
+  },
+  button: {
+    alignItems: "center",
+    backgroundColor: "#f4c542",
+    borderRadius: 8,
+    marginTop: 4,
+    paddingHorizontal: 18,
+    paddingVertical: 14
+  },
+  buttonPressed: {
+    backgroundColor: "#d9ab28"
+  },
+  buttonText: {
+    color: "#101820",
+    fontSize: 18,
+    fontWeight: "700"
+  },
+  helperText: {
+    color: "#92a2b3",
+    fontSize: 14,
+    lineHeight: 20,
+    marginTop: 16
+  },
+  input: {
+    borderColor: "#2a3947",
+    borderRadius: 8,
+    borderWidth: 1,
+    color: "#f8fafc",
+    fontSize: 18,
+    marginBottom: 12,
+    paddingHorizontal: 14,
+    paddingVertical: 12
   },
   status: {
     color: "#d7dee7",
