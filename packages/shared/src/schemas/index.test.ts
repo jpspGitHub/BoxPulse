@@ -9,6 +9,11 @@ import {
   requireActiveAuthUser
 } from "../auth/index.js";
 import {
+  adminCreateUserRequestSchema,
+  adminManagedUserRoleSchema,
+  adminUpdateUserRequestSchema,
+  adminUserSchema,
+  adminUsersListResponseSchema,
   authSessionSchema,
   currentAuthUserSchema,
   exerciseRepetitionConfigSchema,
@@ -29,6 +34,12 @@ test("userRoleSchema accepts the supported MVP roles", () => {
   assert.equal(userRoleSchema.parse("admin"), "admin");
   assert.equal(userRoleSchema.parse("coach"), "coach");
   assert.equal(userRoleSchema.parse("boxer"), "boxer");
+});
+
+test("adminManagedUserRoleSchema accepts only coach and boxer roles", () => {
+  assert.equal(adminManagedUserRoleSchema.parse("coach"), "coach");
+  assert.equal(adminManagedUserRoleSchema.parse("boxer"), "boxer");
+  assert.equal(adminManagedUserRoleSchema.safeParse("admin").success, false);
 });
 
 test("loginRequestSchema validates the auth login contract", () => {
@@ -79,6 +90,135 @@ test("currentAuthUserSchema validates the auth me contract", () => {
   });
 
   assert.equal(result.success, true);
+});
+
+test("adminUserSchema validates admin-managed user summaries", () => {
+  const result = adminUserSchema.safeParse({
+    id: "00000000-0000-4000-8000-000000000020",
+    email: "boxer@gym.com",
+    role: "boxer",
+    is_active: true,
+    profile: {
+      id: "00000000-0000-4000-8000-000000000021",
+      first_name: "Martin",
+      last_name: "Rodriguez",
+      phone: "+59899999999",
+      level: "intermediate"
+    }
+  });
+
+  assert.equal(result.success, true);
+});
+
+test("adminUsersListResponseSchema validates list data and pagination", () => {
+  const result = adminUsersListResponseSchema.safeParse({
+    data: [
+      {
+        id: "00000000-0000-4000-8000-000000000020",
+        email: "coach@gym.com",
+        role: "coach",
+        is_active: true,
+        profile: {
+          id: "00000000-0000-4000-8000-000000000021",
+          first_name: "Nicolas",
+          last_name: "Cabrera",
+          phone: null,
+          level: null
+        }
+      }
+    ],
+    pagination: {
+      page: 1,
+      page_size: 20,
+      total: 1
+    }
+  });
+
+  assert.equal(result.success, true);
+});
+
+test("adminCreateUserRequestSchema validates coach and boxer creation contracts", () => {
+  assert.equal(
+    adminCreateUserRequestSchema.safeParse({
+      email: "coach@gym.com",
+      role: "coach",
+      first_name: "Nicolas",
+      last_name: "Cabrera",
+      phone: "+59899999999"
+    }).success,
+    true
+  );
+
+  assert.equal(
+    adminCreateUserRequestSchema.safeParse({
+      email: "boxer@gym.com",
+      role: "boxer",
+      first_name: "Martin",
+      last_name: "Rodriguez",
+      phone: null,
+      level: "intermediate"
+    }).success,
+    true
+  );
+});
+
+test("adminCreateUserRequestSchema rejects admin role and invalid boxer level", () => {
+  assert.equal(
+    adminCreateUserRequestSchema.safeParse({
+      email: "admin@gym.com",
+      role: "admin",
+      first_name: "Admin",
+      last_name: "User"
+    }).success,
+    false
+  );
+
+  assert.equal(
+    adminCreateUserRequestSchema.safeParse({
+      email: "boxer@gym.com",
+      role: "boxer",
+      first_name: "Martin",
+      last_name: "Rodriguez",
+      level: "elite"
+    }).success,
+    false
+  );
+
+  assert.equal(
+    adminCreateUserRequestSchema.safeParse({
+      email: "coach@gym.com",
+      role: "coach",
+      first_name: "Nicolas",
+      last_name: "Cabrera",
+      level: "beginner"
+    }).success,
+    false
+  );
+});
+
+test("adminUpdateUserRequestSchema validates partial profile updates", () => {
+  assert.equal(
+    adminUpdateUserRequestSchema.safeParse({
+      first_name: "Martin"
+    }).success,
+    true
+  );
+
+  assert.equal(
+    adminUpdateUserRequestSchema.safeParse({
+      phone: null,
+      level: "advanced"
+    }).success,
+    true
+  );
+
+  assert.equal(adminUpdateUserRequestSchema.safeParse({}).success, false);
+  assert.equal(
+    adminUpdateUserRequestSchema.safeParse({
+      level: "elite"
+    }).success,
+    false
+  );
 });
 
 test("auth helpers validate roles and inactive users", () => {

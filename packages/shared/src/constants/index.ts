@@ -2,6 +2,8 @@ export const BOXPULSE_APP_NAME = "BoxPulse";
 
 export const USER_ROLES = ["admin", "coach", "boxer"] as const;
 
+export const ADMIN_MANAGED_USER_ROLES = ["coach", "boxer"] as const;
+
 export const BOXER_LEVELS = ["beginner", "intermediate", "advanced"] as const;
 
 export const TRAINING_PROGRAM_STATUSES = ["draft", "active", "archived"] as const;

@@ -1,4 +1,5 @@
 import type {
+  ADMIN_MANAGED_USER_ROLES,
   ATTENDANCE_SOURCES,
   BOXER_LEVELS,
   EXERCISE_MODES,
@@ -15,6 +16,7 @@ import type {
 type ArrayValue<T extends readonly string[]> = T[number];
 
 export type UserRole = ArrayValue<typeof USER_ROLES>;
+export type AdminManagedUserRole = ArrayValue<typeof ADMIN_MANAGED_USER_ROLES>;
 export type BoxerLevel = ArrayValue<typeof BOXER_LEVELS>;
 export type TrainingProgramStatus = ArrayValue<typeof TRAINING_PROGRAM_STATUSES>;
 export type TrainingProgramLevel = ArrayValue<typeof TRAINING_PROGRAM_LEVELS>;
@@ -67,6 +69,59 @@ export interface CurrentAuthUser {
   role: UserRole;
   gym_id: Uuid;
   profile: AuthProfileSummary;
+}
+
+export interface AdminUserProfileSummary {
+  id: Uuid;
+  first_name: string;
+  last_name: string;
+  phone?: string | null;
+  level?: BoxerLevel | null;
+}
+
+export interface AdminUser {
+  id: Uuid;
+  email: string;
+  role: AdminManagedUserRole;
+  is_active: boolean;
+  profile: AdminUserProfileSummary;
+}
+
+export interface Pagination {
+  page: number;
+  page_size: number;
+  total: number;
+}
+
+export interface AdminUsersListResponse {
+  data: AdminUser[];
+  pagination: Pagination;
+}
+
+export interface AdminCreateCoachUserRequest {
+  email: string;
+  role: "coach";
+  first_name: string;
+  last_name: string;
+  phone?: string | null;
+}
+
+export interface AdminCreateBoxerUserRequest {
+  email: string;
+  role: "boxer";
+  first_name: string;
+  last_name: string;
+  phone?: string | null;
+  level?: BoxerLevel | null;
+}
+
+export type AdminCreateUserRequest = AdminCreateCoachUserRequest | AdminCreateBoxerUserRequest;
+
+export interface AdminUpdateUserRequest {
+  first_name?: string;
+  last_name?: string;
+  phone?: string | null;
+  level?: BoxerLevel | null;
 }
 
 export interface Gym extends BaseEntity {

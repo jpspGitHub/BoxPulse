@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 import {
+  ADMIN_MANAGED_USER_ROLES,
   ATTENDANCE_SOURCES,
   BOXER_LEVELS,
   EXERCISE_MODES,
@@ -24,6 +25,7 @@ export const isoDateSchema = z.string().regex(/^\d{4}-\d{2}-\d{2}$/);
 export const isoDateTimeSchema = z.string().datetime({ offset: true });
 
 export const userRoleSchema = z.enum(USER_ROLES);
+export const adminManagedUserRoleSchema = z.enum(ADMIN_MANAGED_USER_ROLES);
 export const boxerLevelSchema = z.enum(BOXER_LEVELS);
 export const trainingProgramStatusSchema = z.enum(TRAINING_PROGRAM_STATUSES);
 export const trainingProgramLevelSchema = z.enum(TRAINING_PROGRAM_LEVELS);
@@ -80,6 +82,79 @@ export const currentAuthUserSchema = z.object({
   gym_id: uuidSchema,
   profile: authProfileSummarySchema
 });
+
+export const paginationSchema = z.object({
+  page: positiveIntegerSchema,
+  page_size: positiveIntegerSchema,
+  total: nonNegativeIntegerSchema
+});
+
+export const adminUsersListQuerySchema = z.object({
+  page: z.coerce.number().int().positive().optional(),
+  page_size: z.coerce.number().int().positive().optional()
+});
+
+export const adminUserProfileSummarySchema = z.object({
+  id: uuidSchema,
+  first_name: z.string().trim().min(1),
+  last_name: z.string().trim().min(1),
+  phone: optionalNullableStringSchema,
+  level: boxerLevelSchema.optional().nullable()
+});
+
+export const adminUserSchema = z.object({
+  id: uuidSchema,
+  email: z.string().email(),
+  role: adminManagedUserRoleSchema,
+  is_active: z.boolean(),
+  profile: adminUserProfileSummarySchema
+});
+
+export const adminUsersListResponseSchema = z.object({
+  data: z.array(adminUserSchema),
+  pagination: paginationSchema
+});
+
+const adminUserMutationBaseSchema = z.object({
+  email: z.string().email(),
+  first_name: z.string().trim().min(1),
+  last_name: z.string().trim().min(1),
+  phone: optionalNullableStringSchema
+});
+
+export const adminCreateCoachUserRequestSchema = adminUserMutationBaseSchema
+  .extend({
+    role: z.literal("coach")
+  })
+  .strict();
+
+export const adminCreateBoxerUserRequestSchema = adminUserMutationBaseSchema
+  .extend({
+    role: z.literal("boxer"),
+    level: boxerLevelSchema.optional().nullable()
+  })
+  .strict();
+
+export const adminCreateUserRequestSchema = z.discriminatedUnion("role", [
+  adminCreateCoachUserRequestSchema,
+  adminCreateBoxerUserRequestSchema
+]);
+
+export const adminCreateUserResponseSchema = adminUserSchema;
+
+export const adminUpdateUserRequestSchema = z
+  .object({
+    first_name: z.string().trim().min(1).optional(),
+    last_name: z.string().trim().min(1).optional(),
+    phone: optionalNullableStringSchema,
+    level: boxerLevelSchema.optional().nullable()
+  })
+  .strict()
+  .refine((value) => Object.keys(value).length > 0, {
+    message: "At least one user field must be provided"
+  });
+
+export const adminUpdateUserResponseSchema = adminUserSchema;
 
 export const gymSchema = baseEntitySchema.extend({
   name: z.string().trim().min(1),
@@ -220,11 +295,19 @@ export const attendanceRecordSchema = z.object({
 });
 
 export type UserRoleInput = z.infer<typeof userRoleSchema>;
+export type AdminManagedUserRoleInput = z.infer<typeof adminManagedUserRoleSchema>;
 export type AuthUserInput = z.infer<typeof authUserSchema>;
 export type AuthSessionInput = z.infer<typeof authSessionSchema>;
 export type LoginRequestInput = z.infer<typeof loginRequestSchema>;
 export type LoginResponseInput = z.infer<typeof loginResponseSchema>;
 export type CurrentAuthUserInput = z.infer<typeof currentAuthUserSchema>;
+export type AdminUserInput = z.infer<typeof adminUserSchema>;
+export type AdminUsersListQueryInput = z.infer<typeof adminUsersListQuerySchema>;
+export type AdminUsersListResponseInput = z.infer<typeof adminUsersListResponseSchema>;
+export type AdminCreateUserRequestInput = z.infer<typeof adminCreateUserRequestSchema>;
+export type AdminCreateUserResponseInput = z.infer<typeof adminCreateUserResponseSchema>;
+export type AdminUpdateUserRequestInput = z.infer<typeof adminUpdateUserRequestSchema>;
+export type AdminUpdateUserResponseInput = z.infer<typeof adminUpdateUserResponseSchema>;
 export type ExerciseInput = z.infer<typeof exerciseSchema>;
 export type ExerciseTimerConfigInput = z.infer<typeof exerciseTimerConfigSchema>;
 export type ExerciseRepetitionConfigInput = z.infer<typeof exerciseRepetitionConfigSchema>;
