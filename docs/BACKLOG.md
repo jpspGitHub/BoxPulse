@@ -60,6 +60,16 @@ Features/documentos relacionados:
 - [004 - Admin User Management](./features/004-admin-user-management.md)
 - [005 - Admin Dashboard](./features/005-admin-dashboard.md)
 
+Tareas ejecutables derivadas:
+
+- [Task] Create shared admin user contracts
+- [Task] Implement admin users read API
+- [Task] Implement admin user creation and gym membership
+- [Task] Implement admin user update and activation API
+- [Task] Create admin users list UI
+- [Task] Create admin user form UI
+- [Task] Add admin user activation controls
+
 ## Fase 4 - Coach Mobile Exercise Flow
 
 Objetivo: construir el flujo operativo principal del coach dentro del gimnasio.
@@ -112,17 +122,23 @@ Features/documentos relacionados:
 9. Implement role and active-user guards
 10. Protect admin web routes
 11. Protect mobile coach and boxer routes
-12. Admin User Management
-13. Coach Start Exercise
-14. Coach Timer Exercise
-15. Coach Repetition Exercise
-16. Boxer Progress Tracking
-17. Boxer Profile Management
-18. Boxer Attendance and Workout History
-19. Training Programs
-20. Program Assignments
-21. Dashboards
-22. MVP Validation
+12. Create shared admin user contracts
+13. Implement admin users read API
+14. Implement admin user creation and gym membership
+15. Implement admin user update and activation API
+16. Create admin users list UI
+17. Create admin user form UI
+18. Add admin user activation controls
+19. Coach Start Exercise
+20. Coach Timer Exercise
+21. Coach Repetition Exercise
+22. Boxer Progress Tracking
+23. Boxer Profile Management
+24. Boxer Attendance and Workout History
+25. Training Programs
+26. Program Assignments
+27. Dashboards
+28. MVP Validation
 
 ## Convención para issues
 
