@@ -1,0 +1,16 @@
+{
+  "expo": {
+    "name": "BoxPulse",
+    "slug": "boxpulse",
+    "version": "0.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "dark",
+    "newArchEnabled": true,
+    "android": {
+      "package": "com.anonymous.boxpulse"
+    },
+    "ios": {
+      "bundleIdentifier": "com.anonymous.boxpulse"
+    }
+  }
+}

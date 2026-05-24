@@ -1,0 +1,25 @@
+{
+  "name": "@boxpulse/api",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "start": "node dist/index.js",
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "pnpm run build && node --test dist/auth-guard.test.js"
+  },
+  "dependencies": {
+    "@boxpulse/shared": "workspace:*",
+    "@supabase/supabase-js": "^2.106.1",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "zod": "^3.25.28"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.18",
+    "@types/express": "^5.0.2",
+    "tsx": "^4.19.4"
+  }
+}

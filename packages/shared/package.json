@@ -1,0 +1,38 @@
+{
+  "name": "@boxpulse/shared",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "default": "./dist/index.js"
+    },
+    "./constants": {
+      "types": "./src/constants/index.ts",
+      "default": "./dist/constants/index.js"
+    },
+    "./schemas": {
+      "types": "./src/schemas/index.ts",
+      "default": "./dist/schemas/index.js"
+    },
+    "./types": {
+      "types": "./src/types/index.ts",
+      "default": "./dist/types/index.js"
+    },
+    "./auth": {
+      "types": "./src/auth/index.ts",
+      "default": "./dist/auth/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "pnpm run build && node --test dist/schemas/index.test.js"
+  },
+  "dependencies": {
+    "zod": "^3.25.28"
+  }
+}
