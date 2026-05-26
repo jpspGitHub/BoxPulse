@@ -77,6 +77,114 @@ p {
   max-width: 1120px;
 }
 
+.admin-form-section {
+  margin: 0 auto 18px;
+  max-width: 1120px;
+  border: 1px solid #2a3947;
+  border-radius: 8px;
+  background: #152331;
+  padding: 22px;
+}
+
+.admin-form-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.admin-form-heading h2 {
+  margin: 0 0 8px;
+  font-size: 24px;
+}
+
+.admin-form-heading p {
+  font-size: 15px;
+}
+
+.admin-user-form {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.admin-user-form label {
+  display: grid;
+  gap: 8px;
+  color: #c3d0de;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.admin-user-form input,
+.admin-user-form select {
+  width: 100%;
+  border: 1px solid #33475a;
+  border-radius: 8px;
+  background: #101820;
+  color: #f8fafc;
+  font: inherit;
+  min-height: 44px;
+  padding: 10px 12px;
+}
+
+.admin-user-form input:disabled,
+.admin-user-form select:disabled {
+  color: #94a3b8;
+  cursor: not-allowed;
+  opacity: 0.72;
+}
+
+.admin-form-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.admin-primary-button,
+.admin-secondary-button,
+.admin-table-button {
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 700;
+}
+
+.admin-primary-button {
+  min-height: 44px;
+  background: #e7f0f9;
+  color: #101820;
+  padding: 10px 16px;
+}
+
+.admin-primary-button:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+.admin-secondary-button,
+.admin-table-button {
+  border: 1px solid #3d5368;
+  background: transparent;
+  color: #d7dee7;
+}
+
+.admin-secondary-button {
+  min-height: 40px;
+  padding: 8px 12px;
+}
+
+.admin-form-message {
+  color: #9fd6b9;
+  font-size: 14px;
+}
+
+.admin-form-message-error {
+  color: #ffb0b7;
+}
+
 .admin-users-summary {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -130,7 +238,7 @@ p {
 
 .admin-users-table {
   width: 100%;
-  min-width: 760px;
+  min-width: 860px;
   border-collapse: collapse;
 }
 
@@ -189,9 +297,22 @@ p {
   color: #ffb0b7;
 }
 
+.admin-table-button {
+  min-height: 34px;
+  padding: 6px 10px;
+}
+
 @media (max-width: 720px) {
   .admin-page {
     padding: 20px;
+  }
+
+  .admin-form-heading {
+    display: grid;
+  }
+
+  .admin-user-form {
+    grid-template-columns: 1fr;
   }
 
   .admin-users-summary {
