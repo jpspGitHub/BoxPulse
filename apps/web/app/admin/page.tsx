@@ -1,4 +1,4 @@
-import { AdminUsersList } from "./admin-users-list";
+import { AdminUsersManager } from "./admin-users-manager";
 
 export default function AdminPage() {
   return (
@@ -10,7 +10,7 @@ export default function AdminPage() {
         </div>
       </header>
 
-      <AdminUsersList />
+      <AdminUsersManager />
     </main>
   );
 }

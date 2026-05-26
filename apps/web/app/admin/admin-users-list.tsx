@@ -24,6 +24,11 @@ type AdminUsersState =
       users: AdminUser[];
     };
 
+type AdminUsersListProps = {
+  onEditUser: (user: AdminUser) => void;
+  refreshKey: number;
+};
+
 function getProfileName(user: AdminUser) {
   return `${user.profile.first_name} ${user.profile.last_name}`.trim();
 }
@@ -54,7 +59,7 @@ function parseAdminUsersResponse(body: unknown): AdminUsersListResponse {
   return adminUsersListResponseSchema.parse(body);
 }
 
-export function AdminUsersList() {
+export function AdminUsersList({ onEditUser, refreshKey }: AdminUsersListProps) {
   const { accessToken } = useWebAuthSession();
   const [state, setState] = useState<AdminUsersState>({
     status: "loading",
@@ -112,7 +117,7 @@ export function AdminUsersList() {
     return () => {
       controller.abort();
     };
-  }, [accessToken]);
+  }, [accessToken, refreshKey]);
 
   const activeCount = useMemo(
     () => state.users.filter((user) => user.is_active).length,
@@ -181,6 +186,7 @@ export function AdminUsersList() {
               <th scope="col">Nivel</th>
               <th scope="col">Teléfono</th>
               <th scope="col">Estado</th>
+              <th scope="col">Acción</th>
             </tr>
           </thead>
           <tbody>
@@ -203,6 +209,15 @@ export function AdminUsersList() {
                   >
                     {user.is_active ? "Activo" : "Inactivo"}
                   </span>
+                </td>
+                <td>
+                  <button
+                    className="admin-table-button"
+                    type="button"
+                    onClick={() => onEditUser(user)}
+                  >
+                    Editar
+                  </button>
                 </td>
               </tr>
             ))}
