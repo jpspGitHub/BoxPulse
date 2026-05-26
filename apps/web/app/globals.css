@@ -302,6 +302,36 @@ p {
   padding: 6px 10px;
 }
 
+.admin-table-button:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+.admin-table-button-danger {
+  border-color: #7d3941;
+  color: #ffb0b7;
+}
+
+.admin-table-button-success {
+  border-color: #2d6f55;
+  color: #79e0b1;
+}
+
+.admin-table-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.admin-table-message {
+  padding: 14px 16px 0;
+  font-size: 14px;
+}
+
+.admin-table-message-error {
+  color: #ffb0b7;
+}
+
 @media (max-width: 720px) {
   .admin-page {
     padding: 20px;
