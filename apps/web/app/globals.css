@@ -52,3 +52,149 @@ p {
   color: #d7dee7;
   font-size: 18px;
 }
+
+.admin-page {
+  display: block;
+  min-height: 100vh;
+  padding: 32px;
+}
+
+.admin-header {
+  margin: 0 auto 24px;
+  max-width: 1120px;
+}
+
+.admin-eyebrow {
+  margin-bottom: 8px;
+  color: #8fb5d8;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.admin-users-section {
+  margin: 0 auto;
+  max-width: 1120px;
+}
+
+.admin-users-summary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.admin-users-summary div,
+.admin-state,
+.admin-users-table-wrap {
+  border: 1px solid #2a3947;
+  border-radius: 8px;
+  background: #152331;
+}
+
+.admin-users-summary div {
+  padding: 18px;
+}
+
+.admin-users-summary span {
+  display: block;
+  margin-bottom: 8px;
+  color: #9fb1c3;
+  font-size: 14px;
+}
+
+.admin-users-summary strong {
+  color: #f8fafc;
+  font-size: 28px;
+  line-height: 1;
+}
+
+.admin-state {
+  margin: 0 auto;
+  max-width: 720px;
+  padding: 28px;
+}
+
+.admin-state-error {
+  border-color: #9b3d42;
+}
+
+.admin-state h2 {
+  margin: 0 0 10px;
+  font-size: 24px;
+}
+
+.admin-users-table-wrap {
+  overflow-x: auto;
+}
+
+.admin-users-table {
+  width: 100%;
+  min-width: 760px;
+  border-collapse: collapse;
+}
+
+.admin-users-table th,
+.admin-users-table td {
+  padding: 16px;
+  border-bottom: 1px solid #263544;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.admin-users-table th {
+  color: #9fb1c3;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.admin-users-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.admin-user-name,
+.admin-user-email {
+  display: block;
+}
+
+.admin-user-name {
+  margin-bottom: 4px;
+  color: #f8fafc;
+  font-weight: 700;
+}
+
+.admin-user-email {
+  color: #9fb1c3;
+  font-size: 14px;
+}
+
+.admin-status-badge {
+  display: inline-flex;
+  min-width: 72px;
+  justify-content: center;
+  border-radius: 999px;
+  padding: 6px 10px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.admin-status-active {
+  background: #123629;
+  color: #79e0b1;
+}
+
+.admin-status-inactive {
+  background: #3a2528;
+  color: #ffb0b7;
+}
+
+@media (max-width: 720px) {
+  .admin-page {
+    padding: 20px;
+  }
+
+  .admin-users-summary {
+    grid-template-columns: 1fr;
+  }
+}

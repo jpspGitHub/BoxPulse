@@ -1,10 +1,16 @@
+import { AdminUsersList } from "./admin-users-list";
+
 export default function AdminPage() {
   return (
-    <main>
-      <section className="status-panel" aria-label="BoxPulse admin status">
-        <h1>Área admin</h1>
-        <p>Acceso administrativo habilitado.</p>
-      </section>
+    <main className="admin-page">
+      <header className="admin-header">
+        <div>
+          <p className="admin-eyebrow">Administración</p>
+          <h1>Usuarios del gimnasio</h1>
+        </div>
+      </header>
+
+      <AdminUsersList />
     </main>
   );
 }
