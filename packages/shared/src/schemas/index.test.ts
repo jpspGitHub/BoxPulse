@@ -13,6 +13,8 @@ import {
   adminManagedUserRoleSchema,
   adminUpdateUserRequestSchema,
   adminUserSchema,
+  adminUserDetailResponseSchema,
+  adminUsersListQuerySchema,
   adminUsersListResponseSchema,
   authSessionSchema,
   currentAuthUserSchema,
@@ -110,7 +112,16 @@ test("adminUserSchema validates admin-managed user summaries", () => {
   assert.equal(result.success, true);
 });
 
-test("adminUsersListResponseSchema validates list data and pagination", () => {
+test("adminUsersListQuerySchema coerces optional pagination query params", () => {
+  assert.deepEqual(adminUsersListQuerySchema.parse({ page: "2", page_size: "25" }), {
+    page: 2,
+    page_size: 25
+  });
+
+  assert.equal(adminUsersListQuerySchema.safeParse({ page: "0" }).success, false);
+});
+
+test("adminUsersListResponseSchema validates admin user list data", () => {
   const result = adminUsersListResponseSchema.safeParse({
     data: [
       {
@@ -162,13 +173,20 @@ test("adminCreateUserRequestSchema validates coach and boxer creation contracts"
   );
 });
 
-test("adminCreateUserRequestSchema rejects admin role and invalid boxer level", () => {
+test("adminUserDetailResponseSchema rejects admin users and invalid boxer levels", () => {
   assert.equal(
-    adminCreateUserRequestSchema.safeParse({
+    adminUserDetailResponseSchema.safeParse({
+      id: "00000000-0000-4000-8000-000000000020",
       email: "admin@gym.com",
       role: "admin",
-      first_name: "Admin",
-      last_name: "User"
+      is_active: true,
+      profile: {
+        id: "00000000-0000-4000-8000-000000000021",
+        first_name: "Admin",
+        last_name: "User",
+        phone: null,
+        level: null
+      }
     }).success,
     false
   );
@@ -214,8 +232,19 @@ test("adminUpdateUserRequestSchema validates partial profile updates", () => {
 
   assert.equal(adminUpdateUserRequestSchema.safeParse({}).success, false);
   assert.equal(
-    adminUpdateUserRequestSchema.safeParse({
-      level: "elite"
+    adminUserDetailResponseSchema.safeParse({
+      id: "00000000-0000-4000-8000-000000000020",
+      email: "boxer@gym.com",
+      role: "boxer",
+      level: "elite",
+      is_active: true,
+      profile: {
+        id: "00000000-0000-4000-8000-000000000021",
+        first_name: "Martin",
+        last_name: "Rodriguez",
+        phone: null,
+        level: "elite"
+      }
     }).success,
     false
   );

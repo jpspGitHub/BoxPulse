@@ -71,6 +71,12 @@ export interface CurrentAuthUser {
   profile: AuthProfileSummary;
 }
 
+export interface Pagination {
+  page: number;
+  page_size: number;
+  total: number;
+}
+
 export interface AdminUserProfileSummary {
   id: Uuid;
   first_name: string;
@@ -87,41 +93,9 @@ export interface AdminUser {
   profile: AdminUserProfileSummary;
 }
 
-export interface Pagination {
-  page: number;
-  page_size: number;
-  total: number;
-}
-
 export interface AdminUsersListResponse {
   data: AdminUser[];
   pagination: Pagination;
-}
-
-export interface AdminCreateCoachUserRequest {
-  email: string;
-  role: "coach";
-  first_name: string;
-  last_name: string;
-  phone?: string | null;
-}
-
-export interface AdminCreateBoxerUserRequest {
-  email: string;
-  role: "boxer";
-  first_name: string;
-  last_name: string;
-  phone?: string | null;
-  level?: BoxerLevel | null;
-}
-
-export type AdminCreateUserRequest = AdminCreateCoachUserRequest | AdminCreateBoxerUserRequest;
-
-export interface AdminUpdateUserRequest {
-  first_name?: string;
-  last_name?: string;
-  phone?: string | null;
-  level?: BoxerLevel | null;
 }
 
 export interface Gym extends BaseEntity {

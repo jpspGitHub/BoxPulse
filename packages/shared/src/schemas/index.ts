@@ -155,6 +155,7 @@ export const adminUpdateUserRequestSchema = z
   });
 
 export const adminUpdateUserResponseSchema = adminUserSchema;
+export const adminUserDetailResponseSchema = adminUserSchema;
 
 export const gymSchema = baseEntitySchema.extend({
   name: z.string().trim().min(1),
@@ -308,6 +309,7 @@ export type AdminCreateUserRequestInput = z.infer<typeof adminCreateUserRequestS
 export type AdminCreateUserResponseInput = z.infer<typeof adminCreateUserResponseSchema>;
 export type AdminUpdateUserRequestInput = z.infer<typeof adminUpdateUserRequestSchema>;
 export type AdminUpdateUserResponseInput = z.infer<typeof adminUpdateUserResponseSchema>;
+export type AdminUserDetailResponseInput = z.infer<typeof adminUserDetailResponseSchema>;
 export type ExerciseInput = z.infer<typeof exerciseSchema>;
 export type ExerciseTimerConfigInput = z.infer<typeof exerciseTimerConfigSchema>;
 export type ExerciseRepetitionConfigInput = z.infer<typeof exerciseRepetitionConfigSchema>;
