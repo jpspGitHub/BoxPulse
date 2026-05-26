@@ -98,6 +98,25 @@ export interface AdminUsersListResponse {
   pagination: Pagination;
 }
 
+export interface AdminCreateCoachUserRequest {
+  email: string;
+  role: "coach";
+  first_name: string;
+  last_name: string;
+  phone?: string | null;
+}
+
+export interface AdminCreateBoxerUserRequest {
+  email: string;
+  role: "boxer";
+  first_name: string;
+  last_name: string;
+  phone?: string | null;
+  level?: BoxerLevel | null;
+}
+
+export type AdminCreateUserRequest = AdminCreateCoachUserRequest | AdminCreateBoxerUserRequest;
+
 export interface Gym extends BaseEntity {
   name: string;
   slug: string;
