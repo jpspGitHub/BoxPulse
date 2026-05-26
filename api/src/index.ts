@@ -2,6 +2,8 @@ import cors from "cors";
 import express from "express";
 import { z } from "zod";
 
+import { createAdminUsersRouter } from "./admin-users.js";
+
 const envSchema = z.object({
   PORT: z.coerce.number().int().positive().default(3001),
   BOXPULSE_VERBOSE_LOGS: z
@@ -25,6 +27,8 @@ app.get("/health", (_request, response) => {
 app.get("/api/v1/health", (_request, response) => {
   response.json(healthResponse);
 });
+
+app.use("/api/v1/admin/users", createAdminUsersRouter());
 
 app.listen(env.PORT, "0.0.0.0", () => {
   if (env.BOXPULSE_VERBOSE_LOGS) {
