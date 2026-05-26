@@ -5,6 +5,7 @@ import type { AdminUser, AuthUser } from "@boxpulse/shared/types";
 
 import {
   type AdminUsersRepository,
+  createAdminUserForApi,
   getAdminUserForApi,
   listAdminUsersForApi
 } from "./admin-users.js";
@@ -53,12 +54,35 @@ const managedBoxer: AdminUser = {
 };
 
 function createRepository(): AdminUsersRepository & {
+  lastCreateRequest?: unknown;
   lastGymId?: string;
   lastPage?: number;
   lastPageSize?: number;
   lastUserId?: string;
 } {
   return {
+    async createAdminUser(gymId, request) {
+      this.lastGymId = gymId;
+      this.lastCreateRequest = request;
+
+      if (request.email === "duplicate@gym.com") {
+        throw new Error("duplicate_email");
+      }
+
+      return {
+        email: request.email,
+        id: "00000000-0000-4000-8000-000000000030",
+        is_active: true,
+        profile: {
+          first_name: request.first_name,
+          id: "00000000-0000-4000-8000-000000000031",
+          last_name: request.last_name,
+          level: request.role === "boxer" ? (request.level ?? null) : null,
+          phone: request.phone ?? null
+        },
+        role: request.role
+      };
+    },
     async getAdminUserById(gymId, userId) {
       this.lastGymId = gymId;
       this.lastUserId = userId;
@@ -77,6 +101,96 @@ function createRepository(): AdminUsersRepository & {
     }
   };
 }
+
+test("createAdminUserForApi creates a managed user scoped to the admin gym", async () => {
+  const repository = createRepository();
+  const result = await createAdminUserForApi(adminUser, repository, {
+    email: "new-boxer@gym.com",
+    first_name: "Sofia",
+    last_name: "Perez",
+    level: "beginner",
+    phone: null,
+    role: "boxer"
+  });
+
+  assert.equal(result.statusCode, 201);
+  assert.deepEqual(result.body, {
+    email: "new-boxer@gym.com",
+    id: "00000000-0000-4000-8000-000000000030",
+    is_active: true,
+    profile: {
+      first_name: "Sofia",
+      id: "00000000-0000-4000-8000-000000000031",
+      last_name: "Perez",
+      level: "beginner",
+      phone: null
+    },
+    role: "boxer"
+  });
+  assert.equal(repository.lastGymId, adminUser.gym_id);
+  assert.deepEqual(repository.lastCreateRequest, {
+    email: "new-boxer@gym.com",
+    first_name: "Sofia",
+    last_name: "Perez",
+    level: "beginner",
+    phone: null,
+    role: "boxer"
+  });
+});
+
+test("createAdminUserForApi denies non-admin users", async () => {
+  const result = await createAdminUserForApi(coachUser, createRepository(), {
+    email: "new-boxer@gym.com",
+    first_name: "Sofia",
+    last_name: "Perez",
+    role: "boxer"
+  });
+
+  assert.equal(result.statusCode, 403);
+  assert.deepEqual(result.body, {
+    error: {
+      code: "forbidden_role",
+      details: {},
+      message: "User role is not allowed to access this resource"
+    }
+  });
+});
+
+test("createAdminUserForApi validates payload and rejects admin creation", async () => {
+  const result = await createAdminUserForApi(adminUser, createRepository(), {
+    email: "admin@gym.com",
+    first_name: "Root",
+    last_name: "Admin",
+    role: "admin"
+  });
+
+  assert.equal(result.statusCode, 400);
+  assert.deepEqual(result.body, {
+    error: {
+      code: "bad_request",
+      details: {},
+      message: "User payload is invalid"
+    }
+  });
+});
+
+test("createAdminUserForApi returns duplicate email errors", async () => {
+  const result = await createAdminUserForApi(adminUser, createRepository(), {
+    email: "duplicate@gym.com",
+    first_name: "Sofia",
+    last_name: "Perez",
+    role: "boxer"
+  });
+
+  assert.equal(result.statusCode, 400);
+  assert.deepEqual(result.body, {
+    error: {
+      code: "duplicate_email",
+      details: {},
+      message: "Ya existe un usuario con ese email."
+    }
+  });
+});
 
 test("listAdminUsersForApi returns paginated users for active admins", async () => {
   const repository = createRepository();

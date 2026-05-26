@@ -4,13 +4,21 @@ import type { SupabaseClient } from "@supabase/supabase-js";
 import { z } from "zod";
 
 import {
+  adminCreateUserRequestSchema,
+  adminCreateUserResponseSchema,
   adminUserDetailResponseSchema,
   adminUsersListQuerySchema,
   adminUsersListResponseSchema,
   authUserSchema,
   uuidSchema
 } from "@boxpulse/shared/schemas";
-import type { AdminUser, AdminUsersListResponse, AuthUser, UserRole } from "@boxpulse/shared/types";
+import type {
+  AdminCreateUserRequest,
+  AdminUser,
+  AdminUsersListResponse,
+  AuthUser,
+  UserRole
+} from "@boxpulse/shared/types";
 
 import { type ApiAuthGuardFailure, requireApiAuthUser } from "./auth-guard.js";
 import { createApiSupabaseClient } from "./supabase.js";
@@ -24,7 +32,7 @@ type ApiErrorBody = ApiAuthGuardFailure["body"];
 type ApiResult<TBody> =
   | {
       body: TBody;
-      statusCode: 200;
+      statusCode: 200 | 201;
     }
   | {
       body: ApiErrorBody;
@@ -37,6 +45,7 @@ type AdminUsersPage = {
 };
 
 export type AdminUsersRepository = {
+  createAdminUser(gymId: string, request: AdminCreateUserRequest): Promise<AdminUser>;
   getAdminUserById(gymId: string, userId: string): Promise<AdminUser | null>;
   listAdminUsers(gymId: string, page: number, pageSize: number): Promise<AdminUsersPage>;
 };
@@ -71,6 +80,13 @@ function internalError(): ApiResult<never> {
   return {
     body: createApiError("internal_server_error", "No pudimos obtener los usuarios. Intentá nuevamente."),
     statusCode: 500
+  };
+}
+
+function duplicateEmail(): ApiResult<never> {
+  return {
+    body: createApiError("duplicate_email", "Ya existe un usuario con ese email."),
+    statusCode: 400
   };
 }
 
@@ -167,6 +183,39 @@ export async function getAdminUserForApi(
   }
 }
 
+export async function createAdminUserForApi(
+  user: AuthUser | null | undefined,
+  repository: AdminUsersRepository,
+  body: unknown
+): Promise<ApiResult<AdminUser>> {
+  const auth = requireAdmin(user);
+
+  if ("statusCode" in auth) {
+    return auth;
+  }
+
+  const request = adminCreateUserRequestSchema.safeParse(body);
+
+  if (!request.success) {
+    return badRequest("User payload is invalid");
+  }
+
+  try {
+    const adminUser = await repository.createAdminUser(auth.user.gym_id, request.data);
+
+    return {
+      body: adminCreateUserResponseSchema.parse(adminUser),
+      statusCode: 201
+    };
+  } catch (error) {
+    if (error instanceof Error && error.message === "duplicate_email") {
+      return duplicateEmail();
+    }
+
+    return internalError();
+  }
+}
+
 const authUserMembershipRowSchema = z.object({
   gym_id: uuidSchema,
   role: z.enum(["admin", "coach", "boxer"])
@@ -220,6 +269,23 @@ function mapAdminUser(
 
 export class SupabaseAdminUsersRepository implements AdminUsersRepository {
   constructor(private readonly supabase: SupabaseClient) {}
+
+  async createAdminUser(gymId: string, request: AdminCreateUserRequest): Promise<AdminUser> {
+    await this.ensureEmailIsAvailable(request.email);
+
+    const user = await this.insertUser(request.email);
+    await this.insertGymMembership(gymId, user.id, request.role);
+    const profile = await this.insertProfile(gymId, user.id, request);
+
+    return mapAdminUser(
+      {
+        role: request.role,
+        user_id: user.id
+      },
+      user,
+      profile
+    );
+  }
 
   async listAdminUsers(gymId: string, page: number, pageSize: number): Promise<AdminUsersPage> {
     const offset = (page - 1) * pageSize;
@@ -333,6 +399,75 @@ export class SupabaseAdminUsersRepository implements AdminUsersRepository {
 
     return z.array(profileRowSchema).parse(profileResult.data ?? []);
   }
+
+  private async ensureEmailIsAvailable(email: string) {
+    const existingUser = await this.supabase
+      .from("users")
+      .select("id")
+      .eq("email", email)
+      .maybeSingle();
+
+    throwSupabaseError(existingUser.error);
+
+    if (existingUser.data) {
+      throw new Error("duplicate_email");
+    }
+  }
+
+  private async insertUser(email: string) {
+    const result = await this.supabase
+      .from("users")
+      .insert({
+        email,
+        is_active: true
+      })
+      .select("id, email, is_active")
+      .single();
+
+    throwSupabaseError(result.error);
+
+    return userRowSchema.parse(result.data);
+  }
+
+  private async insertGymMembership(gymId: string, userId: string, role: "coach" | "boxer") {
+    const result = await this.supabase.from("gym_members").insert({
+      gym_id: gymId,
+      role,
+      user_id: userId
+    });
+
+    throwSupabaseError(result.error);
+  }
+
+  private async insertProfile(gymId: string, userId: string, request: AdminCreateUserRequest) {
+    const baseProfile = {
+      first_name: request.first_name,
+      gym_id: gymId,
+      last_name: request.last_name,
+      phone: request.phone ?? null,
+      user_id: userId
+    };
+
+    const result =
+      request.role === "coach"
+        ? await this.supabase
+            .from("coach_profiles")
+            .insert(baseProfile)
+            .select("id, user_id, first_name, last_name, phone")
+            .single()
+        : await this.supabase
+            .from("boxer_profiles")
+            .insert({
+              ...baseProfile,
+              level: request.level ?? null
+            })
+            .select("id, user_id, first_name, last_name, phone, level")
+            .single();
+
+    throwSupabaseError(result.error);
+
+    return profileRowSchema.parse(result.data);
+  }
 }
 
 function getBearerToken(request: Request): string | null {
@@ -429,6 +564,17 @@ export function createAdminUsersRouter(dependencies: AdminUsersRouterDependencie
     sendApiResult(
       response,
       await listAdminUsersForApi(await resolveAuthUser(getAuthUser, request), getRepository(), request.query)
+    );
+  });
+
+  router.post("/", async (request, response) => {
+    sendApiResult(
+      response,
+      await createAdminUserForApi(
+        await resolveAuthUser(getAuthUser, request),
+        getRepository(),
+        request.body
+      )
     );
   });
 
