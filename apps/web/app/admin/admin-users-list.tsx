@@ -1,6 +1,6 @@
 "use client";
 
-import { adminUsersListResponseSchema } from "@boxpulse/shared/schemas";
+import { adminUpdateUserResponseSchema, adminUsersListResponseSchema } from "@boxpulse/shared/schemas";
 import type { AdminUser, AdminUsersListResponse } from "@boxpulse/shared/types";
 import { useEffect, useMemo, useState } from "react";
 
@@ -8,6 +8,7 @@ import { useWebAuthSession } from "../../lib/auth-session";
 
 const apiBaseUrl = process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:3001/api/v1";
 const loadUsersErrorMessage = "No pudimos cargar los usuarios. Intentá nuevamente.";
+const statusChangeErrorMessage = "No pudimos actualizar el estado del usuario. Intentá nuevamente.";
 
 type AdminUsersState =
   | {
@@ -61,6 +62,15 @@ function parseAdminUsersResponse(body: unknown): AdminUsersListResponse {
 
 export function AdminUsersList({ onEditUser, refreshKey }: AdminUsersListProps) {
   const { accessToken } = useWebAuthSession();
+  const [statusAction, setStatusAction] = useState<{
+    message: string | null;
+    status: "idle" | "saving" | "error";
+    userId: string | null;
+  }>({
+    message: null,
+    status: "idle",
+    userId: null
+  });
   const [state, setState] = useState<AdminUsersState>({
     status: "loading",
     users: []
@@ -124,6 +134,72 @@ export function AdminUsersList({ onEditUser, refreshKey }: AdminUsersListProps) 
     [state.users]
   );
 
+  async function setUserActive(user: AdminUser, isActive: boolean) {
+    if (!accessToken) {
+      setStatusAction({
+        message: statusChangeErrorMessage,
+        status: "error",
+        userId: user.id
+      });
+      return;
+    }
+
+    if (!isActive) {
+      const confirmed = window.confirm(`Vas a desactivar a ${getProfileName(user)}.`);
+
+      if (!confirmed) {
+        return;
+      }
+    }
+
+    setStatusAction({
+      message: null,
+      status: "saving",
+      userId: user.id
+    });
+
+    try {
+      const response = await fetch(
+        `${apiBaseUrl}/admin/users/${user.id}/${isActive ? "activate" : "deactivate"}`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`
+          },
+          method: "POST"
+        }
+      );
+      const body: unknown = await response.json();
+
+      if (!response.ok) {
+        throw new Error(statusChangeErrorMessage);
+      }
+
+      const updatedUser = adminUpdateUserResponseSchema.parse(body);
+
+      setState((current) =>
+        current.status === "ready"
+          ? {
+              status: "ready",
+              users: current.users.map((currentUser) =>
+                currentUser.id === updatedUser.id ? updatedUser : currentUser
+              )
+            }
+          : current
+      );
+      setStatusAction({
+        message: null,
+        status: "idle",
+        userId: null
+      });
+    } catch {
+      setStatusAction({
+        message: statusChangeErrorMessage,
+        status: "error",
+        userId: user.id
+      });
+    }
+  }
+
   if (!accessToken) {
     return (
       <section className="admin-state" aria-live="polite">
@@ -178,6 +254,11 @@ export function AdminUsersList({ onEditUser, refreshKey }: AdminUsersListProps) 
       </div>
 
       <div className="admin-users-table-wrap">
+        {statusAction.message ? (
+          <p className="admin-table-message admin-table-message-error" aria-live="polite">
+            {statusAction.message}
+          </p>
+        ) : null}
         <table className="admin-users-table">
           <thead>
             <tr>
@@ -211,13 +292,31 @@ export function AdminUsersList({ onEditUser, refreshKey }: AdminUsersListProps) 
                   </span>
                 </td>
                 <td>
-                  <button
-                    className="admin-table-button"
-                    type="button"
-                    onClick={() => onEditUser(user)}
-                  >
-                    Editar
-                  </button>
+                  <div className="admin-table-actions">
+                    <button
+                      className="admin-table-button"
+                      type="button"
+                      onClick={() => onEditUser(user)}
+                    >
+                      Editar
+                    </button>
+                    <button
+                      className={
+                        user.is_active
+                          ? "admin-table-button admin-table-button-danger"
+                          : "admin-table-button admin-table-button-success"
+                      }
+                      disabled={statusAction.status === "saving" && statusAction.userId === user.id}
+                      type="button"
+                      onClick={() => setUserActive(user, !user.is_active)}
+                    >
+                      {statusAction.status === "saving" && statusAction.userId === user.id
+                        ? "Guardando"
+                        : user.is_active
+                          ? "Desactivar"
+                          : "Activar"}
+                    </button>
+                  </div>
                 </td>
               </tr>
             ))}
