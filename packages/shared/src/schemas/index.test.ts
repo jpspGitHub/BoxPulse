@@ -9,6 +9,10 @@ import {
   requireActiveAuthUser
 } from "../auth/index.js";
 import {
+  adminManagedUserRoleSchema,
+  adminUserDetailResponseSchema,
+  adminUsersListQuerySchema,
+  adminUsersListResponseSchema,
   authSessionSchema,
   currentAuthUserSchema,
   exerciseRepetitionConfigSchema,
@@ -29,6 +33,12 @@ test("userRoleSchema accepts the supported MVP roles", () => {
   assert.equal(userRoleSchema.parse("admin"), "admin");
   assert.equal(userRoleSchema.parse("coach"), "coach");
   assert.equal(userRoleSchema.parse("boxer"), "boxer");
+});
+
+test("adminManagedUserRoleSchema accepts only coach and boxer roles", () => {
+  assert.equal(adminManagedUserRoleSchema.parse("coach"), "coach");
+  assert.equal(adminManagedUserRoleSchema.parse("boxer"), "boxer");
+  assert.equal(adminManagedUserRoleSchema.safeParse("admin").success, false);
 });
 
 test("loginRequestSchema validates the auth login contract", () => {
@@ -79,6 +89,78 @@ test("currentAuthUserSchema validates the auth me contract", () => {
   });
 
   assert.equal(result.success, true);
+});
+
+test("adminUsersListQuerySchema coerces optional pagination query params", () => {
+  assert.deepEqual(adminUsersListQuerySchema.parse({ page: "2", page_size: "25" }), {
+    page: 2,
+    page_size: 25
+  });
+
+  assert.equal(adminUsersListQuerySchema.safeParse({ page: "0" }).success, false);
+});
+
+test("adminUsersListResponseSchema validates admin user list data", () => {
+  const result = adminUsersListResponseSchema.safeParse({
+    data: [
+      {
+        id: "00000000-0000-4000-8000-000000000020",
+        email: "coach@gym.com",
+        role: "coach",
+        is_active: true,
+        profile: {
+          id: "00000000-0000-4000-8000-000000000021",
+          first_name: "Nicolas",
+          last_name: "Cabrera",
+          phone: null,
+          level: null
+        }
+      }
+    ],
+    pagination: {
+      page: 1,
+      page_size: 20,
+      total: 1
+    }
+  });
+
+  assert.equal(result.success, true);
+});
+
+test("adminUserDetailResponseSchema rejects admin users and invalid boxer levels", () => {
+  assert.equal(
+    adminUserDetailResponseSchema.safeParse({
+      id: "00000000-0000-4000-8000-000000000020",
+      email: "admin@gym.com",
+      role: "admin",
+      is_active: true,
+      profile: {
+        id: "00000000-0000-4000-8000-000000000021",
+        first_name: "Admin",
+        last_name: "User",
+        phone: null,
+        level: null
+      }
+    }).success,
+    false
+  );
+
+  assert.equal(
+    adminUserDetailResponseSchema.safeParse({
+      id: "00000000-0000-4000-8000-000000000020",
+      email: "boxer@gym.com",
+      role: "boxer",
+      is_active: true,
+      profile: {
+        id: "00000000-0000-4000-8000-000000000021",
+        first_name: "Martin",
+        last_name: "Rodriguez",
+        phone: null,
+        level: "elite"
+      }
+    }).success,
+    false
+  );
 });
 
 test("auth helpers validate roles and inactive users", () => {
