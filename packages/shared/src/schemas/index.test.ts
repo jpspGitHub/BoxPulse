@@ -9,7 +9,10 @@ import {
   requireActiveAuthUser
 } from "../auth/index.js";
 import {
+  adminCreateUserRequestSchema,
   adminManagedUserRoleSchema,
+  adminUpdateUserRequestSchema,
+  adminUserSchema,
   adminUserDetailResponseSchema,
   adminUsersListQuerySchema,
   adminUsersListResponseSchema,
@@ -91,6 +94,24 @@ test("currentAuthUserSchema validates the auth me contract", () => {
   assert.equal(result.success, true);
 });
 
+test("adminUserSchema validates admin-managed user summaries", () => {
+  const result = adminUserSchema.safeParse({
+    id: "00000000-0000-4000-8000-000000000020",
+    email: "boxer@gym.com",
+    role: "boxer",
+    is_active: true,
+    profile: {
+      id: "00000000-0000-4000-8000-000000000021",
+      first_name: "Martin",
+      last_name: "Rodriguez",
+      phone: "+59899999999",
+      level: "intermediate"
+    }
+  });
+
+  assert.equal(result.success, true);
+});
+
 test("adminUsersListQuerySchema coerces optional pagination query params", () => {
   assert.deepEqual(adminUsersListQuerySchema.parse({ page: "2", page_size: "25" }), {
     page: 2,
@@ -127,6 +148,31 @@ test("adminUsersListResponseSchema validates admin user list data", () => {
   assert.equal(result.success, true);
 });
 
+test("adminCreateUserRequestSchema validates coach and boxer creation contracts", () => {
+  assert.equal(
+    adminCreateUserRequestSchema.safeParse({
+      email: "coach@gym.com",
+      role: "coach",
+      first_name: "Nicolas",
+      last_name: "Cabrera",
+      phone: "+59899999999"
+    }).success,
+    true
+  );
+
+  assert.equal(
+    adminCreateUserRequestSchema.safeParse({
+      email: "boxer@gym.com",
+      role: "boxer",
+      first_name: "Martin",
+      last_name: "Rodriguez",
+      phone: null,
+      level: "intermediate"
+    }).success,
+    true
+  );
+});
+
 test("adminUserDetailResponseSchema rejects admin users and invalid boxer levels", () => {
   assert.equal(
     adminUserDetailResponseSchema.safeParse({
@@ -146,10 +192,51 @@ test("adminUserDetailResponseSchema rejects admin users and invalid boxer levels
   );
 
   assert.equal(
+    adminCreateUserRequestSchema.safeParse({
+      email: "boxer@gym.com",
+      role: "boxer",
+      first_name: "Martin",
+      last_name: "Rodriguez",
+      level: "elite"
+    }).success,
+    false
+  );
+
+  assert.equal(
+    adminCreateUserRequestSchema.safeParse({
+      email: "coach@gym.com",
+      role: "coach",
+      first_name: "Nicolas",
+      last_name: "Cabrera",
+      level: "beginner"
+    }).success,
+    false
+  );
+});
+
+test("adminUpdateUserRequestSchema validates partial profile updates", () => {
+  assert.equal(
+    adminUpdateUserRequestSchema.safeParse({
+      first_name: "Martin"
+    }).success,
+    true
+  );
+
+  assert.equal(
+    adminUpdateUserRequestSchema.safeParse({
+      phone: null,
+      level: "advanced"
+    }).success,
+    true
+  );
+
+  assert.equal(adminUpdateUserRequestSchema.safeParse({}).success, false);
+  assert.equal(
     adminUserDetailResponseSchema.safeParse({
       id: "00000000-0000-4000-8000-000000000020",
       email: "boxer@gym.com",
       role: "boxer",
+      level: "elite",
       is_active: true,
       profile: {
         id: "00000000-0000-4000-8000-000000000021",

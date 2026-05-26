@@ -115,6 +115,46 @@ export const adminUsersListResponseSchema = z.object({
   pagination: paginationSchema
 });
 
+const adminUserMutationBaseSchema = z.object({
+  email: z.string().email(),
+  first_name: z.string().trim().min(1),
+  last_name: z.string().trim().min(1),
+  phone: optionalNullableStringSchema
+});
+
+export const adminCreateCoachUserRequestSchema = adminUserMutationBaseSchema
+  .extend({
+    role: z.literal("coach")
+  })
+  .strict();
+
+export const adminCreateBoxerUserRequestSchema = adminUserMutationBaseSchema
+  .extend({
+    role: z.literal("boxer"),
+    level: boxerLevelSchema.optional().nullable()
+  })
+  .strict();
+
+export const adminCreateUserRequestSchema = z.discriminatedUnion("role", [
+  adminCreateCoachUserRequestSchema,
+  adminCreateBoxerUserRequestSchema
+]);
+
+export const adminCreateUserResponseSchema = adminUserSchema;
+
+export const adminUpdateUserRequestSchema = z
+  .object({
+    first_name: z.string().trim().min(1).optional(),
+    last_name: z.string().trim().min(1).optional(),
+    phone: optionalNullableStringSchema,
+    level: boxerLevelSchema.optional().nullable()
+  })
+  .strict()
+  .refine((value) => Object.keys(value).length > 0, {
+    message: "At least one user field must be provided"
+  });
+
+export const adminUpdateUserResponseSchema = adminUserSchema;
 export const adminUserDetailResponseSchema = adminUserSchema;
 
 export const gymSchema = baseEntitySchema.extend({
@@ -265,6 +305,10 @@ export type CurrentAuthUserInput = z.infer<typeof currentAuthUserSchema>;
 export type AdminUserInput = z.infer<typeof adminUserSchema>;
 export type AdminUsersListQueryInput = z.infer<typeof adminUsersListQuerySchema>;
 export type AdminUsersListResponseInput = z.infer<typeof adminUsersListResponseSchema>;
+export type AdminCreateUserRequestInput = z.infer<typeof adminCreateUserRequestSchema>;
+export type AdminCreateUserResponseInput = z.infer<typeof adminCreateUserResponseSchema>;
+export type AdminUpdateUserRequestInput = z.infer<typeof adminUpdateUserRequestSchema>;
+export type AdminUpdateUserResponseInput = z.infer<typeof adminUpdateUserResponseSchema>;
 export type AdminUserDetailResponseInput = z.infer<typeof adminUserDetailResponseSchema>;
 export type ExerciseInput = z.infer<typeof exerciseSchema>;
 export type ExerciseTimerConfigInput = z.infer<typeof exerciseTimerConfigSchema>;
