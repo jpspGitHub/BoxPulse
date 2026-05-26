@@ -7,7 +7,9 @@ import {
   type AdminUsersRepository,
   createAdminUserForApi,
   getAdminUserForApi,
-  listAdminUsersForApi
+  listAdminUsersForApi,
+  setAdminUserActiveForApi,
+  updateAdminUserForApi
 } from "./admin-users.js";
 
 const adminUser: AuthUser = {
@@ -58,6 +60,8 @@ function createRepository(): AdminUsersRepository & {
   lastGymId?: string;
   lastPage?: number;
   lastPageSize?: number;
+  lastStatus?: boolean;
+  lastUpdateRequest?: unknown;
   lastUserId?: string;
 } {
   return {
@@ -97,6 +101,40 @@ function createRepository(): AdminUsersRepository & {
       return {
         data: [managedCoach, managedBoxer],
         total: 2
+      };
+    },
+    async setAdminUserActive(gymId, userId, isActive) {
+      this.lastGymId = gymId;
+      this.lastUserId = userId;
+      this.lastStatus = isActive;
+
+      if (userId !== managedBoxer.id) {
+        return null;
+      }
+
+      return {
+        ...managedBoxer,
+        is_active: isActive
+      };
+    },
+    async updateAdminUser(gymId, userId, request) {
+      this.lastGymId = gymId;
+      this.lastUserId = userId;
+      this.lastUpdateRequest = request;
+
+      if (userId !== managedBoxer.id) {
+        return null;
+      }
+
+      return {
+        ...managedBoxer,
+        profile: {
+          ...managedBoxer.profile,
+          first_name: request.first_name ?? managedBoxer.profile.first_name,
+          last_name: request.last_name ?? managedBoxer.profile.last_name,
+          level: request.level === undefined ? managedBoxer.profile.level : request.level,
+          phone: request.phone === undefined ? managedBoxer.profile.phone : request.phone
+        }
       };
     }
   };
@@ -267,6 +305,155 @@ test("getAdminUserForApi validates ids and returns not found", async () => {
     adminUser,
     createRepository(),
     "00000000-0000-4000-8000-000000000099"
+  );
+
+  assert.equal(missing.statusCode, 404);
+  assert.deepEqual(missing.body, {
+    error: {
+      code: "not_found",
+      details: {},
+      message: "User was not found"
+    }
+  });
+});
+
+test("updateAdminUserForApi updates managed profile data scoped to the admin gym", async () => {
+  const repository = createRepository();
+  const result = await updateAdminUserForApi(adminUser, repository, managedBoxer.id, {
+    first_name: "Martina",
+    level: "advanced",
+    phone: null
+  });
+
+  assert.equal(result.statusCode, 200);
+  assert.deepEqual(result.body, {
+    ...managedBoxer,
+    profile: {
+      ...managedBoxer.profile,
+      first_name: "Martina",
+      level: "advanced",
+      phone: null
+    }
+  });
+  assert.equal(repository.lastGymId, adminUser.gym_id);
+  assert.equal(repository.lastUserId, managedBoxer.id);
+  assert.deepEqual(repository.lastUpdateRequest, {
+    first_name: "Martina",
+    level: "advanced",
+    phone: null
+  });
+});
+
+test("updateAdminUserForApi validates payloads and denies non-admin users", async () => {
+  const denied = await updateAdminUserForApi(coachUser, createRepository(), managedBoxer.id, {
+    first_name: "Martina"
+  });
+
+  assert.equal(denied.statusCode, 403);
+  assert.deepEqual(denied.body, {
+    error: {
+      code: "forbidden_role",
+      details: {},
+      message: "User role is not allowed to access this resource"
+    }
+  });
+
+  const invalidId = await updateAdminUserForApi(adminUser, createRepository(), "not-a-uuid", {
+    first_name: "Martina"
+  });
+
+  assert.equal(invalidId.statusCode, 400);
+  assert.deepEqual(invalidId.body, {
+    error: {
+      code: "bad_request",
+      details: {},
+      message: "User id is invalid"
+    }
+  });
+
+  const invalidPayload = await updateAdminUserForApi(adminUser, createRepository(), managedBoxer.id, {});
+
+  assert.equal(invalidPayload.statusCode, 400);
+  assert.deepEqual(invalidPayload.body, {
+    error: {
+      code: "bad_request",
+      details: {},
+      message: "User payload is invalid"
+    }
+  });
+});
+
+test("updateAdminUserForApi returns not found for users outside the admin gym", async () => {
+  const result = await updateAdminUserForApi(
+    adminUser,
+    createRepository(),
+    "00000000-0000-4000-8000-000000000099",
+    {
+      first_name: "Martina"
+    }
+  );
+
+  assert.equal(result.statusCode, 404);
+  assert.deepEqual(result.body, {
+    error: {
+      code: "not_found",
+      details: {},
+      message: "User was not found"
+    }
+  });
+});
+
+test("setAdminUserActiveForApi activates and deactivates users scoped to the admin gym", async () => {
+  const activateRepository = createRepository();
+  const activated = await setAdminUserActiveForApi(
+    adminUser,
+    activateRepository,
+    managedBoxer.id,
+    true
+  );
+
+  assert.equal(activated.statusCode, 200);
+  assert.deepEqual(activated.body, {
+    ...managedBoxer,
+    is_active: true
+  });
+  assert.equal(activateRepository.lastGymId, adminUser.gym_id);
+  assert.equal(activateRepository.lastUserId, managedBoxer.id);
+  assert.equal(activateRepository.lastStatus, true);
+
+  const deactivateRepository = createRepository();
+  const deactivated = await setAdminUserActiveForApi(
+    adminUser,
+    deactivateRepository,
+    managedBoxer.id,
+    false
+  );
+
+  assert.equal(deactivated.statusCode, 200);
+  assert.deepEqual(deactivated.body, {
+    ...managedBoxer,
+    is_active: false
+  });
+  assert.equal(deactivateRepository.lastStatus, false);
+});
+
+test("setAdminUserActiveForApi validates ids and returns not found", async () => {
+  const invalid = await setAdminUserActiveForApi(adminUser, createRepository(), "not-a-uuid", true);
+
+  assert.equal(invalid.statusCode, 400);
+  assert.deepEqual(invalid.body, {
+    error: {
+      code: "bad_request",
+      details: {},
+      message: "User id is invalid"
+    }
+  });
+
+  const missing = await setAdminUserActiveForApi(
+    adminUser,
+    createRepository(),
+    "00000000-0000-4000-8000-000000000099",
+    false
   );
 
   assert.equal(missing.statusCode, 404);

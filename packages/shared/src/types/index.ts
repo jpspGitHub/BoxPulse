@@ -117,6 +117,13 @@ export interface AdminCreateBoxerUserRequest {
 
 export type AdminCreateUserRequest = AdminCreateCoachUserRequest | AdminCreateBoxerUserRequest;
 
+export interface AdminUpdateUserRequest {
+  first_name?: string;
+  last_name?: string;
+  phone?: string | null;
+  level?: BoxerLevel | null;
+}
+
 export interface Gym extends BaseEntity {
   name: string;
   slug: string;

@@ -6,6 +6,8 @@ import { z } from "zod";
 import {
   adminCreateUserRequestSchema,
   adminCreateUserResponseSchema,
+  adminUpdateUserRequestSchema,
+  adminUpdateUserResponseSchema,
   adminUserDetailResponseSchema,
   adminUsersListQuerySchema,
   adminUsersListResponseSchema,
@@ -14,6 +16,7 @@ import {
 } from "@boxpulse/shared/schemas";
 import type {
   AdminCreateUserRequest,
+  AdminUpdateUserRequest,
   AdminUser,
   AdminUsersListResponse,
   AuthUser,
@@ -48,6 +51,12 @@ export type AdminUsersRepository = {
   createAdminUser(gymId: string, request: AdminCreateUserRequest): Promise<AdminUser>;
   getAdminUserById(gymId: string, userId: string): Promise<AdminUser | null>;
   listAdminUsers(gymId: string, page: number, pageSize: number): Promise<AdminUsersPage>;
+  setAdminUserActive(gymId: string, userId: string, isActive: boolean): Promise<AdminUser | null>;
+  updateAdminUser(
+    gymId: string,
+    userId: string,
+    request: AdminUpdateUserRequest
+  ): Promise<AdminUser | null>;
 };
 
 export type RequestAuthUserResolver = (request: Request) => Promise<AuthUser | null>;
@@ -216,6 +225,88 @@ export async function createAdminUserForApi(
   }
 }
 
+export async function updateAdminUserForApi(
+  user: AuthUser | null | undefined,
+  repository: AdminUsersRepository,
+  userId: string,
+  body: unknown
+): Promise<ApiResult<AdminUser>> {
+  const auth = requireAdmin(user);
+
+  if ("statusCode" in auth) {
+    return auth;
+  }
+
+  const parsedUserId = uuidSchema.safeParse(userId);
+
+  if (!parsedUserId.success) {
+    return badRequest("User id is invalid");
+  }
+
+  const request = adminUpdateUserRequestSchema.safeParse(body);
+
+  if (!request.success) {
+    return badRequest("User payload is invalid");
+  }
+
+  try {
+    const adminUser = await repository.updateAdminUser(
+      auth.user.gym_id,
+      parsedUserId.data,
+      request.data
+    );
+
+    if (!adminUser) {
+      return notFound("User was not found");
+    }
+
+    return {
+      body: adminUpdateUserResponseSchema.parse(adminUser),
+      statusCode: 200
+    };
+  } catch {
+    return internalError();
+  }
+}
+
+export async function setAdminUserActiveForApi(
+  user: AuthUser | null | undefined,
+  repository: AdminUsersRepository,
+  userId: string,
+  isActive: boolean
+): Promise<ApiResult<AdminUser>> {
+  const auth = requireAdmin(user);
+
+  if ("statusCode" in auth) {
+    return auth;
+  }
+
+  const parsedUserId = uuidSchema.safeParse(userId);
+
+  if (!parsedUserId.success) {
+    return badRequest("User id is invalid");
+  }
+
+  try {
+    const adminUser = await repository.setAdminUserActive(
+      auth.user.gym_id,
+      parsedUserId.data,
+      isActive
+    );
+
+    if (!adminUser) {
+      return notFound("User was not found");
+    }
+
+    return {
+      body: adminUpdateUserResponseSchema.parse(adminUser),
+      statusCode: 200
+    };
+  } catch {
+    return internalError();
+  }
+}
+
 const authUserMembershipRowSchema = z.object({
   gym_id: uuidSchema,
   role: z.enum(["admin", "coach", "boxer"])
@@ -337,6 +428,51 @@ export class SupabaseAdminUsersRepository implements AdminUsersRepository {
     const profile = profiles.get(membership.user_id);
 
     return user && profile ? mapAdminUser(membership, user, profile) : null;
+  }
+
+  async updateAdminUser(
+    gymId: string,
+    userId: string,
+    request: AdminUpdateUserRequest
+  ): Promise<AdminUser | null> {
+    const adminUser = await this.getAdminUserById(gymId, userId);
+
+    if (!adminUser) {
+      return null;
+    }
+
+    const profile = await this.updateProfile(gymId, userId, adminUser.role, request);
+
+    return {
+      ...adminUser,
+      profile
+    };
+  }
+
+  async setAdminUserActive(
+    gymId: string,
+    userId: string,
+    isActive: boolean
+  ): Promise<AdminUser | null> {
+    const adminUser = await this.getAdminUserById(gymId, userId);
+
+    if (!adminUser) {
+      return null;
+    }
+
+    const userResult = await this.supabase
+      .from("users")
+      .update({ is_active: isActive })
+      .eq("id", userId)
+      .select("id, email, is_active")
+      .single();
+
+    throwSupabaseError(userResult.error);
+
+    return {
+      ...adminUser,
+      ...userRowSchema.parse(userResult.data)
+    };
   }
 
   private async findUsers(userIds: string[]) {
@@ -468,6 +604,70 @@ export class SupabaseAdminUsersRepository implements AdminUsersRepository {
 
     return profileRowSchema.parse(result.data);
   }
+
+  private async updateProfile(
+    gymId: string,
+    userId: string,
+    role: "coach" | "boxer",
+    request: AdminUpdateUserRequest
+  ) {
+    const updates: Partial<{
+      first_name: string;
+      last_name: string;
+      level: "beginner" | "intermediate" | "advanced" | null;
+      phone: string | null;
+    }> = {};
+
+    if (request.first_name !== undefined) {
+      updates.first_name = request.first_name;
+    }
+
+    if (request.last_name !== undefined) {
+      updates.last_name = request.last_name;
+    }
+
+    if (request.phone !== undefined) {
+      updates.phone = request.phone;
+    }
+
+    if (role === "boxer" && request.level !== undefined) {
+      updates.level = request.level;
+    }
+
+    if (Object.keys(updates).length === 0) {
+      const currentProfile = await this.findProfiles(gymId, [
+        {
+          role,
+          user_id: userId
+        }
+      ]);
+
+      const profile = currentProfile.get(userId);
+
+      if (!profile) {
+        throw new Error("Profile was not found");
+      }
+
+      return profile;
+    }
+
+    const table = role === "coach" ? "coach_profiles" : "boxer_profiles";
+    const selectedColumns =
+      role === "coach"
+        ? "id, user_id, first_name, last_name, phone"
+        : "id, user_id, first_name, last_name, phone, level";
+    const result = await this.supabase
+      .from(table)
+      .update(updates)
+      .eq("gym_id", gymId)
+      .eq("user_id", userId)
+      .select(selectedColumns)
+      .single();
+
+    throwSupabaseError(result.error);
+
+    return profileRowSchema.parse(result.data);
+  }
 }
 
 function getBearerToken(request: Request): string | null {
@@ -585,6 +785,42 @@ export function createAdminUsersRouter(dependencies: AdminUsersRouterDependencie
         await resolveAuthUser(getAuthUser, request),
         getRepository(),
         request.params.userId
+      )
+    );
+  });
+
+  router.patch("/:userId", async (request, response) => {
+    sendApiResult(
+      response,
+      await updateAdminUserForApi(
+        await resolveAuthUser(getAuthUser, request),
+        getRepository(),
+        request.params.userId,
+        request.body
+      )
+    );
+  });
+
+  router.post("/:userId/activate", async (request, response) => {
+    sendApiResult(
+      response,
+      await setAdminUserActiveForApi(
+        await resolveAuthUser(getAuthUser, request),
+        getRepository(),
+        request.params.userId,
+        true
+      )
+    );
+  });
+
+  router.post("/:userId/deactivate", async (request, response) => {
+    sendApiResult(
+      response,
+      await setAdminUserActiveForApi(
+        await resolveAuthUser(getAuthUser, request),
+        getRepository(),
+        request.params.userId,
+        false
       )
     );
   });
