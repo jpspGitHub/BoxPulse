@@ -7,5 +7,20 @@
     "noEmit": true,
     "types": ["react"]
   },
-  "include": ["App.tsx", "env.d.ts", "index.ts", "lib/**/*.ts", "lib/**/*.tsx"]
+  "include": [
+    "App.tsx",
+    "app/**/*.ts",
+    "app/**/*.tsx",
+    "components/**/*.ts",
+    "components/**/*.tsx",
+    "constants/**/*.ts",
+    "env.d.ts",
+    "index.ts",
+    "lib/**/*.ts",
+    "lib/**/*.tsx",
+    "mocks/**/*.ts",
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "types/**/*.ts"
+  ]
 }
