@@ -1,0 +1,253 @@
+<!DOCTYPE html><html class="dark" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Elegir entrenamiento</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Hanken+Grotesk:wght@400;500&amp;family=JetBrains+Mono:wght@600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary": "#650a00",
+                        "on-error": "#690005",
+                        "surface-variant": "#43302c",
+                        "on-tertiary-fixed-variant": "#004d62",
+                        "surface-container": "#2c1b18",
+                        "surface-tint": "#ffb4a5",
+                        "primary": "#ffb4a5",
+                        "on-surface": "#fbdcd6",
+                        "primary-container": "#ff5637",
+                        "on-tertiary": "#003544",
+                        "surface-container-low": "#281714",
+                        "tertiary-fixed-dim": "#64d4fc",
+                        "secondary-fixed-dim": "#f0c03e",
+                        "primary-fixed-dim": "#ffb4a5",
+                        "on-background": "#fbdcd6",
+                        "on-surface-variant": "#e5beb6",
+                        "secondary-container": "#ba9000",
+                        "tertiary-container": "#0e9dc3",
+                        "surface-bright": "#483531",
+                        "surface-container-lowest": "#190a08",
+                        "surface": "#1f0f0c",
+                        "surface-dim": "#1f0f0c",
+                        "secondary-fixed": "#ffdf95",
+                        "on-secondary-container": "#3c2c00",
+                        "on-primary-container": "#590800",
+                        "on-primary-fixed": "#3f0400",
+                        "outline-variant": "#5c403a",
+                        "error-container": "#93000a",
+                        "on-tertiary-fixed": "#001f29",
+                        "secondary": "#f0c03e",
+                        "tertiary-fixed": "#baeaff",
+                        "error": "#ffb4ab",
+                        "on-tertiary-container": "#002e3c",
+                        "on-secondary-fixed-variant": "#594400",
+                        "inverse-surface": "#fbdcd6",
+                        "inverse-on-surface": "#3f2c28",
+                        "on-primary-fixed-variant": "#8e1300",
+                        "on-secondary": "#3e2e00",
+                        "tertiary": "#64d4fc",
+                        "inverse-primary": "#ba1b00",
+                        "background": "#1f0f0c",
+                        "surface-container-high": "#382622",
+                        "outline": "#ac8982",
+                        "on-error-container": "#ffdad6",
+                        "primary-fixed": "#ffdad3",
+                        "surface-container-highest": "#43302c",
+                        "on-secondary-fixed": "#251a00"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "xs": "4px",
+                        "container-margin": "20px",
+                        "lg": "24px",
+                        "md": "16px",
+                        "unit": "4px",
+                        "sm": "8px",
+                        "xl": "40px",
+                        "2xl": "64px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Anton"],
+                        "timer-xl": ["Anton"],
+                        "headline-md": ["Anton"],
+                        "label-md": ["JetBrains Mono"],
+                        "body-lg": ["Hanken Grotesk"],
+                        "body-md": ["Hanken Grotesk"],
+                        "headline-lg-mobile": ["Anton"],
+                        "display-lg": ["Anton"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["48px", { "lineHeight": "52px", "letterSpacing": "0.03em", "fontWeight": "400" }],
+                        "timer-xl": ["120px", { "lineHeight": "110px", "fontWeight": "400" }],
+                        "headline-md": ["32px", { "lineHeight": "36px", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["36px", { "lineHeight": "40px", "fontWeight": "400" }],
+                        "display-lg": ["80px", { "lineHeight": "80px", "letterSpacing": "0.02em", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.filled {
+            font-variation-settings: 'FILL' 1;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-background antialiased min-h-screen flex flex-col pt-16 pb-24 selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-container-margin h-16 bg-background dark:bg-background border-b border-outline-variant flat no shadows transition-colors duration-200">
+<button class="text-primary hover:bg-surface-variant p-2 rounded-full transition-colors flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<div class="text-headline-md font-headline-md text-primary tracking-wider">ROUNDLAB</div>
+<div class="w-10 h-10 rounded-full bg-surface-variant overflow-hidden border border-outline-variant flex items-center justify-center text-on-surface-variant cursor-pointer hover:bg-surface transition-colors" title="Coach Profile Picture">
+<span class="material-symbols-outlined filled" data-icon="person">person</span>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow px-container-margin py-lg md:px-xl md:py-xl max-w-7xl mx-auto w-full">
+<h1 class="text-headline-lg-mobile font-headline-lg-mobile md:text-headline-lg md:font-headline-lg mb-xl text-center md:text-left text-on-surface uppercase border-b-2 border-primary inline-block pb-sm">Elegir entrenamiento</h1>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-md md:gap-lg">
+<!-- Training Cards -->
+<!-- Bolsa -->
+<button class="group flex flex-col items-center justify-center p-lg bg-surface border border-outline-variant rounded-lg hover:border-primary focus:border-primary focus:outline-none transition-all duration-200 text-left w-full relative overflow-hidden" onclick="toggleSelection(this)">
+<div class="absolute inset-0 bg-primary opacity-0 group-hover:opacity-5 group-focus:opacity-10 transition-opacity"></div>
+<span class="material-symbols-outlined text-[48px] text-secondary mb-md group-focus:text-primary transition-colors group-[.selected]:text-primary" data-icon="sports_martial_arts">sports_martial_arts</span>
+<h3 class="text-body-lg font-body-lg text-on-surface mb-xs uppercase">Bolsa</h3>
+<p class="text-label-md font-label-md text-on-surface-variant text-center">Trabajo de potencia y resistencia.</p>
+<div class="absolute top-sm right-sm opacity-0 group-[.selected]:opacity-100 transition-opacity text-primary">
+<span class="material-symbols-outlined filled" data-icon="check_circle">check_circle</span>
+</div>
+</button>
+<!-- Sparring -->
+<button class="group flex flex-col items-center justify-center p-lg bg-surface border border-outline-variant rounded-lg hover:border-primary focus:border-primary focus:outline-none transition-all duration-200 text-left w-full relative overflow-hidden" onclick="toggleSelection(this)">
+<div class="absolute inset-0 bg-primary opacity-0 group-hover:opacity-5 group-focus:opacity-10 transition-opacity"></div>
+<span class="material-symbols-outlined text-[48px] text-secondary mb-md group-focus:text-primary transition-colors group-[.selected]:text-primary" data-icon="front_hand">front_hand</span>
+<h3 class="text-body-lg font-body-lg text-on-surface mb-xs uppercase">Sparring</h3>
+<p class="text-label-md font-label-md text-on-surface-variant text-center">Combate simulado en el ring.</p>
+<div class="absolute top-sm right-sm opacity-0 group-[.selected]:opacity-100 transition-opacity text-primary">
+<span class="material-symbols-outlined filled" data-icon="check_circle">check_circle</span>
+</div>
+</button>
+<!-- Abdominales -->
+<button class="group flex flex-col items-center justify-center p-lg bg-surface border border-outline-variant rounded-lg hover:border-primary focus:border-primary focus:outline-none transition-all duration-200 text-left w-full relative overflow-hidden" onclick="toggleSelection(this)">
+<div class="absolute inset-0 bg-primary opacity-0 group-hover:opacity-5 group-focus:opacity-10 transition-opacity"></div>
+<span class="material-symbols-outlined text-[48px] text-secondary mb-md group-focus:text-primary transition-colors group-[.selected]:text-primary" data-icon="accessibility_new">accessibility_new</span>
+<h3 class="text-body-lg font-body-lg text-on-surface mb-xs uppercase">Abdominales</h3>
+<p class="text-label-md font-label-md text-on-surface-variant text-center">Fortalecimiento del core.</p>
+<div class="absolute top-sm right-sm opacity-0 group-[.selected]:opacity-100 transition-opacity text-primary">
+<span class="material-symbols-outlined filled" data-icon="check_circle">check_circle</span>
+</div>
+</button>
+<!-- Comba -->
+<button class="group flex flex-col items-center justify-center p-lg bg-surface border border-outline-variant rounded-lg hover:border-primary focus:border-primary focus:outline-none transition-all duration-200 text-left w-full relative overflow-hidden" onclick="toggleSelection(this)">
+<div class="absolute inset-0 bg-primary opacity-0 group-hover:opacity-5 group-focus:opacity-10 transition-opacity"></div>
+<span class="material-symbols-outlined text-[48px] text-secondary mb-md group-focus:text-primary transition-colors group-[.selected]:text-primary" data-icon="fitness_center">fitness_center</span>
+<h3 class="text-body-lg font-body-lg text-on-surface mb-xs uppercase">Comba</h3>
+<p class="text-label-md font-label-md text-on-surface-variant text-center">Ritmo, cardio y coordinación.</p>
+<div class="absolute top-sm right-sm opacity-0 group-[.selected]:opacity-100 transition-opacity text-primary">
+<span class="material-symbols-outlined filled" data-icon="check_circle">check_circle</span>
+</div>
+</button>
+<!-- Sombra -->
+<button class="group flex flex-col items-center justify-center p-lg bg-surface border border-outline-variant rounded-lg hover:border-primary focus:border-primary focus:outline-none transition-all duration-200 text-left w-full relative overflow-hidden" onclick="toggleSelection(this)">
+<div class="absolute inset-0 bg-primary opacity-0 group-hover:opacity-5 group-focus:opacity-10 transition-opacity"></div>
+<span class="material-symbols-outlined text-[48px] text-secondary mb-md group-focus:text-primary transition-colors group-[.selected]:text-primary" data-icon="person_play">person_play</span>
+<h3 class="text-body-lg font-body-lg text-on-surface mb-xs uppercase">Sombra</h3>
+<p class="text-label-md font-label-md text-on-surface-variant text-center">Técnica al aire y fluidez.</p>
+<div class="absolute top-sm right-sm opacity-0 group-[.selected]:opacity-100 transition-opacity text-primary">
+<span class="material-symbols-outlined filled" data-icon="check_circle">check_circle</span>
+</div>
+</button>
+<!-- Manoplas -->
+<button class="group flex flex-col items-center justify-center p-lg bg-surface border border-outline-variant rounded-lg hover:border-primary focus:border-primary focus:outline-none transition-all duration-200 text-left w-full relative overflow-hidden" onclick="toggleSelection(this)">
+<div class="absolute inset-0 bg-primary opacity-0 group-hover:opacity-5 group-focus:opacity-10 transition-opacity"></div>
+<span class="material-symbols-outlined text-[48px] text-secondary mb-md group-focus:text-primary transition-colors group-[.selected]:text-primary" data-icon="sports_kabaddi">sports_kabaddi</span>
+<h3 class="text-body-lg font-body-lg text-on-surface mb-xs uppercase">Manoplas</h3>
+<p class="text-label-md font-label-md text-on-surface-variant text-center">Precisión y reflejos con entrenador.</p>
+<div class="absolute top-sm right-sm opacity-0 group-[.selected]:opacity-100 transition-opacity text-primary">
+<span class="material-symbols-outlined filled" data-icon="check_circle">check_circle</span>
+</div>
+</button>
+<!-- Técnica -->
+<button class="group flex flex-col items-center justify-center p-lg bg-surface border border-outline-variant rounded-lg hover:border-primary focus:border-primary focus:outline-none transition-all duration-200 text-left w-full relative overflow-hidden" onclick="toggleSelection(this)">
+<div class="absolute inset-0 bg-primary opacity-0 group-hover:opacity-5 group-focus:opacity-10 transition-opacity"></div>
+<span class="material-symbols-outlined text-[48px] text-secondary mb-md group-focus:text-primary transition-colors group-[.selected]:text-primary" data-icon="model_training">model_training</span>
+<h3 class="text-body-lg font-body-lg text-on-surface mb-xs uppercase">Técnica</h3>
+<p class="text-label-md font-label-md text-on-surface-variant text-center">Perfeccionamiento de movimientos.</p>
+<div class="absolute top-sm right-sm opacity-0 group-[.selected]:opacity-100 transition-opacity text-primary">
+<span class="material-symbols-outlined filled" data-icon="check_circle">check_circle</span>
+</div>
+</button>
+<!-- Fuerza -->
+<button class="group flex flex-col items-center justify-center p-lg bg-surface border border-outline-variant rounded-lg hover:border-primary focus:border-primary focus:outline-none transition-all duration-200 text-left w-full relative overflow-hidden" onclick="toggleSelection(this)">
+<div class="absolute inset-0 bg-primary opacity-0 group-hover:opacity-5 group-focus:opacity-10 transition-opacity"></div>
+<span class="material-symbols-outlined text-[48px] text-secondary mb-md group-focus:text-primary transition-colors group-[.selected]:text-primary" data-icon="bolt">bolt</span>
+<h3 class="text-body-lg font-body-lg text-on-surface mb-xs uppercase">Fuerza</h3>
+<p class="text-label-md font-label-md text-on-surface-variant text-center">Acondicionamiento físico general.</p>
+<div class="absolute top-sm right-sm opacity-0 group-[.selected]:opacity-100 transition-opacity text-primary">
+<span class="material-symbols-outlined filled" data-icon="check_circle">check_circle</span>
+</div>
+</button>
+</div>
+</main>
+<!-- Bottom Action Bar (Contextual FAB replacement for transactional flow) -->
+<div class="fixed bottom-0 left-0 w-full bg-surface border-t border-outline-variant p-md flex justify-center items-center z-50 shadow-[0px_-4px_0px_rgba(0,0,0,0.5)]">
+<div class="max-w-7xl w-full flex justify-end">
+<button class="bg-surface-variant text-on-surface-variant font-headline-md text-body-lg px-xl py-sm min-h-[56px] rounded uppercase cursor-not-allowed transition-colors duration-200 border-2 border-transparent" disabled="" id="continue-btn">
+                CONTINUAR
+            </button>
+</div>
+</div>
+<script>
+        function toggleSelection(btn) {
+            const isSelected = btn.classList.contains('selected');
+            const allBtns = document.querySelectorAll('.group');
+            
+            // Deselect all
+            allBtns.forEach(b => {
+                b.classList.remove('selected', 'border-primary');
+            });
+            
+            // Toggle current
+            if (!isSelected) {
+                btn.classList.add('selected', 'border-primary');
+            }
+            
+            const continueBtn = document.getElementById('continue-btn');
+            const anySelected = document.querySelectorAll('.selected').length > 0;
+            
+            if (anySelected) {
+                continueBtn.disabled = false;
+                continueBtn.classList.remove('bg-surface-variant', 'text-on-surface-variant', 'cursor-not-allowed');
+                continueBtn.classList.add('bg-primary-container', 'text-on-primary', 'hover:bg-[#ff7a63]', 'cursor-pointer');
+            } else {
+                continueBtn.disabled = true;
+                continueBtn.classList.add('bg-surface-variant', 'text-on-surface-variant', 'cursor-not-allowed');
+                continueBtn.classList.remove('bg-primary-container', 'text-on-primary', 'hover:bg-[#ff7a63]', 'cursor-pointer');
+            }
+        }
+    </script>
+</body></html>

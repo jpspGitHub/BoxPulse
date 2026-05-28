@@ -42,28 +42,31 @@ const styles = StyleSheet.create({
   },
   eyebrow: {
     color: colors.accent,
-    fontSize: 12,
+    fontSize: 14,
     fontWeight: "900",
-    letterSpacing: 0,
+    letterSpacing: 3,
     marginBottom: 8,
     textTransform: "uppercase"
   },
   title: {
     color: colors.text,
-    fontSize: 32,
+    fontSize: 42,
     fontWeight: "900",
-    lineHeight: 36
+    lineHeight: 46,
+    textTransform: "uppercase"
   },
   description: {
     color: colors.subtext,
-    fontSize: 16,
-    lineHeight: 23,
+    fontSize: 20,
+    fontWeight: "700",
+    lineHeight: 28,
     marginTop: 8
   },
   sectionTitle: {
-    color: colors.text,
+    color: colors.accent,
     fontSize: 18,
-    fontWeight: "900"
+    fontWeight: "900",
+    letterSpacing: 3,
+    textTransform: "uppercase"
   }
 });
-

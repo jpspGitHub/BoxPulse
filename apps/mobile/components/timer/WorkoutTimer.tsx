@@ -7,7 +7,9 @@ import { Button } from "../ui/Button";
 type TimerPhase = "preparation" | "round" | "rest" | "completed";
 
 function formatSeconds(totalSeconds: number): string {
-  const minutes = Math.floor(totalSeconds / 60).toString().padStart(2, "0");
+  const minutes = Math.floor(totalSeconds / 60)
+    .toString()
+    .padStart(2, "0");
   const seconds = (totalSeconds % 60).toString().padStart(2, "0");
 
   return `${minutes}:${seconds}`;
@@ -24,9 +26,13 @@ export function WorkoutTimer({
   restSeconds?: number;
   totalRounds?: number;
 }) {
-  const [phase, setPhase] = useState<TimerPhase>(initialPreparationSeconds > 0 ? "preparation" : "round");
+  const [phase, setPhase] = useState<TimerPhase>(
+    initialPreparationSeconds > 0 ? "preparation" : "round"
+  );
   const [round, setRound] = useState(1);
-  const [seconds, setSeconds] = useState(initialPreparationSeconds > 0 ? initialPreparationSeconds : roundSeconds);
+  const [seconds, setSeconds] = useState(
+    initialPreparationSeconds > 0 ? initialPreparationSeconds : roundSeconds
+  );
   const [isPaused, setIsPaused] = useState(false);
 
   const phaseLabel = useMemo(() => {
@@ -110,7 +116,9 @@ export function WorkoutTimer({
       <View style={styles.panel}>
         <Text style={styles.phase}>{phaseLabel}</Text>
         <Text style={styles.timer}>{formatSeconds(seconds)}</Text>
-        <Text style={styles.hint}>Round {round} de {totalRounds}</Text>
+        <Text style={styles.hint}>
+          Round {round} de {totalRounds}
+        </Text>
       </View>
       <View style={styles.actions}>
         <Button
@@ -121,8 +129,18 @@ export function WorkoutTimer({
         <Button label="Siguiente" onPress={nextRound} variant="secondary" style={styles.action} />
       </View>
       <View style={styles.actions}>
-        <Button label="Reiniciar round" onPress={restartRound} variant="secondary" style={styles.action} />
-        <Button label="Reiniciar todo" onPress={restartExercise} variant="secondary" style={styles.action} />
+        <Button
+          label="Reiniciar round"
+          onPress={restartRound}
+          variant="secondary"
+          style={styles.action}
+        />
+        <Button
+          label="Reiniciar todo"
+          onPress={restartExercise}
+          variant="secondary"
+          style={styles.action}
+        />
       </View>
     </View>
   );
@@ -134,23 +152,23 @@ const styles = StyleSheet.create({
   },
   panel: {
     alignItems: "center",
-    backgroundColor: colors.surface,
-    borderColor: colors.accent,
+    backgroundColor: colors.background,
+    borderColor: colors.primary,
     borderRadius: 8,
-    borderWidth: 1,
+    borderWidth: 4,
     padding: 28
   },
   phase: {
-    color: colors.accent,
-    fontSize: 13,
+    color: colors.primarySoft,
+    fontSize: 18,
     fontWeight: "900",
-    letterSpacing: 0
+    letterSpacing: 6
   },
   timer: {
     color: colors.text,
-    fontSize: 76,
+    fontSize: 92,
     fontWeight: "900",
-    lineHeight: 86
+    lineHeight: 104
   },
   hint: {
     color: colors.subtext,
@@ -165,4 +183,3 @@ const styles = StyleSheet.create({
     flex: 1
   }
 });
-

@@ -9,7 +9,9 @@ import { ScreenHeader, SectionTitle } from "../../../components/ui/Typography";
 import { colors } from "../../../constants/theme";
 
 function formatElapsed(totalSeconds: number): string {
-  const minutes = Math.floor(totalSeconds / 60).toString().padStart(2, "0");
+  const minutes = Math.floor(totalSeconds / 60)
+    .toString()
+    .padStart(2, "0");
   const seconds = (totalSeconds % 60).toString().padStart(2, "0");
 
   return `${minutes}:${seconds}`;
@@ -27,21 +29,39 @@ export default function CoachRepetitionRunRoute() {
 
   return (
     <AppScreen>
-      <ScreenHeader eyebrow="Repeticiones" title="Fuerza y core" description="Objetivo 50 repeticiones · 4 series" />
+      <ScreenHeader
+        eyebrow="Meta: 50 repeticiones"
+        title="Abdominales"
+        description="Objetivo por participante"
+      />
       <View style={styles.panel}>
-        <Text style={styles.state}>SERIE {series} DE 4</Text>
+        <Text style={styles.state}>TIEMPO TRANSCURRIDO</Text>
         <Text style={styles.reps}>50</Text>
-        <Text style={styles.hint}>Tiempo {formatElapsed(elapsed)}</Text>
+        <Text style={styles.hint}>
+          Serie {series} de 4 · {formatElapsed(elapsed)}
+        </Text>
       </View>
       <Surface>
         <SectionTitle>Participantes</SectionTitle>
         <Text style={styles.copy}>Martin Rodriguez, Lucas Cabrera</Text>
       </Surface>
-      <Button label="Marcar serie completa" onPress={() => setSeries((current) => Math.min(4, current + 1))} />
+      <Button
+        label="Marcar serie completa"
+        onPress={() => setSeries((current) => Math.min(4, current + 1))}
+      />
       <Button label="Reiniciar timer" onPress={() => setElapsed(0)} variant="secondary" />
       <View style={styles.actions}>
-        <Button label="Cancelar" onPress={() => router.replace("/coach")} variant="danger" style={styles.action} />
-        <Button label="Finalizar" onPress={() => router.push("/coach/workout/workout-jump-rope")} style={styles.action} />
+        <Button
+          label="Cancelar"
+          onPress={() => router.replace("/coach")}
+          variant="danger"
+          style={styles.action}
+        />
+        <Button
+          label="Finalizar"
+          onPress={() => router.push("/coach/workout/workout-jump-rope")}
+          style={styles.action}
+        />
       </View>
     </AppScreen>
   );
@@ -50,20 +70,21 @@ export default function CoachRepetitionRunRoute() {
 const styles = StyleSheet.create({
   panel: {
     alignItems: "center",
-    backgroundColor: colors.surface,
-    borderColor: colors.accent,
+    backgroundColor: colors.background,
+    borderColor: colors.primary,
     borderRadius: 8,
-    borderWidth: 1,
+    borderWidth: 4,
     padding: 28
   },
   state: {
-    color: colors.accent,
-    fontSize: 13,
-    fontWeight: "900"
+    color: colors.primarySoft,
+    fontSize: 18,
+    fontWeight: "900",
+    letterSpacing: 6
   },
   reps: {
     color: colors.text,
-    fontSize: 86,
+    fontSize: 100,
     fontWeight: "900",
     lineHeight: 94
   },
@@ -85,4 +106,3 @@ const styles = StyleSheet.create({
     flex: 1
   }
 });
-

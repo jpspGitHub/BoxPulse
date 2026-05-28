@@ -16,17 +16,23 @@ export default function CoachNewWorkoutRoute() {
   const [mode, setMode] = useState<ExerciseMode>("timer");
 
   function toggleBoxer(id: string) {
-    setSelectedBoxers((current) => (current.includes(id) ? current.filter((boxerId) => boxerId !== id) : [...current, id]));
+    setSelectedBoxers((current) =>
+      current.includes(id) ? current.filter((boxerId) => boxerId !== id) : [...current, id]
+    );
   }
 
   return (
     <AppScreen>
       <ScreenHeader
         eyebrow="Nuevo ejercicio"
-        title="Configurar sesion"
-        description={`${selectedBoxers.length} participantes seleccionados`}
+        title="Seleccionar participantes"
+        description="Selecciona los boxeadores para esta sesion."
       />
-      <TextInput placeholder="Buscar boxeador" placeholderTextColor={colors.muted} style={styles.input} />
+      <TextInput
+        placeholder="Buscar boxeador"
+        placeholderTextColor={colors.muted}
+        style={styles.input}
+      />
       <Surface>
         <SectionTitle>Participantes</SectionTitle>
         {boxers.map((boxer) => (
@@ -38,7 +44,9 @@ export default function CoachNewWorkoutRoute() {
           >
             <View>
               <Text style={styles.optionTitle}>{boxer.fullName}</Text>
-              <Text style={styles.optionMeta}>{boxer.attendanceThisMonth} asistencias este mes</Text>
+              <Text style={styles.optionMeta}>
+                {boxer.attendanceThisMonth} asistencias este mes
+              </Text>
             </View>
             <Text style={styles.check}>{selectedBoxers.includes(boxer.id) ? "OK" : "+"}</Text>
           </PressableSurface>
@@ -60,7 +68,7 @@ export default function CoachNewWorkoutRoute() {
         </View>
       </Surface>
       <Surface>
-        <SectionTitle>Modalidad</SectionTitle>
+        <SectionTitle>Como quieres medir este ejercicio?</SectionTitle>
         <PressableSurface onPress={() => setMode("timer")} selected={mode === "timer"}>
           <Text style={styles.optionTitle}>Por cronometro</Text>
           <Text style={styles.optionMeta}>Rounds, descanso, preparacion y control en vivo.</Text>
@@ -71,11 +79,20 @@ export default function CoachNewWorkoutRoute() {
         </PressableSurface>
       </Surface>
       <View style={styles.actions}>
-        <Button label="Cancelar" onPress={() => router.back()} variant="secondary" style={styles.action} />
+        <Button
+          label="Cancelar"
+          onPress={() => router.back()}
+          variant="secondary"
+          style={styles.action}
+        />
         <Button
           label={mode === "timer" ? "Configurar timer" : "Iniciar reps"}
           disabled={selectedBoxers.length === 0}
-          onPress={() => (mode === "timer" ? router.push("/coach/timer") : router.push("/coach/workout/repetition-run"))}
+          onPress={() =>
+            mode === "timer"
+              ? router.push("/coach/timer")
+              : router.push("/coach/workout/repetition-run")
+          }
           style={styles.action}
         />
       </View>
@@ -85,7 +102,7 @@ export default function CoachNewWorkoutRoute() {
 
 const styles = StyleSheet.create({
   input: {
-    backgroundColor: colors.surface,
+    backgroundColor: colors.surfaceWarm,
     borderColor: colors.border,
     borderRadius: 8,
     borderWidth: 1,
@@ -101,8 +118,9 @@ const styles = StyleSheet.create({
   },
   optionTitle: {
     color: colors.text,
-    fontSize: 16,
-    fontWeight: "900"
+    fontSize: 22,
+    fontWeight: "900",
+    textTransform: "uppercase"
   },
   optionMeta: {
     color: colors.muted,
@@ -121,7 +139,9 @@ const styles = StyleSheet.create({
     gap: 10
   },
   tile: {
-    minHeight: 72,
+    alignItems: "center",
+    justifyContent: "center",
+    minHeight: 130,
     width: "47%"
   },
   actions: {
@@ -132,4 +152,3 @@ const styles = StyleSheet.create({
     flex: 1
   }
 });
-

@@ -14,13 +14,17 @@ const currentBoxer = findBoxer("martin");
 export default function BoxerProfileRoute() {
   return (
     <AppScreen footer={<BottomTabs items={boxerTabs} />}>
-      <ScreenHeader eyebrow="Perfil" title={currentBoxer.fullName} description="Datos personales y cuenta." />
+      <ScreenHeader
+        eyebrow="Edit profile"
+        title="Perfil"
+        description="Update your fighter vitals."
+      />
       <Surface>
         <View style={styles.identity}>
           <Avatar initials={currentBoxer.avatarInitials} />
           <View>
             <Text style={styles.name}>{currentBoxer.fullName}</Text>
-            <Text style={styles.meta}>martin@boxpulse.app</Text>
+            <Text style={styles.meta}>Update photo</Text>
           </View>
         </View>
       </Surface>
@@ -48,8 +52,9 @@ const styles = StyleSheet.create({
   },
   name: {
     color: colors.text,
-    fontSize: 18,
-    fontWeight: "900"
+    fontSize: 24,
+    fontWeight: "900",
+    textTransform: "uppercase"
   },
   meta: {
     color: colors.muted,
@@ -57,10 +62,11 @@ const styles = StyleSheet.create({
     marginTop: 4
   },
   input: {
-    backgroundColor: colors.background,
+    backgroundColor: "#190a08",
     borderColor: colors.border,
-    borderRadius: 8,
-    borderWidth: 1,
+    borderRadius: 0,
+    borderWidth: 0,
+    borderBottomWidth: 2,
     color: colors.text,
     fontSize: 16,
     minHeight: 50,

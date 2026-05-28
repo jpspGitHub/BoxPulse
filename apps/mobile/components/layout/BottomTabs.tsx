@@ -47,15 +47,15 @@ export const boxerTabs: BottomTabItem[] = [
 
 const styles = StyleSheet.create({
   tabs: {
-    backgroundColor: colors.surface,
+    backgroundColor: colors.surfaceWarm,
     borderColor: colors.border,
     borderTopWidth: 1,
     bottom: 0,
     flexDirection: "row",
-    gap: 6,
+    gap: 8,
     left: 0,
     padding: 12,
-    paddingBottom: 18,
+    paddingBottom: 20,
     position: "absolute",
     right: 0
   },
@@ -64,19 +64,19 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     flex: 1,
     justifyContent: "center",
-    minHeight: 44,
+    minHeight: 70,
     paddingHorizontal: 4
   },
   itemActive: {
-    backgroundColor: colors.accent
+    backgroundColor: colors.primary
   },
   label: {
-    color: colors.muted,
-    fontSize: 11,
-    fontWeight: "900"
+    color: colors.subtext,
+    fontSize: 15,
+    fontWeight: "900",
+    letterSpacing: 2
   },
   labelActive: {
-    color: colors.background
+    color: colors.primaryDark
   }
 });
-

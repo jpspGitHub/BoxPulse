@@ -49,19 +49,19 @@ export function Button({
 const styles = StyleSheet.create({
   button: {
     alignItems: "center",
-    backgroundColor: colors.accent,
+    backgroundColor: colors.primary,
     borderRadius: 8,
     flexDirection: "row",
     gap: 8,
     justifyContent: "center",
-    minHeight: 54,
+    minHeight: 64,
     paddingHorizontal: 18,
     paddingVertical: 14
   },
   secondary: {
     backgroundColor: "transparent",
-    borderColor: colors.border,
-    borderWidth: 1
+    borderColor: colors.accent,
+    borderWidth: 2
   },
   danger: {
     backgroundColor: colors.dangerSoft,
@@ -75,15 +75,16 @@ const styles = StyleSheet.create({
     opacity: 0.82
   },
   text: {
-    color: colors.background,
-    fontSize: 16,
-    fontWeight: "900"
+    color: "#ffffff",
+    fontSize: 28,
+    fontWeight: "900",
+    letterSpacing: 0,
+    textTransform: "uppercase"
   },
   secondaryText: {
-    color: colors.text
+    color: colors.accent
   },
   dangerText: {
     color: colors.danger
   }
 });
-

@@ -1,0 +1,169 @@
+<!DOCTYPE html><html class="dark" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Configuración de Ejercicio - RoundLab</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Hanken+Grotesk:wght@400;500;600&amp;family=JetBrains+Mono:wght@600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-container": "#0e9dc3",
+                        "on-primary": "#650a00",
+                        "on-surface": "#fbdcd6",
+                        "on-error": "#690005",
+                        "surface-tint": "#ffb4a5",
+                        "surface-container-lowest": "#190a08",
+                        "tertiary": "#64d4fc",
+                        "surface-container-high": "#382622",
+                        "on-background": "#fbdcd6",
+                        "inverse-on-surface": "#3f2c28",
+                        "surface": "#1f0f0c",
+                        "surface-variant": "#43302c",
+                        "on-primary-container": "#590800",
+                        "primary-fixed-dim": "#ffb4a5",
+                        "inverse-surface": "#fbdcd6",
+                        "secondary": "#f0c03e",
+                        "secondary-container": "#ba9000",
+                        "on-secondary-container": "#3c2c00",
+                        "surface-container": "#2c1b18",
+                        "secondary-fixed": "#ffdf95",
+                        "on-error-container": "#ffdad6",
+                        "on-secondary-fixed": "#251a00",
+                        "surface-dim": "#1f0f0c",
+                        "primary": "#ffb4a5",
+                        "surface-bright": "#483531",
+                        "primary-fixed": "#ffdad3",
+                        "on-primary-fixed-variant": "#8e1300",
+                        "primary-container": "#ff5637",
+                        "error-container": "#93000a",
+                        "surface-container-low": "#281714",
+                        "on-secondary-fixed-variant": "#594400",
+                        "on-tertiary-fixed-variant": "#004d62",
+                        "on-primary-fixed": "#3f0400",
+                        "inverse-primary": "#ba1b00",
+                        "on-surface-variant": "#e5beb6",
+                        "secondary-fixed-dim": "#f0c03e",
+                        "background": "#1f0f0c",
+                        "outline-variant": "#5c403a",
+                        "tertiary-fixed-dim": "#64d4fc",
+                        "on-tertiary-container": "#002e3c",
+                        "on-secondary": "#3e2e00",
+                        "on-tertiary-fixed": "#001f29",
+                        "outline": "#ac8982",
+                        "on-tertiary": "#003544",
+                        "error": "#ffb4ab",
+                        "tertiary-fixed": "#baeaff",
+                        "surface-container-highest": "#43302c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-margin": "20px",
+                        "xl": "40px",
+                        "xs": "4px",
+                        "lg": "24px",
+                        "2xl": "64px",
+                        "unit": "4px",
+                        "sm": "8px",
+                        "gutter": "16px",
+                        "md": "16px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["JetBrains Mono"],
+                        "body-lg": ["Hanken Grotesk"],
+                        "headline-lg-mobile": ["Anton"],
+                        "headline-lg": ["Anton"],
+                        "body-md": ["Hanken Grotesk"],
+                        "timer-xl": ["Anton"],
+                        "headline-md": ["Anton"],
+                        "display-lg": ["Anton"]
+                    },
+                    "fontSize": {
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "500" }],
+                        "headline-lg-mobile": ["36px", { "lineHeight": "40px", "fontWeight": "400" }],
+                        "headline-lg": ["48px", { "lineHeight": "52px", "letterSpacing": "0.03em", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "timer-xl": ["120px", { "lineHeight": "110px", "fontWeight": "400" }],
+                        "headline-md": ["32px", { "lineHeight": "36px", "fontWeight": "400" }],
+                        "display-lg": ["80px", { "lineHeight": "80px", "letterSpacing": "0.02em", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .custom-radio:checked + div {
+            border-color: #ffb4a5; /* primary */
+            background-color: #2c1b18; /* surface-container */
+        }
+        .custom-radio:checked + div .icon-container {
+            color: #ffb4a5;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen flex flex-col pt-container-margin px-container-margin pb-[120px] md:pb-container-margin antialiased">
+<!-- Top AppBar Semantic Shell Excluded (Transactional Page) -->
+<!-- Header Section -->
+<header class="mb-xl flex flex-col gap-sm">
+<h2 class="text-label-md font-label-md text-primary tracking-widest uppercase">Configuración de Ejercicio</h2>
+<h1 class="text-headline-lg-mobile font-headline-lg-mobile md:text-headline-lg md:font-headline-lg uppercase">¿Cómo querés medir este ejercicio?</h1>
+</header>
+<!-- Main Content: Selection Cards -->
+<main class="flex-grow flex flex-col gap-md">
+<!-- Card 1: Cronómetro -->
+<label class="cursor-pointer relative block">
+<input checked="" class="custom-radio sr-only peer" name="measurement_type" type="radio" value="timer">
+<div class="border border-outline-variant bg-surface-container-low p-md rounded-lg flex flex-col gap-sm transition-all duration-200 peer-hover:border-primary-fixed-dim group h-full min-h-[140px]">
+<div class="flex items-center gap-md">
+<div class="icon-container text-on-surface-variant flex items-center justify-center p-sm rounded-full bg-surface-variant">
+<span class="material-symbols-outlined text-[32px]">timer</span>
+</div>
+<h3 class="text-headline-md font-headline-md uppercase m-0 leading-none">Por Cronómetro</h3>
+</div>
+<p class="text-body-md font-body-md text-on-surface-variant mt-sm">
+                    Ideal para rounds de guanteo, trabajo en la bolsa, sombra o intervalos de alta intensidad.
+                </p>
+</div>
+</label>
+<!-- Card 2: Repeticiones -->
+<label class="cursor-pointer relative block">
+<input class="custom-radio sr-only peer" name="measurement_type" type="radio" value="reps">
+<div class="border border-outline-variant bg-surface-container-low p-md rounded-lg flex flex-col gap-sm transition-all duration-200 peer-hover:border-primary-fixed-dim group h-full min-h-[140px]">
+<div class="flex items-center gap-md">
+<div class="icon-container text-on-surface-variant flex items-center justify-center p-sm rounded-full bg-surface-variant">
+<span class="material-symbols-outlined text-[32px]">repeat</span>
+</div>
+<h3 class="text-headline-md font-headline-md uppercase m-0 leading-none">Por Repeticiones</h3>
+</div>
+<p class="text-body-md font-body-md text-on-surface-variant mt-sm">
+                    Ideal para rutinas de abdominales, ejercicios de fuerza, levantamiento o calistenia.
+                </p>
+</div>
+</label>
+</main>
+<!-- Fixed Footer Actions -->
+<footer class="fixed bottom-0 left-0 w-full bg-background/95 backdrop-blur-sm border-t border-outline-variant p-container-margin flex flex-col gap-sm z-50 md:static md:bg-transparent md:border-none md:p-0 md:mt-xl">
+<button class="w-full bg-primary text-on-primary font-headline-md text-headline-md uppercase py-sm px-md rounded-lg min-h-[56px] flex items-center justify-center gap-sm hover:bg-primary-fixed transition-colors active:scale-[0.98]">
+            Continuar
+            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">arrow_forward</span>
+</button>
+<button class="w-full bg-transparent text-on-surface font-label-md text-label-md uppercase py-sm px-md rounded-lg min-h-[48px] hover:bg-surface-variant transition-colors active:scale-[0.98]">
+            Cancelar
+        </button>
+</footer>
+</body></html>

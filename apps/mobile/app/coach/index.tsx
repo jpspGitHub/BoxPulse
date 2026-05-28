@@ -16,16 +16,24 @@ export default function CoachHomeRoute() {
     <AppScreen footer={<BottomTabs items={coachTabs} />}>
       <ScreenHeader
         eyebrow="Coach"
-        title="Hoy en RoundLab"
-        description="Operacion rapida para entrenar, registrar y seguir boxeadores."
+        title="Hola, Coach Nicolas"
+        description="Ready for today's session."
       />
       <View style={styles.stats}>
         <StatCard label="Boxers activos" value={boxers.length.toString()} tone="accent" />
         <StatCard label="Entrenos hoy" value="7" tone="success" />
       </View>
+      <Surface style={styles.classCard}>
+        <Text style={styles.kicker}>Proxima clase</Text>
+        <Text style={styles.classTitle}>Sparring avanzado</Text>
+        <Text style={styles.cardCopy}>18:00 hrs - Ring 1</Text>
+      </Surface>
       <Button label="Iniciar ejercicio" onPress={() => router.push("/coach/workout/new")} />
       <Surface>
-        <SectionTitle>Actividad reciente</SectionTitle>
+        <View style={styles.sectionRow}>
+          <SectionTitle>Ultimos entrenamientos</SectionTitle>
+          <Text style={styles.linkText}>Ver todos</Text>
+        </View>
         {workouts.map((workout) => (
           <DataRow
             key={workout.id}
@@ -37,9 +45,11 @@ export default function CoachHomeRoute() {
         ))}
       </Surface>
       <Surface>
-        <Text style={styles.sectionKicker}>Seguimiento</Text>
-        <Text style={styles.cardTitle}>Ultimos registros de progreso</Text>
-        <Text style={styles.cardCopy}>Martin bajo 1.4 kg este mes y Sofia completo 15 asistencias.</Text>
+        <Text style={styles.sectionKicker}>Boxeadores recientes</Text>
+        <Text style={styles.cardTitle}>Mateo R. / Sofia L.</Text>
+        <Text style={styles.cardCopy}>
+          Martin bajo 1.4 kg este mes y Sofia completo 15 asistencias.
+        </Text>
       </Surface>
     </AppScreen>
   );
@@ -49,6 +59,32 @@ const styles = StyleSheet.create({
   stats: {
     flexDirection: "row",
     gap: 12
+  },
+  classCard: {
+    minHeight: 150,
+    justifyContent: "flex-end"
+  },
+  kicker: {
+    color: colors.subtext,
+    fontSize: 18,
+    fontWeight: "900",
+    letterSpacing: 3,
+    textTransform: "uppercase"
+  },
+  classTitle: {
+    color: colors.text,
+    fontSize: 32,
+    fontWeight: "900"
+  },
+  sectionRow: {
+    alignItems: "center",
+    flexDirection: "row",
+    justifyContent: "space-between"
+  },
+  linkText: {
+    color: colors.primarySoft,
+    fontSize: 16,
+    fontWeight: "900"
   },
   sectionKicker: {
     color: colors.accent,
@@ -67,4 +103,3 @@ const styles = StyleSheet.create({
     lineHeight: 22
   }
 });
-

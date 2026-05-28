@@ -3,7 +3,13 @@ import { Pressable, StyleSheet, Text, View, type StyleProp, type ViewStyle } fro
 
 import { colors } from "../../constants/theme";
 
-export function Surface({ children, style }: { children: ReactNode; style?: StyleProp<ViewStyle> }) {
+export function Surface({
+  children,
+  style
+}: {
+  children: ReactNode;
+  style?: StyleProp<ViewStyle>;
+}) {
   return <View style={[styles.surface, style]}>{children}</View>;
 }
 
@@ -35,7 +41,13 @@ export function PressableSurface({
   );
 }
 
-export function Badge({ label, tone = "neutral" }: { label: string; tone?: "neutral" | "success" | "accent" }) {
+export function Badge({
+  label,
+  tone = "neutral"
+}: {
+  label: string;
+  tone?: "neutral" | "success" | "accent";
+}) {
   return (
     <Text
       style={[
@@ -52,17 +64,18 @@ export function Badge({ label, tone = "neutral" }: { label: string; tone?: "neut
 const styles = StyleSheet.create({
   surface: {
     backgroundColor: colors.surface,
-    borderColor: colors.border,
+    borderColor: colors.borderCool,
     borderRadius: 8,
     borderWidth: 1,
-    gap: 12,
-    padding: 16
+    gap: 16,
+    padding: 18
   },
   pressable: {
     minHeight: 64
   },
   selected: {
-    borderColor: colors.accent
+    backgroundColor: colors.surfaceWarm,
+    borderColor: colors.primary
   },
   pressed: {
     opacity: 0.84
@@ -74,6 +87,7 @@ const styles = StyleSheet.create({
     color: colors.info,
     fontSize: 12,
     fontWeight: "900",
+    letterSpacing: 1,
     overflow: "hidden",
     paddingHorizontal: 10,
     paddingVertical: 6
@@ -87,4 +101,3 @@ const styles = StyleSheet.create({
     color: colors.accent
   }
 });
-

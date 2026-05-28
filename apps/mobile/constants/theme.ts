@@ -1,19 +1,25 @@
 export const colors = {
-  background: "#080d12",
-  surface: "#101821",
-  surfaceRaised: "#14202b",
-  border: "#253443",
-  muted: "#8fa1b3",
-  text: "#f7fafc",
-  subtext: "#b6c3d1",
+  background: "#1f0f0c",
+  canvas: "#0f1115",
+  surface: "#1a1d24",
+  surfaceWarm: "#2c1b18",
+  surfaceRaised: "#382622",
+  border: "#5c403a",
+  borderCool: "#2a2e37",
+  muted: "#e5beb6",
+  text: "#fbdcd6",
+  subtext: "#f1c9c1",
+  primary: "#ff4d2e",
+  primarySoft: "#ffb4a5",
+  primaryDark: "#590800",
   accent: "#f5c542",
-  accentSoft: "#3b3318",
-  success: "#72e0a8",
-  successSoft: "#123324",
-  danger: "#ff8f9a",
-  dangerSoft: "#391d24",
-  info: "#7fb7ff",
-  infoSoft: "#112b49"
+  accentSoft: "#3e2e00",
+  success: "#64d4fc",
+  successSoft: "#003544",
+  danger: "#ffb4ab",
+  dangerSoft: "#3b1617",
+  info: "#64d4fc",
+  infoSoft: "#102a33"
 } as const;
 
 export const spacing = {
@@ -21,4 +27,3 @@ export const spacing = {
   section: 16,
   item: 12
 } as const;
-

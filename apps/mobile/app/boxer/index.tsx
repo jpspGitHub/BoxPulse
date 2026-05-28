@@ -19,18 +19,37 @@ export default function BoxerHomeRoute() {
       <ScreenHeader
         eyebrow="Boxer"
         title={`Hola, ${currentBoxer.fullName.split(" ")[0]}`}
-        description="Resumen personal de entrenamientos, asistencia y progreso."
+        description="Listos para el siguiente round."
+      />
+      <Surface style={styles.heroCard}>
+        <Text style={styles.pill}>Siguiente sesion</Text>
+        <Text style={styles.heroTitle}>Sparring tactico</Text>
+        <Text style={styles.copy}>Semana 3 / Dia 2 - 60 Minutos</Text>
+        <Button
+          label="Iniciar entrenamiento"
+          onPress={() => router.push("/boxer/workout/workout-bag-rounds")}
+        />
+      </Surface>
+      <DataRow
+        title="Registrar progreso"
+        meta="Peso, medidas y observaciones"
+        badge=">"
+        onPress={() => router.push("/boxer/progress")}
+      />
+      <DataRow
+        title="Ver estadisticas"
+        meta="KPIs, actividad semanal y distribucion"
+        badge=">"
+        onPress={() => router.push("/boxer/progress")}
       />
       <View style={styles.stats}>
-        <StatCard label="Asistencias mes" value={currentBoxer.attendanceThisMonth.toString()} tone="success" />
+        <StatCard
+          label="Asistencias mes"
+          value={currentBoxer.attendanceThisMonth.toString()}
+          tone="success"
+        />
         <StatCard label="Peso actual" value={`${currentBoxer.currentWeightKg}`} tone="accent" />
       </View>
-      <Surface>
-        <SectionTitle>Programa activo</SectionTitle>
-        <Text style={styles.title}>{currentBoxer.activeProgramName}</Text>
-        <Text style={styles.copy}>Foco de la semana: tecnica defensiva y resistencia.</Text>
-        <Button label="Ver programa" onPress={() => router.push("/boxer/program")} />
-      </Surface>
       <Surface>
         <SectionTitle>Proximo workout</SectionTitle>
         <DataRow
@@ -50,8 +69,33 @@ export default function BoxerHomeRoute() {
 
 const styles = StyleSheet.create({
   stats: {
+    flexWrap: "wrap",
     flexDirection: "row",
     gap: 12
+  },
+  heroCard: {
+    gap: 18,
+    minHeight: 280
+  },
+  pill: {
+    alignSelf: "flex-start",
+    backgroundColor: colors.primary,
+    borderRadius: 6,
+    color: colors.primaryDark,
+    fontSize: 18,
+    fontWeight: "900",
+    letterSpacing: 3,
+    overflow: "hidden",
+    paddingHorizontal: 14,
+    paddingVertical: 10,
+    textTransform: "uppercase"
+  },
+  heroTitle: {
+    color: "#ffffff",
+    fontSize: 44,
+    fontWeight: "900",
+    lineHeight: 48,
+    textTransform: "uppercase"
   },
   title: {
     color: colors.text,

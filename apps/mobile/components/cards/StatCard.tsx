@@ -31,31 +31,32 @@ export function StatCard({
 const styles = StyleSheet.create({
   card: {
     backgroundColor: colors.surface,
-    borderColor: colors.border,
+    borderColor: colors.borderCool,
     borderRadius: 8,
     borderWidth: 1,
     flex: 1,
     minWidth: 142,
-    padding: 16
+    minHeight: 128,
+    padding: 18
   },
   accent: {
-    borderColor: "#755c21"
+    borderColor: colors.primary
   },
   success: {
-    borderColor: "#1d6448"
+    borderColor: colors.accent
   },
   value: {
     color: colors.text,
-    fontSize: 30,
+    fontSize: 48,
     fontWeight: "900",
-    lineHeight: 34
+    lineHeight: 54
   },
   label: {
-    color: colors.muted,
-    fontSize: 12,
+    color: colors.subtext,
+    fontSize: 14,
     fontWeight: "900",
+    letterSpacing: 3,
     marginTop: 8,
     textTransform: "uppercase"
   }
 });
-

@@ -55,27 +55,31 @@ const styles = StyleSheet.create({
   },
   rowTitle: {
     color: colors.text,
-    fontSize: 16,
-    fontWeight: "900"
+    fontSize: 20,
+    fontWeight: "900",
+    letterSpacing: 1,
+    textTransform: "uppercase"
   },
   rowMeta: {
-    color: colors.muted,
-    fontSize: 14,
-    lineHeight: 20,
+    color: colors.subtext,
+    fontSize: 16,
+    fontWeight: "700",
+    lineHeight: 22,
     marginTop: 4
   },
   avatar: {
     alignItems: "center",
-    backgroundColor: colors.accent,
+    backgroundColor: colors.surfaceRaised,
+    borderColor: colors.border,
     borderRadius: 22,
+    borderWidth: 2,
     height: 44,
     justifyContent: "center",
     width: 44
   },
   avatarText: {
-    color: colors.background,
+    color: colors.text,
     fontSize: 15,
     fontWeight: "900"
   }
 });
-

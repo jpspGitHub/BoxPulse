@@ -7,15 +7,14 @@ import { colors } from "../constants/theme";
 
 export default function LoginRoute() {
   return (
-    <AppScreen scroll={false} contentStyle={styles.screen}>
+    <AppScreen scroll={false} contentStyle={styles.screen} topBar={<View />}>
       <View style={styles.hero}>
-        <Text style={styles.brand}>BoxPulse</Text>
-        <Text style={styles.title}>Entrenar y registrar en el gimnasio.</Text>
-        <Text style={styles.copy}>
-          Login mock para navegar los flujos mobile del MVP como coach o boxer.
-        </Text>
+        <Text style={styles.icon}>拳</Text>
+        <Text style={styles.brand}>RoundLab</Text>
+        <Text style={styles.copy}>Entra al ring y sigue tu progreso.</Text>
       </View>
       <View style={styles.form}>
+        <Text style={styles.formTitle}>Bienvenido a RoundLab</Text>
         <TextInput
           autoCapitalize="none"
           keyboardType="email-address"
@@ -33,8 +32,12 @@ export default function LoginRoute() {
           value="••••••••"
           editable={false}
         />
-        <Button label="Entrar como coach" onPress={() => router.replace("/coach")} />
-        <Button label="Entrar como boxer" onPress={() => router.replace("/boxer")} variant="secondary" />
+        <Button label="Iniciar sesion" onPress={() => router.replace("/coach")} />
+        <Button
+          label="Entrar como boxer"
+          onPress={() => router.replace("/boxer")}
+          variant="secondary"
+        />
       </View>
     </AppScreen>
   );
@@ -42,44 +45,63 @@ export default function LoginRoute() {
 
 const styles = StyleSheet.create({
   screen: {
-    justifyContent: "space-between"
+    justifyContent: "space-between",
+    padding: 0
   },
   hero: {
+    alignItems: "center",
+    backgroundColor: colors.background,
     flex: 1,
-    justifyContent: "flex-end"
+    justifyContent: "flex-end",
+    padding: 28,
+    paddingBottom: 44
+  },
+  icon: {
+    color: colors.primary,
+    fontSize: 56,
+    fontWeight: "900",
+    marginBottom: 12
   },
   brand: {
-    color: colors.accent,
-    fontSize: 18,
-    fontWeight: "900",
-    letterSpacing: 0,
-    marginBottom: 18,
-    textTransform: "uppercase"
-  },
-  title: {
-    color: colors.text,
+    color: colors.primarySoft,
     fontSize: 42,
     fontWeight: "900",
-    lineHeight: 46,
-    marginBottom: 12
+    letterSpacing: 0,
+    textTransform: "uppercase"
   },
   copy: {
     color: colors.subtext,
     fontSize: 17,
-    lineHeight: 24
+    fontWeight: "700",
+    lineHeight: 24,
+    marginTop: 8,
+    textAlign: "center"
   },
   form: {
-    gap: 12
+    backgroundColor: colors.background,
+    borderTopLeftRadius: 28,
+    borderTopRightRadius: 28,
+    gap: 14,
+    padding: 20,
+    paddingBottom: 28
+  },
+  formTitle: {
+    color: colors.text,
+    fontSize: 32,
+    fontWeight: "900",
+    marginBottom: 12,
+    textAlign: "center",
+    textTransform: "uppercase"
   },
   input: {
-    backgroundColor: colors.surface,
+    backgroundColor: colors.surfaceWarm,
     borderColor: colors.border,
-    borderRadius: 8,
-    borderWidth: 1,
+    borderRadius: 0,
+    borderWidth: 0,
+    borderBottomWidth: 2,
     color: colors.text,
     fontSize: 16,
     minHeight: 52,
     paddingHorizontal: 14
   }
 });
-

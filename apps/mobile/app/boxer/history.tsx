@@ -12,10 +12,14 @@ import { workouts } from "../../mocks/mobile-data";
 export default function BoxerHistoryRoute() {
   return (
     <AppScreen footer={<BottomTabs items={boxerTabs} />}>
-      <ScreenHeader eyebrow="Historial" title="Entrenamientos" description="Asistencia y ejercicios completados." />
+      <ScreenHeader
+        eyebrow="Workout vault"
+        title="Historial"
+        description="Review your past sessions and track your grind."
+      />
       <View style={styles.stats}>
-        <StatCard label="Asistencia mes" value="86%" tone="success" />
-        <StatCard label="Horas" value="18.5" tone="accent" />
+        <StatCard label="Current streak" value="12" tone="success" />
+        <StatCard label="Records" value="3" tone="accent" />
       </View>
       <Surface>
         <SectionTitle>Ejercicios recientes</SectionTitle>
@@ -39,4 +43,3 @@ const styles = StyleSheet.create({
     gap: 12
   }
 });
-

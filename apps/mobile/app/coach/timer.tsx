@@ -14,8 +14,8 @@ export default function CoachTimerRoute() {
     <AppScreen>
       <ScreenHeader
         eyebrow="Cronometro"
-        title="Bolsa por rounds"
-        description="Configuracion mock para validar el flujo antes del backend."
+        title="Configurar cronometro"
+        description="Bolsa - 4 boxeadores"
       />
       <View style={styles.configGrid}>
         <StatCard label="Round" value="03:00" tone="accent" />
@@ -23,14 +23,23 @@ export default function CoachTimerRoute() {
         <StatCard label="Rounds" value="4" tone="success" />
         <StatCard label="Preparacion" value="00:15" />
       </View>
-      <Surface>
+      <Surface style={styles.summary}>
         <SectionTitle>Participantes</SectionTitle>
         <Text style={styles.copy}>Martin Rodriguez, Sofia Pereira, Valentina Silva</Text>
       </Surface>
       <WorkoutTimer />
       <View style={styles.actions}>
-        <Button label="Cancelar" onPress={() => router.replace("/coach")} variant="danger" style={styles.action} />
-        <Button label="Finalizar" onPress={() => router.push("/coach/workout/workout-bag-rounds")} style={styles.action} />
+        <Button
+          label="Cancelar"
+          onPress={() => router.replace("/coach")}
+          variant="danger"
+          style={styles.action}
+        />
+        <Button
+          label="Finalizar"
+          onPress={() => router.push("/coach/workout/workout-bag-rounds")}
+          style={styles.action}
+        />
       </View>
     </AppScreen>
   );
@@ -47,6 +56,9 @@ const styles = StyleSheet.create({
     fontSize: 15,
     lineHeight: 22
   },
+  summary: {
+    backgroundColor: colors.surfaceRaised
+  },
   actions: {
     flexDirection: "row",
     gap: 12
@@ -55,4 +67,3 @@ const styles = StyleSheet.create({
     flex: 1
   }
 });
-
