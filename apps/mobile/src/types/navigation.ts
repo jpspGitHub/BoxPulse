@@ -1,0 +1,16 @@
+export type AppScreen =
+  | "coach-home"
+  | "participants"
+  | "exercise-type"
+  | "exercise-mode"
+  | "timer-config"
+  | "timer-run"
+  | "repetition-config"
+  | "repetition-run"
+  | "exercise-summary"
+  | "coach-boxers"
+  | "programs"
+  | "boxer-home"
+  | "boxer-history"
+  | "boxer-progress"
+  | "boxer-profile";
