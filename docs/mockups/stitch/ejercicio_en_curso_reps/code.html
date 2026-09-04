@@ -1,0 +1,231 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Ejercicio en Curso - Repeticiones</title>
+<!-- Google Fonts: Anton, Hanken Grotesk, JetBrains Mono -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Hanken+Grotesk:wght@400;500;600&amp;family=JetBrains+Mono:wght@600&amp;display=swap" rel="stylesheet">
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS via CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary": "#650a00",
+                        "on-error": "#690005",
+                        "surface-variant": "#43302c",
+                        "on-tertiary-fixed-variant": "#004d62",
+                        "surface-container": "#2c1b18",
+                        "surface-tint": "#ffb4a5",
+                        "primary": "#ffb4a5",
+                        "on-surface": "#fbdcd6",
+                        "primary-container": "#ff5637",
+                        "on-tertiary": "#003544",
+                        "surface-container-low": "#281714",
+                        "tertiary-fixed-dim": "#64d4fc",
+                        "secondary-fixed-dim": "#f0c03e",
+                        "primary-fixed-dim": "#ffb4a5",
+                        "on-background": "#fbdcd6",
+                        "on-surface-variant": "#e5beb6",
+                        "secondary-container": "#ba9000",
+                        "tertiary-container": "#0e9dc3",
+                        "surface-bright": "#483531",
+                        "surface-container-lowest": "#190a08",
+                        "surface": "#1f0f0c",
+                        "surface-dim": "#1f0f0c",
+                        "secondary-fixed": "#ffdf95",
+                        "on-secondary-container": "#3c2c00",
+                        "on-primary-container": "#590800",
+                        "on-primary-fixed": "#3f0400",
+                        "outline-variant": "#5c403a",
+                        "error-container": "#93000a",
+                        "on-tertiary-fixed": "#001f29",
+                        "secondary": "#f0c03e",
+                        "tertiary-fixed": "#baeaff",
+                        "error": "#ffb4ab",
+                        "on-tertiary-container": "#002e3c",
+                        "on-secondary-fixed-variant": "#594400",
+                        "inverse-surface": "#fbdcd6",
+                        "inverse-on-surface": "#3f2c28",
+                        "on-primary-fixed-variant": "#8e1300",
+                        "on-secondary": "#3e2e00",
+                        "tertiary": "#64d4fc",
+                        "inverse-primary": "#ba1b00",
+                        "background": "#1f0f0c",
+                        "surface-container-high": "#382622",
+                        "outline": "#ac8982",
+                        "on-error-container": "#ffdad6",
+                        "primary-fixed": "#ffdad3",
+                        "surface-container-highest": "#43302c",
+                        "on-secondary-fixed": "#251a00"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "xs": "4px",
+                        "container-margin": "20px",
+                        "lg": "24px",
+                        "md": "16px",
+                        "unit": "4px",
+                        "sm": "8px",
+                        "xl": "40px",
+                        "2xl": "64px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Anton"],
+                        "timer-xl": ["Anton"],
+                        "headline-md": ["Anton"],
+                        "label-md": ["JetBrains Mono"],
+                        "body-lg": ["Hanken Grotesk"],
+                        "body-md": ["Hanken Grotesk"],
+                        "headline-lg-mobile": ["Anton"],
+                        "display-lg": ["Anton"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["48px", { "lineHeight": "52px", "letterSpacing": "0.03em", "fontWeight": "400" }],
+                        "timer-xl": ["120px", { "lineHeight": "110px", "fontWeight": "400" }],
+                        "headline-md": ["32px", { "lineHeight": "36px", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["36px", { "lineHeight": "40px", "fontWeight": "400" }],
+                        "display-lg": ["80px", { "lineHeight": "80px", "letterSpacing": "0.02em", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .pulse-border {
+            animation: pulse-border 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse-border {
+            0%, 100% { border-color: rgba(255, 86, 55, 1); box-shadow: 0 0 15px rgba(255, 86, 55, 0.4); }
+            50% { border-color: rgba(255, 86, 55, 0.3); box-shadow: 0 0 5px rgba(255, 86, 55, 0.1); }
+        }
+        /* Custom scrollbar for compact list */
+        .compact-scroll::-webkit-scrollbar {
+            width: 4px;
+        }
+        .compact-scroll::-webkit-scrollbar-track {
+            background: #1f0f0c; 
+        }
+        .compact-scroll::-webkit-scrollbar-thumb {
+            background: #43302c; 
+            border-radius: 4px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen flex flex-col antialiased selection:bg-primary selection:text-on-primary">
+<!-- Note: TopAppBar and BottomNavBar are suppressed as this is a task-focused "Exercise in Progress" view -->
+<main class="flex-1 flex flex-col w-full max-w-md mx-auto px-container-margin py-xl gap-xl relative">
+<!-- Header Section -->
+<header class="flex flex-col items-center justify-center text-center gap-sm">
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-on-background uppercase tracking-wide">
+                ABDOMINALES
+            </h1>
+<div class="inline-flex items-center gap-2 bg-surface-container py-2 px-4 border border-outline-variant rounded-DEFAULT">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">flag</span>
+<span class="font-label-md text-label-md text-secondary tracking-widest uppercase">
+                    META: 50 REPETICIONES
+                </span>
+</div>
+</header>
+<!-- Timer Section (Centerpiece) -->
+<section class="flex flex-col items-center justify-center w-full">
+<div class="w-full bg-surface border-[3px] border-primary pulse-border rounded-lg p-lg flex flex-col items-center justify-center relative overflow-hidden">
+<!-- Industrial overlay texture effect (subtle) -->
+<div class="absolute inset-0 opacity-[0.03] bg-[radial-gradient(circle_at_center,_#ffffff_1px,_transparent_1px)]" style="background-size: 8px 8px;"></div>
+<span class="font-label-md text-label-md text-primary tracking-[0.2em] mb-2 relative z-10">TIEMPO TRANSCURRIDO</span>
+<!-- Huge Timer -->
+<div class="font-timer-xl text-timer-xl text-on-background tracking-tight relative z-10 drop-shadow-md">
+                    04:28
+                </div>
+</div>
+</section>
+<!-- Participants Section (Compact) -->
+<section class="flex flex-col w-full bg-surface border border-outline-variant rounded-lg overflow-hidden flex-shrink-0 max-h-[160px]">
+<div class="bg-surface-container-high py-2 px-md border-b border-outline-variant flex justify-between items-center">
+<span class="font-label-md text-label-md text-on-surface-variant">PARTICIPANTES (4)</span>
+<span class="material-symbols-outlined text-on-surface-variant text-sm">group</span>
+</div>
+<!-- Scrollable List -->
+<div class="flex flex-col overflow-y-auto compact-scroll p-md gap-3">
+<!-- Participant 1 -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest border border-outline-variant flex items-center justify-center overflow-hidden">
+<img alt="Avatar" class="w-full h-full object-cover" data-alt="A close up portrait of a tough-looking athlete with short hair in a gritty gym setting. The lighting is high-contrast and moody, highlighting sweat and determination. The background is a dark out-of-focus boxing ring." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAiT67F8hLk2aa6iTaxtn1GgoWS2F0eZJmWA-tW3U4R5HmUDWKzReHt4dNvXAXII0bO51U_SMBH0rra2wx89Xh_fcTfj00JUUjE7FY8VTGiGYtVv48yiPofFqZ-U8WDG4QaGmulV1yebvaMTub5QhRx8cvHI3KNT6ih0eGfdvJjOmdpUhMN9YYZFw9s0n_LAp7l5TRi68GsGGwDsX6V2SifdOBKFRgcT_x5pzeU4dbsw0E7G8Mcwk6mqlqKVP8fYhYV66P6f95p4gLl">
+</div>
+<span class="font-body-md text-body-md text-on-surface font-medium uppercase">M. JOHNSON</span>
+</div>
+<div class="font-label-md text-label-md text-secondary">
+                        42 / 50
+                    </div>
+</div>
+<!-- Participant 2 -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest border border-outline-variant flex items-center justify-center overflow-hidden">
+<img alt="Avatar" class="w-full h-full object-cover" data-alt="A close up portrait of a tough-looking athlete with short hair in a gritty gym setting. The lighting is high-contrast and moody, highlighting sweat and determination. The background is a dark out-of-focus boxing ring." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCiucv5cNZnv2ellu0LbhuWhZfofsidG93OoldrWCYzNMbzCG3ZlRMHgklN6-w1jnNad7chAXB3fYrQYRD4S1-P5Mm2EJ_Rl4ksTn0yAOGBtzX4c83vqfDFNxdILUfR4dUfuLzxjeEedBKJ4UrGpyZiFObusLYf1OTj0FVN3U_Rp-xTtGR7rJswXtM9sZQcvacJwd2t2E_WmKoZKsjPVG2Cv8ngtrvEN6wxjVdx7lDqyBsIYv0w-DIwTpOQQWOh2iqv7aLwS4nY6tFE">
+</div>
+<span class="font-body-md text-body-md text-on-surface font-medium uppercase">L. DAVIES</span>
+</div>
+<div class="font-label-md text-label-md text-on-surface-variant">
+                        38 / 50
+                    </div>
+</div>
+<!-- Participant 3 -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest border border-outline-variant flex items-center justify-center overflow-hidden">
+<span class="font-label-md text-label-md text-on-surface-variant">TJ</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface font-medium uppercase">T. JONES</span>
+</div>
+<div class="font-label-md text-label-md text-on-surface-variant">
+                        35 / 50
+                    </div>
+</div>
+</div>
+</section>
+<!-- Actions Section (Bottom anchored) -->
+<section class="mt-auto flex flex-col gap-md w-full pt-lg">
+<!-- Huge Primary Button -->
+<button class="w-full h-[72px] bg-[#FF4D2E] active:bg-[#D93D22] transition-colors duration-150 flex items-center justify-center gap-3 rounded-DEFAULT shadow-[0px_4px_0px_rgba(0,0,0,0.6)] active:translate-y-[4px] active:shadow-none">
+<span class="material-symbols-outlined text-[#FFFFFF] text-3xl" style="font-variation-settings: 'FILL' 1;">stop_circle</span>
+<span class="font-headline-md text-headline-md text-[#FFFFFF] uppercase tracking-wider">
+                    FINALIZAR
+                </span>
+</button>
+<!-- Secondary Actions Row -->
+<div class="flex gap-md w-full">
+<button class="flex-1 h-[56px] bg-transparent border-2 border-secondary text-secondary hover:bg-surface-container transition-colors duration-150 flex items-center justify-center gap-2 rounded-DEFAULT">
+<span class="material-symbols-outlined text-secondary text-lg">restart_alt</span>
+<span class="font-label-md text-label-md uppercase tracking-wider">Reiniciar</span>
+</button>
+<button class="flex-1 h-[56px] bg-transparent text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-colors duration-150 flex items-center justify-center gap-2 rounded-DEFAULT">
+<span class="material-symbols-outlined text-lg">close</span>
+<span class="font-label-md text-label-md uppercase tracking-wider">Cancelar</span>
+</button>
+</div>
+</section>
+</main>
+</body></html>

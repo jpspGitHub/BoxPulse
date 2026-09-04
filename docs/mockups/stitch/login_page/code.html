@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ROUNDLAB - Iniciar Sesión</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Hanken+Grotesk:wght@400;500;700&amp;family=JetBrains+Mono:wght@600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container-lowest": "#190a08",
+                      "surface-container": "#2c1b18",
+                      "secondary-fixed": "#ffdf95",
+                      "on-secondary-fixed-variant": "#594400",
+                      "tertiary": "#64d4fc",
+                      "on-primary-fixed-variant": "#8e1300",
+                      "surface-container-highest": "#43302c",
+                      "primary": "#ffb4a5",
+                      "on-tertiary-fixed": "#001f29",
+                      "on-primary": "#650a00",
+                      "on-error": "#690005",
+                      "on-error-container": "#ffdad6",
+                      "surface-bright": "#483531",
+                      "error-container": "#93000a",
+                      "outline-variant": "#5c403a",
+                      "on-surface-variant": "#e5beb6",
+                      "primary-fixed-dim": "#ffb4a5",
+                      "on-primary-container": "#590800",
+                      "on-background": "#fbdcd6",
+                      "on-secondary-fixed": "#251a00",
+                      "inverse-surface": "#fbdcd6",
+                      "on-tertiary-fixed-variant": "#004d62",
+                      "tertiary-fixed-dim": "#64d4fc",
+                      "surface": "#1f0f0c",
+                      "on-secondary-container": "#3c2c00",
+                      "error": "#ffb4ab",
+                      "surface-container-low": "#281714",
+                      "primary-container": "#ff5637",
+                      "surface-tint": "#ffb4a5",
+                      "inverse-primary": "#ba1b00",
+                      "surface-dim": "#1f0f0c",
+                      "surface-container-high": "#382622",
+                      "secondary-fixed-dim": "#f0c03e",
+                      "on-tertiary": "#003544",
+                      "surface-variant": "#43302c",
+                      "primary-fixed": "#ffdad3",
+                      "on-tertiary-container": "#002e3c",
+                      "secondary": "#f0c03e",
+                      "outline": "#ac8982",
+                      "tertiary-fixed": "#baeaff",
+                      "inverse-on-surface": "#3f2c28",
+                      "on-primary-fixed": "#3f0400",
+                      "background": "#1f0f0c",
+                      "on-surface": "#fbdcd6",
+                      "secondary-container": "#ba9000",
+                      "on-secondary": "#3e2e00",
+                      "tertiary-container": "#0e9dc3"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "lg": "24px",
+                      "container-margin": "20px",
+                      "sm": "8px",
+                      "2xl": "64px",
+                      "xs": "4px",
+                      "md": "16px",
+                      "gutter": "16px",
+                      "xl": "40px",
+                      "unit": "4px"
+              },
+              "fontFamily": {
+                      "timer-xl": ["Anton"],
+                      "headline-md": ["Anton"],
+                      "body-md": ["Hanken Grotesk"],
+                      "label-md": ["JetBrains Mono"],
+                      "headline-lg": ["Anton"],
+                      "body-lg": ["Hanken Grotesk"],
+                      "headline-lg-mobile": ["Anton"],
+                      "display-lg": ["Anton"]
+              },
+              "fontSize": {
+                      "timer-xl": ["120px", {"lineHeight": "110px", "fontWeight": "400"}],
+                      "headline-md": ["32px", {"lineHeight": "36px", "fontWeight": "400"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "headline-lg": ["48px", {"lineHeight": "52px", "letterSpacing": "0.03em", "fontWeight": "400"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "500"}],
+                      "headline-lg-mobile": ["36px", {"lineHeight": "40px", "fontWeight": "400"}],
+                      "display-lg": ["80px", {"lineHeight": "80px", "letterSpacing": "0.02em", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .hero-gradient {
+            background: linear-gradient(0deg, rgba(15,17,21,1) 0%, rgba(15,17,21,0.6) 50%, rgba(15,17,21,0.4) 100%);
+        }
+        .input-focus-effect:focus-within {
+            border-bottom-color: #ff5637;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md min-h-screen selection:bg-primary-container selection:text-white overflow-x-hidden">
+<!-- Main Container -->
+<main class="relative flex flex-col min-h-screen">
+<!-- Hero Section -->
+<section class="relative h-[397px] w-full flex flex-col items-center justify-end overflow-hidden px-container-margin pb-10">
+<!-- Background Image -->
+<div class="absolute inset-0 z-0">
+<img alt="Boxing training" class="w-full h-full object-cover object-center grayscale opacity-60" data-alt="A cinematic, high-contrast photograph of a professional boxing gym at night. Dust particles dance in the shafts of harsh overhead spotlights, illuminating a heavy leather sandbag swinging slightly. The aesthetic is industrial and gritty, using a deep charcoal and volcanic black color palette with sharp, moody lighting that emphasizes physical power and focus. The atmosphere is quiet but intense, perfectly capturing the high-performance boxing brand identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB26a-3P7X4h3tib3NVn87i0vm2FGtMgtF8FFywwIwbJHLEcmpI9OfNt9Zm31MEFHICoixZUIoHGWb0O8BOsC8yAk8iul1nMUvh6lSri7kFJ1SShoi172ySDageR9IzGTDbrOzjnFxbMqe_o-DdHKH9Zom_fMaB2sTNijiGMQ3BOSsW3aOcSAPz17D08t-YEI747K63FK7Y1rX7WxPaGycx2bHtLEP5mwovs0yMwicy3tP3N07Ke3yR4ZHS_XyuATtxIoRVtZhuCv2g"/>
+<div class="absolute inset-0 hero-gradient z-10"></div>
+</div>
+<!-- Logo & Brand -->
+<div class="relative z-20 flex flex-col items-center text-center">
+<div class="mb-4">
+<span class="material-symbols-outlined text-primary-container !text-[64px]" style="font-variation-settings: 'FILL' 1;">fitness_center</span>
+</div>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary tracking-wider uppercase">
+                    ROUNDLAB
+                </h1>
+<p class="font-body-md text-on-surface-variant max-w-[280px] mt-2 opacity-90">
+                    Entra al ring y sigue tu progreso.
+                </p>
+</div>
+</section>
+<!-- Login Form Section -->
+<section class="relative z-30 flex-grow bg-background px-container-margin -mt-4 rounded-t-[32px] pt-10">
+<div class="max-w-md mx-auto">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-8 text-center uppercase tracking-tight">
+                    BIENVENIDO A ROUNDLAB
+                </h2>
+<form class="space-y-6" onsubmit="event.preventDefault();">
+<!-- Email Field -->
+<div class="flex flex-col gap-2">
+<label class="font-label-md text-label-md text-on-surface-variant uppercase ml-1" for="email">Email</label>
+<div class="input-focus-effect bg-surface-container-low border-b-2 border-outline-variant transition-colors duration-300">
+<input class="w-full bg-transparent border-none focus:ring-0 px-4 py-4 text-on-surface font-body-lg placeholder:text-surface-variant" id="email" placeholder="tu@email.com" type="email"/>
+</div>
+</div>
+<!-- Password Field -->
+<div class="flex flex-col gap-2">
+<label class="font-label-md text-label-md text-on-surface-variant uppercase ml-1" for="password">Contraseña</label>
+<div class="input-focus-effect bg-surface-container-low border-b-2 border-outline-variant transition-colors duration-300 relative">
+<input class="w-full bg-transparent border-none focus:ring-0 px-4 py-4 text-on-surface font-body-lg placeholder:text-surface-variant" id="password" placeholder="••••••••" type="password"/>
+<button class="absolute right-4 top-1/2 -translate-y-1/2 text-on-surface-variant active:scale-95 transition-transform" type="button">
+<span class="material-symbols-outlined">visibility</span>
+</button>
+</div>
+</div>
+<!-- Forgot Password Link -->
+<div class="flex justify-end">
+<a class="font-label-md text-label-md text-primary-container hover:opacity-80 transition-opacity" href="#">
+                            Olvidé mi contraseña
+                        </a>
+</div>
+<!-- Main Login Button -->
+<button class="w-full h-14 bg-primary-container text-on-primary-container font-headline-md text-headline-md flex items-center justify-center gap-2 uppercase tracking-wide active:scale-[0.98] transition-all duration-200 shadow-[0px_4px_0px_rgba(89,8,0,0.5)]">
+                        INICIAR SESIÓN
+                        <span class="material-symbols-outlined">bolt</span>
+</button>
+</form>
+<!-- Social Login Separator -->
+<div class="relative my-10 flex items-center">
+<div class="flex-grow border-t border-outline-variant"></div>
+<span class="px-4 font-label-md text-label-md text-on-surface-variant uppercase">O entra con</span>
+<div class="flex-grow border-t border-outline-variant"></div>
+</div>
+<!-- Social Icons -->
+<div class="grid grid-cols-2 gap-4">
+<button class="flex items-center justify-center gap-3 h-14 bg-surface-container-high border border-outline-variant active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[24px]">brand_family</span>
+<span class="font-label-md text-label-md uppercase">Apple</span>
+</button>
+<button class="flex items-center justify-center gap-3 h-14 bg-surface-container-high border border-outline-variant active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[24px]">google</span>
+<span class="font-label-md text-label-md uppercase">Google</span>
+</button>
+</div>
+<!-- Footer Register -->
+<div class="mt-12 mb-8 text-center">
+<p class="font-body-md text-on-surface-variant">
+                        ¿No tienes cuenta? 
+                        <a class="text-secondary font-bold hover:underline underline-offset-4 decoration-2" href="#">
+                            Regístrate.
+                        </a>
+</p>
+</div>
+</div>
+</section>
+<!-- Decorative Floating Elements -->
+<div class="fixed top-[20%] -right-10 w-40 h-40 bg-primary-container/10 rounded-full blur-3xl pointer-events-none"></div>
+<div class="fixed bottom-[10%] -left-10 w-60 h-60 bg-secondary/5 rounded-full blur-3xl pointer-events-none"></div>
+</main>
+<script>
+        // Simple Interaction Script
+        document.addEventListener('DOMContentLoaded', () => {
+            const inputs = document.querySelectorAll('input');
+            inputs.forEach(input => {
+                input.addEventListener('focus', () => {
+                    input.parentElement.classList.add('border-primary-container');
+                    input.parentElement.classList.remove('border-outline-variant');
+                });
+                input.addEventListener('blur', () => {
+                    input.parentElement.classList.remove('border-primary-container');
+                    input.parentElement.classList.add('border-outline-variant');
+                });
+            });
+
+            // Toggle Password Visibility
+            const visibilityBtn = document.querySelector('button .material-symbols-outlined');
+            if(visibilityBtn) {
+                visibilityBtn.parentElement.addEventListener('click', () => {
+                    const input = document.getElementById('password');
+                    if (input.type === 'password') {
+                        input.type = 'text';
+                        visibilityBtn.innerText = 'visibility_off';
+                    } else {
+                        input.type = 'password';
+                        visibilityBtn.innerText = 'visibility';
+                    }
+                });
+            }
+        });
+    </script>
+</body></html>

@@ -1,0 +1,279 @@
+<!DOCTYPE html><html class="dark" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>RoundLab - Home</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Hanken+Grotesk:wght@400;500&amp;family=JetBrains+Mono:wght@600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-on-surface": "#3f2c28",
+                        "on-tertiary-container": "#002e3c",
+                        "surface-tint": "#ffb4a5",
+                        "surface-container-low": "#281714",
+                        "surface-container-highest": "#43302c",
+                        "tertiary-fixed-dim": "#64d4fc",
+                        "secondary": "#f0c03e",
+                        "inverse-surface": "#fbdcd6",
+                        "inverse-primary": "#ba1b00",
+                        "on-tertiary-fixed": "#001f29",
+                        "surface-variant": "#43302c",
+                        "primary": "#ffb4a5",
+                        "error-container": "#93000a",
+                        "primary-fixed": "#ffdad3",
+                        "secondary-container": "#ba9000",
+                        "on-error-container": "#ffdad6",
+                        "tertiary": "#64d4fc",
+                        "outline": "#ac8982",
+                        "on-tertiary": "#003544",
+                        "surface-container": "#2c1b18",
+                        "primary-fixed-dim": "#ffb4a5",
+                        "on-secondary": "#3e2e00",
+                        "surface": "#1f0f0c",
+                        "on-secondary-fixed": "#251a00",
+                        "background": "#1f0f0c",
+                        "tertiary-fixed": "#baeaff",
+                        "tertiary-container": "#0e9dc3",
+                        "on-surface-variant": "#e5beb6",
+                        "secondary-fixed-dim": "#f0c03e",
+                        "on-primary-fixed-variant": "#8e1300",
+                        "on-surface": "#fbdcd6",
+                        "on-tertiary-fixed-variant": "#004d62",
+                        "surface-dim": "#1f0f0c",
+                        "surface-bright": "#483531",
+                        "on-primary": "#650a00",
+                        "on-background": "#fbdcd6",
+                        "primary-container": "#ff5637",
+                        "on-secondary-container": "#3c2c00",
+                        "on-primary-container": "#590800",
+                        "surface-container-high": "#382622",
+                        "outline-variant": "#5c403a",
+                        "on-primary-fixed": "#3f0400",
+                        "surface-container-lowest": "#190a08",
+                        "secondary-fixed": "#ffdf95",
+                        "on-secondary-fixed-variant": "#594400",
+                        "on-error": "#690005",
+                        "error": "#ffb4ab"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "40px",
+                        "container-margin": "20px",
+                        "sm": "8px",
+                        "gutter": "16px",
+                        "2xl": "64px",
+                        "unit": "4px",
+                        "md": "16px",
+                        "xs": "4px",
+                        "lg": "24px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Anton"],
+                        "headline-lg": ["Anton"],
+                        "body-lg": ["Hanken Grotesk"],
+                        "headline-lg-mobile": ["Anton"],
+                        "body-md": ["Hanken Grotesk"],
+                        "timer-xl": ["Anton"],
+                        "display-lg": ["Anton"],
+                        "label-md": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["32px", { "lineHeight": "36px", "fontWeight": "400" }],
+                        "headline-lg": ["48px", { "lineHeight": "52px", "letterSpacing": "0.03em", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "500" }],
+                        "headline-lg-mobile": ["36px", { "lineHeight": "40px", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "timer-xl": ["120px", { "lineHeight": "110px", "fontWeight": "400" }],
+                        "display-lg": ["80px", { "lineHeight": "80px", "letterSpacing": "0.02em", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600" }]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { background-color: #0F1115; color: #fbdcd6; }
+        .card-surface { background-color: #1A1D24; border: 1px solid #2A2E37; }
+        .card-accent-primary { border-color: #FF4D2E; }
+        .btn-primary { background-color: #FF4D2E; color: white; }
+        .btn-secondary { border: 2px solid #F5C542; color: #F5C542; }
+        .text-primary-accent { color: #FF4D2E; }
+        .text-secondary-accent { color: #F5C542; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen pb-2xl md:pb-0 font-body-md text-body-md">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky bg-surface border-b border-outline-variant flex justify-between items-center px-container-margin py-md z-50">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-surface-container overflow-hidden border border-outline-variant">
+<img alt="Boxer Profile Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAX9nWNZeplwtSlcUFnXdzSVJJ9NdPrIhM7twO3ifScXqfHZ5iUKoXawNZmaoQRdHrBAlQK62tx_1VJIzbHmjKQKreDYi55RPaNdiZ8qPmzNhSxp8jfkqoDo1GluwVW3yXpydvS6PGJ-0C2L6cyEyfQxbSIQ44ytCtQ61eziZEeqWLcg1c_BqRg3jak5IXW_-P9OD8USJWA8vCLNFlM1ahcDtaSbtkEhPlSZ2aJLHF3EgcMJkplLnTX2JIo0MTZT1-yIwFN_RjBpr20">
+</div>
+<span class="font-headline-md text-headline-md text-primary-accent uppercase tracking-wider">RoundLab</span>
+</div>
+<button aria-label="Notifications" class="text-on-surface hover:opacity-80 active:scale-95 transition-transform">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">notifications</span>
+</button>
+</header>
+<main class="px-container-margin py-xl max-w-7xl mx-auto space-y-xl">
+<!-- Welcome Section -->
+<section>
+<h1 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface">HOLA, MARTÍN</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-sm">Listos para el siguiente round.</p>
+</section>
+<!-- Main Action & Active Program -->
+<section class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Primary Action Card (Bento Style) -->
+<div class="card-surface rounded-lg p-lg md:col-span-8 flex flex-col justify-between relative overflow-hidden group">
+<div class="absolute inset-0 z-0 opacity-20 bg-cover bg-center" data-alt="A gritty, high-contrast, black and white photograph of a heavy punching bag in a dimly lit, industrial boxing gym. Sweat and chalk dust linger in the air, catching the harsh directional light. The aesthetic is raw, powerful, and intense, perfectly suited for a high-end combat sports digital application." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAonF5pHrb7ctXuQxLl_THPQUCod50QhE-B5gdbhN7x9VSvhFSTb3zsrZU4hPbXvZ1hK01tOQaqK4heAZqWB2hFOLyDgZDbZueluhc9JDtfNe0bFDg_E8uqO-9GLgdfCJGE692qi07uYYxsV6bJEi5NjAJTzd_OR0JVgud1Tai36Z_UrveRl5rKmdgkjhwPKisiU5KDI4Gp0h80p24OTlIczHDs4Uj85FvJTW6Wvt30DVFVvfRF6Xk30pI_wL2Ef-eFPxckQFwF9HoZ');"></div>
+<div class="relative z-10 flex flex-col h-full gap-lg">
+<div>
+<span class="inline-block bg-primary-container text-on-primary-container font-label-md text-label-md px-sm py-xs rounded uppercase mb-md">Siguiente Sesión</span>
+<h2 class="font-headline-md text-headline-md text-white">SPARRING TÁCTICO</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-xs">Semana 3 / Día 2 • 60 Minutos</p>
+</div>
+<button class="btn-primary font-headline-md text-headline-md uppercase rounded w-full md:w-auto self-start min-h-[56px] px-lg flex items-center justify-center gap-sm active:scale-95 transition-transform">
+<span class="material-symbols-outlined">play_arrow</span>
+                        Iniciar Entrenamiento
+                    </button>
+</div>
+</div>
+<!-- Quick Actions Grid -->
+<div class="md:col-span-4 flex flex-col gap-gutter">
+<button class="card-surface rounded-lg p-md flex items-center justify-between hover:border-[#F5C542] transition-colors group h-full min-h-[80px]">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-secondary-accent group-hover:scale-110 transition-transform">edit_document</span>
+<span class="font-label-md text-label-md text-on-surface uppercase">Registrar Progreso</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">arrow_forward</span>
+</button>
+<button class="card-surface rounded-lg p-md flex items-center justify-between hover:border-[#F5C542] transition-colors group h-full min-h-[80px]">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-secondary-accent group-hover:scale-110 transition-transform">bar_chart</span>
+<span class="font-label-md text-label-md text-on-surface uppercase">Ver Estadísticas</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">arrow_forward</span>
+</button>
+</div>
+</section>
+<!-- Summary Grid (Bento) -->
+<section>
+<h3 class="font-label-md text-label-md text-on-surface-variant uppercase mb-md tracking-widest border-b border-outline-variant pb-xs">Resumen Actual</h3>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-gutter">
+<div class="card-surface rounded-lg p-md flex flex-col gap-sm">
+<div class="flex items-center gap-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]">monitor_weight</span>
+<span class="font-label-md text-label-md uppercase">Peso Actual</span>
+</div>
+<div class="font-headline-md text-headline-md text-on-surface">74.5 <span class="text-body-md text-on-surface-variant">kg</span></div>
+<div class="text-[12px] text-tertiary-fixed-dim font-label-md uppercase mt-auto">-0.5 kg vs semana ant.</div>
+</div>
+<div class="card-surface rounded-lg p-md flex flex-col gap-sm">
+<div class="flex items-center gap-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]">fitness_center</span>
+<span class="font-label-md text-label-md uppercase">Entrenamientos</span>
+</div>
+<div class="font-headline-md text-headline-md text-on-surface">4 <span class="text-body-md text-on-surface-variant">/ 5</span></div>
+<div class="w-full h-1 bg-surface-container-high rounded-full mt-auto overflow-hidden">
+<div class="h-full bg-[#FF4D2E] w-[80%]"></div>
+</div>
+</div>
+<div class="card-surface rounded-lg p-md flex flex-col gap-sm">
+<div class="flex items-center gap-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px]">calendar_month</span>
+<span class="font-label-md text-label-md uppercase">Asistencia</span>
+</div>
+<div class="font-headline-md text-headline-md text-on-surface">82%</div>
+<div class="text-[12px] text-on-surface-variant font-label-md uppercase mt-auto">Últimos 30 días</div>
+</div>
+<div class="card-surface rounded-lg p-md flex flex-col gap-sm card-accent-primary">
+<div class="flex items-center gap-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-[20px] text-primary-accent" style="font-variation-settings: 'FILL' 1;">local_fire_department</span>
+<span class="font-label-md text-label-md uppercase text-primary-accent">Racha</span>
+</div>
+<div class="font-headline-md text-headline-md text-on-surface">12 <span class="text-body-md text-on-surface-variant">días</span></div>
+<div class="text-[12px] text-primary-accent font-label-md uppercase mt-auto">¡Imparable!</div>
+</div>
+</div>
+</section>
+<!-- Recent Activity List -->
+<section>
+<h3 class="font-label-md text-label-md text-on-surface-variant uppercase mb-md tracking-widest border-b border-outline-variant pb-xs">Actividad Reciente</h3>
+<div class="flex flex-col border border-[#2A2E37] rounded-lg overflow-hidden">
+<div class="bg-[#1A1D24] p-md flex items-center justify-between border-b border-[#2A2E37] hover:bg-surface-container-high transition-colors cursor-pointer">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 bg-surface-container rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant">sports_martial_arts</span>
+</div>
+<div>
+<div class="font-label-md text-label-md text-on-surface uppercase">Técnica: Defensa y Contraataque</div>
+<div class="font-body-md text-body-md text-on-surface-variant text-[14px]">Ayer • 45 min • Alta intensidad</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">chevron_right</span>
+</div>
+<div class="bg-[#1A1D24] p-md flex items-center justify-between border-b border-[#2A2E37] hover:bg-surface-container-high transition-colors cursor-pointer">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 bg-surface-container rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant">directions_run</span>
+</div>
+<div>
+<div class="font-label-md text-label-md text-on-surface uppercase">Cardio: Sprints (Pista)</div>
+<div class="font-body-md text-body-md text-on-surface-variant text-[14px]">Lun, 12 Oct • 30 min • Media intensidad</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">chevron_right</span>
+</div>
+<div class="bg-[#1A1D24] p-md flex items-center justify-between hover:bg-surface-container-high transition-colors cursor-pointer">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 bg-surface-container rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-on-surface-variant">fitness_center</span>
+</div>
+<div>
+<div class="font-label-md text-label-md text-on-surface uppercase">Fuerza: Tren Superior</div>
+<div class="font-body-md text-body-md text-on-surface-variant text-[14px]">Sáb, 10 Oct • 60 min • Alta intensidad</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">chevron_right</span>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 h-2xl bg-surface-container dark:bg-surface-container border-t border-outline-variant shadow-[0px_-4px_0px_rgba(0,0,0,0.5)] flex justify-around items-center md:hidden">
+<!-- Active Tab: Home -->
+<a class="flex flex-col items-center justify-center text-secondary border-t-2 border-secondary pt-1 h-full w-full active:scale-90 duration-100" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-label-md text-label-md text-[10px] mt-1">Home</span>
+</a>
+<!-- Inactive Tabs -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant pt-1 h-full w-full hover:text-primary transition-colors active:scale-90 duration-100" href="#">
+<span class="material-symbols-outlined">fitness_center</span>
+<span class="font-label-md text-label-md text-[10px] mt-1">Workouts</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant pt-1 h-full w-full hover:text-primary transition-colors active:scale-90 duration-100" href="#">
+<span class="material-symbols-outlined">monitoring</span>
+<span class="font-label-md text-label-md text-[10px] mt-1">Progress</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant pt-1 h-full w-full hover:text-primary transition-colors active:scale-90 duration-100" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md text-label-md text-[10px] mt-1">Profile</span>
+</a>
+</nav>
+</body></html>

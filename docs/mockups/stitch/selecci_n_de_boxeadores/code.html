@@ -1,0 +1,306 @@
+<!DOCTYPE html><html class="dark" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Selección de Boxeadores - ROUNDLAB</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Hanken+Grotesk:wght@400;500&amp;family=JetBrains+Mono:wght@600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary": "#650a00",
+                        "on-error": "#690005",
+                        "surface-variant": "#43302c",
+                        "on-tertiary-fixed-variant": "#004d62",
+                        "surface-container": "#2c1b18",
+                        "surface-tint": "#ffb4a5",
+                        "primary": "#ffb4a5",
+                        "on-surface": "#fbdcd6",
+                        "primary-container": "#ff5637",
+                        "on-tertiary": "#003544",
+                        "surface-container-low": "#281714",
+                        "tertiary-fixed-dim": "#64d4fc",
+                        "secondary-fixed-dim": "#f0c03e",
+                        "primary-fixed-dim": "#ffb4a5",
+                        "on-background": "#fbdcd6",
+                        "on-surface-variant": "#e5beb6",
+                        "secondary-container": "#ba9000",
+                        "tertiary-container": "#0e9dc3",
+                        "surface-bright": "#483531",
+                        "surface-container-lowest": "#190a08",
+                        "surface": "#1f0f0c",
+                        "surface-dim": "#1f0f0c",
+                        "secondary-fixed": "#ffdf95",
+                        "on-secondary-container": "#3c2c00",
+                        "on-primary-container": "#590800",
+                        "on-primary-fixed": "#3f0400",
+                        "outline-variant": "#5c403a",
+                        "error-container": "#93000a",
+                        "on-tertiary-fixed": "#001f29",
+                        "secondary": "#f0c03e",
+                        "tertiary-fixed": "#baeaff",
+                        "error": "#ffb4ab",
+                        "on-tertiary-container": "#002e3c",
+                        "on-secondary-fixed-variant": "#594400",
+                        "inverse-surface": "#fbdcd6",
+                        "inverse-on-surface": "#3f2c28",
+                        "on-primary-fixed-variant": "#8e1300",
+                        "on-secondary": "#3e2e00",
+                        "tertiary": "#64d4fc",
+                        "inverse-primary": "#ba1b00",
+                        "background": "#1f0f0c",
+                        "surface-container-high": "#382622",
+                        "outline": "#ac8982",
+                        "on-error-container": "#ffdad6",
+                        "primary-fixed": "#ffdad3",
+                        "surface-container-highest": "#43302c",
+                        "on-secondary-fixed": "#251a00"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "16px",
+                        "xs": "4px",
+                        "container-margin": "20px",
+                        "lg": "24px",
+                        "md": "16px",
+                        "unit": "4px",
+                        "sm": "8px",
+                        "xl": "40px",
+                        "2xl": "64px"
+                    },
+                    "fontFamily": {
+                        "headline-lg": ["Anton"],
+                        "timer-xl": ["Anton"],
+                        "headline-md": ["Anton"],
+                        "label-md": ["JetBrains Mono"],
+                        "body-lg": ["Hanken Grotesk"],
+                        "body-md": ["Hanken Grotesk"],
+                        "headline-lg-mobile": ["Anton"],
+                        "display-lg": ["Anton"]
+                    },
+                    "fontSize": {
+                        "headline-lg": ["48px", { "lineHeight": "52px", "letterSpacing": "0.03em", "fontWeight": "400" }],
+                        "timer-xl": ["120px", { "lineHeight": "110px", "fontWeight": "400" }],
+                        "headline-md": ["32px", { "lineHeight": "36px", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "500" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["36px", { "lineHeight": "40px", "fontWeight": "400" }],
+                        "display-lg": ["80px", { "lineHeight": "80px", "letterSpacing": "0.02em", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined[data-weight="fill"] {
+            font-variation-settings: 'FILL' 1;
+        }
+        
+        /* Custom Checkbox Styling for the Boxer Cards */
+        .boxer-checkbox:checked + div {
+            border-color: #ff5637; /* primary-container */
+            background-color: #2c1b18; /* surface-container */
+        }
+        .boxer-checkbox:checked + div .check-icon {
+            opacity: 1;
+            transform: scale(1);
+        }
+        .check-icon {
+            opacity: 0;
+            transform: scale(0.5);
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen flex flex-col font-body-md">
+<!-- TopAppBar -->
+<header class="bg-background dark:bg-background text-primary dark:text-primary docked full-width top-0 border-b border-outline-variant flat no shadows transition-colors duration-200 flex justify-between items-center w-full px-container-margin h-16 sticky z-40">
+<div class="flex items-center gap-md">
+<button class="text-on-surface-variant hover:bg-surface-variant rounded-full p-2 flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h1 class="text-headline-md font-headline-md text-primary tracking-wider">ROUNDLAB</h1>
+</div>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-outline-variant">
+<img alt="Coach Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFjKhkYa6vCmte37havjTUP3x9UOKVD4Z_R7dvz5LcG8P9r7YwpCKiEWf_bRJAZowEZBwyxy9Z8HwnUEwNIfaVfRbQlncpGT8wLTKSV9KPD1Sg_PEMO7-CU1qrLcME2zV1a3BjAVadB6gnZizJlYT6V3lcgdlE3Y7iLxH7CvLu5kTAt0Y2Ns1JpKEtc8CDNqiescs2H4x0MCE17t16unkPyl-ghHa3ZVymJRQJ1em7H1Xz_KZhdArEVBomhIaxv-ULHEzAevsU78Il">
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow px-container-margin py-lg pb-32">
+<div class="mb-lg">
+<h2 class="text-headline-md font-headline-md text-on-background mb-sm">Seleccionar participantes</h2>
+<p class="text-body-md font-body-md text-on-surface-variant">Selecciona los boxeadores para esta sesión.</p>
+</div>
+<!-- Search & Filter Controls -->
+<div class="space-y-md mb-xl">
+<!-- Search Bar -->
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full bg-surface-container text-on-surface font-body-md h-14 pl-12 pr-4 rounded-lg border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors placeholder:text-on-surface-variant" placeholder="Buscar boxeador..." type="text">
+</div>
+<!-- Quick Filters (Horizontal Scroll on Mobile) -->
+<div class="flex gap-sm overflow-x-auto pb-2 scrollbar-hide -mx-container-margin px-container-margin md:mx-0 md:px-0">
+<button class="whitespace-nowrap px-4 py-2 rounded-full bg-primary text-on-primary font-label-md text-label-md transition-colors">Todos</button>
+<button class="whitespace-nowrap px-4 py-2 rounded-full bg-surface-container border border-outline-variant text-on-surface hover:border-primary-container font-label-md text-label-md transition-colors">Presentes</button>
+<button class="whitespace-nowrap px-4 py-2 rounded-full bg-surface-container border border-outline-variant text-on-surface hover:border-primary-container font-label-md text-label-md transition-colors">Principiantes</button>
+<button class="whitespace-nowrap px-4 py-2 rounded-full bg-surface-container border border-outline-variant text-on-surface hover:border-primary-container font-label-md text-label-md transition-colors">Avanzados</button>
+</div>
+</div>
+<!-- Boxers Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-md">
+<!-- Boxer Card 1 (Selected) -->
+<label class="cursor-pointer relative block">
+<input checked="" class="boxer-checkbox sr-only" type="checkbox">
+<div class="bg-[#1A1D24] border border-outline-variant rounded-xl p-md flex items-center justify-between transition-all duration-200 h-24 hover:border-on-surface-variant">
+<div class="flex items-center gap-md">
+<div class="w-14 h-14 rounded-full bg-surface-variant flex items-center justify-center text-body-lg font-body-lg text-on-surface overflow-hidden">
+<img alt="Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCYePdWZxEElRdtdKzHefIK6UqqTo4C61pRRw57tJevgPWlMp2b6BM_r508D8bCGLOoXrXoWhOoZbBkUfpdfOLHQztEojMaXog-4MNZ_vOBuonFEm6vN_V_kZrkG_TLx2qP5wAxFgEI4DUiCQZVQuAaPsz8fV96R7bi9r9tFejZimaquI5tam9PscAiSlx2tlNbKQLNFymRM75A9o7sw-Clq8aBz80S8_bLovL522NiuJ7nAn8qSZZOHNAhSqzNCqS7AqimEi8xfdaJ">
+</div>
+<div>
+<h3 class="text-body-lg font-body-lg text-on-surface font-semibold">Martín Rodríguez</h3>
+<div class="flex items-center gap-xs mt-1">
+<span class="px-2 py-0.5 rounded bg-tertiary-container/20 text-tertiary text-xs font-label-md">Avanzado</span>
+<span class="flex items-center gap-1 text-xs text-on-surface-variant"><span class="material-symbols-outlined text-[14px]" data-weight="fill">fiber_manual_record</span>Presente</span>
+</div>
+</div>
+</div>
+<div class="w-8 h-8 rounded-full border-2 border-outline-variant flex items-center justify-center bg-transparent">
+<span class="material-symbols-outlined check-icon text-primary-container" data-weight="fill">check_circle</span>
+</div>
+</div>
+</label>
+<!-- Boxer Card 2 -->
+<label class="cursor-pointer relative block">
+<input class="boxer-checkbox sr-only" type="checkbox">
+<div class="bg-[#1A1D24] border border-outline-variant rounded-xl p-md flex items-center justify-between transition-all duration-200 h-24 hover:border-on-surface-variant">
+<div class="flex items-center gap-md">
+<div class="w-14 h-14 rounded-full bg-surface-variant flex items-center justify-center text-body-lg font-body-lg text-on-surface">
+                            SP
+                        </div>
+<div>
+<h3 class="text-body-lg font-body-lg text-on-surface font-semibold">Sofía Pereira</h3>
+<div class="flex items-center gap-xs mt-1">
+<span class="px-2 py-0.5 rounded bg-secondary-container/20 text-secondary text-xs font-label-md">Intermedio</span>
+</div>
+</div>
+</div>
+<div class="w-8 h-8 rounded-full border-2 border-outline-variant flex items-center justify-center bg-transparent">
+<span class="material-symbols-outlined check-icon text-primary-container" data-weight="fill">check_circle</span>
+</div>
+</div>
+</label>
+<!-- Boxer Card 3 (Selected) -->
+<label class="cursor-pointer relative block">
+<input checked="" class="boxer-checkbox sr-only" type="checkbox">
+<div class="bg-[#1A1D24] border border-outline-variant rounded-xl p-md flex items-center justify-between transition-all duration-200 h-24 hover:border-on-surface-variant">
+<div class="flex items-center gap-md">
+<div class="w-14 h-14 rounded-full bg-surface-variant flex items-center justify-center text-body-lg font-body-lg text-on-surface overflow-hidden">
+<img alt="Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAc-LBDSo2OnryulJrCCyGWLdkOYOUo931imwth6wIUWNo971l2npiAoYXUz0Y9oiDKAUiq2KrGlc1hJPNtl6tLouk_z024TUgvI4blmVYUa4YN2hue0D71Z8eNF4GXapaNOf8eljU_FhqxFn7_a4Hao2byKfAiUEUy1WXVTV-w-Z3OEcC12jp8PU_CUelm17KGn-FnHxA99gSzQeOPexF_C_O1dqFxlRY182RNGS9qAKrP_dKAWpHkkfDKtwg9hyn4NLcfOkoudcTu">
+</div>
+<div>
+<h3 class="text-body-lg font-body-lg text-on-surface font-semibold">Diego Fernández</h3>
+<div class="flex items-center gap-xs mt-1">
+<span class="px-2 py-0.5 rounded bg-surface-variant text-on-surface-variant text-xs font-label-md">Principiante</span>
+<span class="flex items-center gap-1 text-xs text-on-surface-variant"><span class="material-symbols-outlined text-[14px]" data-weight="fill">fiber_manual_record</span>Presente</span>
+</div>
+</div>
+</div>
+<div class="w-8 h-8 rounded-full border-2 border-outline-variant flex items-center justify-center bg-transparent">
+<span class="material-symbols-outlined check-icon text-primary-container" data-weight="fill">check_circle</span>
+</div>
+</div>
+</label>
+<!-- Boxer Card 4 -->
+<label class="cursor-pointer relative block">
+<input class="boxer-checkbox sr-only" type="checkbox">
+<div class="bg-[#1A1D24] border border-outline-variant rounded-xl p-md flex items-center justify-between transition-all duration-200 h-24 hover:border-on-surface-variant">
+<div class="flex items-center gap-md">
+<div class="w-14 h-14 rounded-full bg-surface-variant flex items-center justify-center text-body-lg font-body-lg text-on-surface">
+                            LG
+                        </div>
+<div>
+<h3 class="text-body-lg font-body-lg text-on-surface font-semibold">Lucía Gómez</h3>
+<div class="flex items-center gap-xs mt-1">
+<span class="px-2 py-0.5 rounded bg-secondary-container/20 text-secondary text-xs font-label-md">Intermedio</span>
+</div>
+</div>
+</div>
+<div class="w-8 h-8 rounded-full border-2 border-outline-variant flex items-center justify-center bg-transparent">
+<span class="material-symbols-outlined check-icon text-primary-container" data-weight="fill">check_circle</span>
+</div>
+</div>
+</label>
+<!-- Boxer Card 5 (Selected) -->
+<label class="cursor-pointer relative block">
+<input checked="" class="boxer-checkbox sr-only" type="checkbox">
+<div class="bg-[#1A1D24] border border-outline-variant rounded-xl p-md flex items-center justify-between transition-all duration-200 h-24 hover:border-on-surface-variant">
+<div class="flex items-center gap-md">
+<div class="w-14 h-14 rounded-full bg-surface-variant flex items-center justify-center text-body-lg font-body-lg text-on-surface">
+                            FS
+                        </div>
+<div>
+<h3 class="text-body-lg font-body-lg text-on-surface font-semibold">Facundo Silva</h3>
+<div class="flex items-center gap-xs mt-1">
+<span class="px-2 py-0.5 rounded bg-tertiary-container/20 text-tertiary text-xs font-label-md">Avanzado</span>
+</div>
+</div>
+</div>
+<div class="w-8 h-8 rounded-full border-2 border-outline-variant flex items-center justify-center bg-transparent">
+<span class="material-symbols-outlined check-icon text-primary-container" data-weight="fill">check_circle</span>
+</div>
+</div>
+</label>
+<!-- Boxer Card 6 (Selected) -->
+<label class="cursor-pointer relative block">
+<input checked="" class="boxer-checkbox sr-only" type="checkbox">
+<div class="bg-[#1A1D24] border border-outline-variant rounded-xl p-md flex items-center justify-between transition-all duration-200 h-24 hover:border-on-surface-variant">
+<div class="flex items-center gap-md">
+<div class="w-14 h-14 rounded-full bg-surface-variant flex items-center justify-center text-body-lg font-body-lg text-on-surface overflow-hidden">
+<img alt="Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCoKFTvzIew8cmJJjodzPc-sqF6E5Xea29P9V7JskGujC5Yhw3wQ8xGUXqIUqwFuMU6EkIN3mxdFKMOrZeaL2IeHYg5MPVOHeRKZMdxueQWo5Wxw8G9m8I-ddM38-WcgGkGvgQ2_hrtdvb1pgUzoBY3R4oa-5vukm-aQROmtElGsKf3kbixzZP_a-rLCeZkNL93KOD7fjmj51qfLt1Vxc9vlsgYQ4SCRoY8_tIMuZKmQrWBLFiqe0iJFTqfuAvIhwAI2nRL3T99D_Uy">
+</div>
+<div>
+<h3 class="text-body-lg font-body-lg text-on-surface font-semibold">Camila Torres</h3>
+<div class="flex items-center gap-xs mt-1">
+<span class="px-2 py-0.5 rounded bg-surface-variant text-on-surface-variant text-xs font-label-md">Principiante</span>
+<span class="flex items-center gap-1 text-xs text-on-surface-variant"><span class="material-symbols-outlined text-[14px]" data-weight="fill">fiber_manual_record</span>Presente</span>
+</div>
+</div>
+</div>
+<div class="w-8 h-8 rounded-full border-2 border-outline-variant flex items-center justify-center bg-transparent">
+<span class="material-symbols-outlined check-icon text-primary-container" data-weight="fill">check_circle</span>
+</div>
+</div>
+</label>
+</div>
+</main>
+<!-- Contextual Bottom Action Bar -->
+<div class="fixed bottom-0 left-0 w-full bg-[#1A1D24] border-t border-outline-variant p-md z-50 shadow-[0px_-4px_0px_rgba(0,0,0,0.5)]">
+<div class="max-w-7xl mx-auto flex items-center justify-between">
+<div class="flex flex-col">
+<span class="text-on-surface-variant font-label-md text-label-md">SELECCIONADOS</span>
+<span class="text-headline-md font-headline-md text-on-surface">4</span>
+</div>
+<button class="bg-[#FF4D2E] hover:bg-primary-container text-white font-headline-md text-[24px] uppercase px-xl py-3 min-h-[56px] rounded flex items-center justify-center transition-colors">
+                CONTINUAR
+            </button>
+</div>
+</div>
+</body></html>

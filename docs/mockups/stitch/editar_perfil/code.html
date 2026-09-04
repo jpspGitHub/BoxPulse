@@ -1,0 +1,222 @@
+<!DOCTYPE html><html class="dark" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Edit Profile - RoundLab</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Hanken+Grotesk:wght@400;500;700&amp;family=JetBrains+Mono:wght@600&amp;display=swap" rel="stylesheet">
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "inverse-on-surface": "#3f2c28",
+                    "on-tertiary-container": "#002e3c",
+                    "surface-tint": "#ffb4a5",
+                    "surface-container-low": "#281714",
+                    "surface-container-highest": "#43302c",
+                    "tertiary-fixed-dim": "#64d4fc",
+                    "secondary": "#f0c03e",
+                    "inverse-surface": "#fbdcd6",
+                    "inverse-primary": "#ba1b00",
+                    "on-tertiary-fixed": "#001f29",
+                    "surface-variant": "#43302c",
+                    "primary": "#ffb4a5",
+                    "error-container": "#93000a",
+                    "primary-fixed": "#ffdad3",
+                    "secondary-container": "#ba9000",
+                    "on-error-container": "#ffdad6",
+                    "tertiary": "#64d4fc",
+                    "outline": "#ac8982",
+                    "on-tertiary": "#003544",
+                    "surface-container": "#2c1b18",
+                    "primary-fixed-dim": "#ffb4a5",
+                    "on-secondary": "#3e2e00",
+                    "surface": "#1f0f0c",
+                    "on-secondary-fixed": "#251a00",
+                    "background": "#1f0f0c",
+                    "tertiary-fixed": "#baeaff",
+                    "tertiary-container": "#0e9dc3",
+                    "on-surface-variant": "#e5beb6",
+                    "secondary-fixed-dim": "#f0c03e",
+                    "on-primary-fixed-variant": "#8e1300",
+                    "on-surface": "#fbdcd6",
+                    "on-tertiary-fixed-variant": "#004d62",
+                    "surface-dim": "#1f0f0c",
+                    "surface-bright": "#483531",
+                    "on-primary": "#650a00",
+                    "on-background": "#fbdcd6",
+                    "primary-container": "#ff5637",
+                    "on-secondary-container": "#3c2c00",
+                    "on-primary-container": "#590800",
+                    "surface-container-high": "#382622",
+                    "outline-variant": "#5c403a",
+                    "on-primary-fixed": "#3f0400",
+                    "surface-container-lowest": "#190a08",
+                    "secondary-fixed": "#ffdf95",
+                    "on-secondary-fixed-variant": "#594400",
+                    "on-error": "#690005",
+                    "error": "#ffb4ab"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xl": "40px",
+                    "container-margin": "20px",
+                    "sm": "8px",
+                    "gutter": "16px",
+                    "2xl": "64px",
+                    "unit": "4px",
+                    "md": "16px",
+                    "xs": "4px",
+                    "lg": "24px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Anton"],
+                    "headline-lg": ["Anton"],
+                    "body-lg": ["Hanken Grotesk"],
+                    "headline-lg-mobile": ["Anton"],
+                    "body-md": ["Hanken Grotesk"],
+                    "timer-xl": ["Anton"],
+                    "display-lg": ["Anton"],
+                    "label-md": ["JetBrains Mono"]
+            },
+            "fontSize": {
+                    "headline-md": ["32px", {"lineHeight": "36px", "fontWeight": "400"}],
+                    "headline-lg": ["48px", {"lineHeight": "52px", "letterSpacing": "0.03em", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "500"}],
+                    "headline-lg-mobile": ["36px", {"lineHeight": "40px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "timer-xl": ["120px", {"lineHeight": "110px", "fontWeight": "400"}],
+                    "display-lg": ["80px", {"lineHeight": "80px", "letterSpacing": "0.02em", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.05em", "fontWeight": "600"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        /* Custom scrollbar for industrial feel */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1f0f0c; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #43302c; 
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #5c403a; 
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col antialiased selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopAppBar (Shared Component) -->
+<header class="w-full top-0 sticky bg-surface border-b border-outline-variant z-40">
+<div class="flex justify-between items-center px-container-margin py-md">
+<!-- Leading: Avatar/Back Action for Task Screen -->
+<button class="hover:opacity-80 active:scale-95 transition-transform flex items-center justify-center w-12 h-12 rounded-full border border-outline-variant bg-surface-container text-on-surface">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">arrow_back</span>
+</button>
+<!-- Headline -->
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary uppercase tracking-wider hidden md:block md:font-headline-lg md:text-headline-lg">
+                RoundLab
+            </h1>
+<h1 class="font-headline-lg-mobile text-headline-lg-mobile text-primary uppercase tracking-wider md:hidden">
+                RoundLab
+            </h1>
+<!-- Trailing: Hidden for edit profile to focus on task, replaced with an empty div for flex spacing -->
+<div class="w-12 h-12"></div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="flex-grow flex flex-col px-container-margin py-xl max-w-3xl mx-auto w-full">
+<!-- Page Title -->
+<div class="mb-xl">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-on-background uppercase tracking-wider md:font-headline-lg md:text-headline-lg">
+                Edit Profile
+            </h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-sm">Update your fighter vitals.</p>
+</div>
+<!-- Form Card (Industrial Construction) -->
+<div class="bg-surface-container border border-outline-variant p-lg md:p-xl flex flex-col gap-xl">
+<!-- Avatar Uploader -->
+<div class="flex flex-col items-center justify-center gap-md">
+<div class="relative group cursor-pointer">
+<!-- Avatar Preview Ring -->
+<div class="w-32 h-32 md:w-40 md:h-40 rounded-full border-2 border-dashed border-outline-variant flex items-center justify-center overflow-hidden bg-surface-container-lowest group-hover:border-primary-container transition-colors relative z-10">
+<!-- Placeholder Image / Current Avatar -->
+<div class="absolute inset-0 bg-surface-container flex items-center justify-center z-0 opacity-50 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-4xl text-on-surface-variant" style="font-variation-settings: 'FILL' 1;">person</span>
+</div>
+<img alt="Avatar" class="w-full h-full object-cover relative z-10 mix-blend-luminosity opacity-80" data-alt="A rugged, high-contrast portrait of a boxer in a dimly lit gym, focusing on intense eyes and sweat. The lighting is cinematic, highlighting the grit and texture of the skin against a deep, dark industrial background. The overall tone is raw, energetic, and perfectly aligns with a dark-mode, combat sports aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDmVpp6o3Kt2uiaYTUbTjUfCOg40CgxeQNZZReDuB9hidTbmMwvMmS0b2Hw8gVkkoQRla8eHLY_1abhEk-a4mfh3ArDBTLUaHX4Lfnw6i01uJvzwBaB64BGScjdiyXHSUFCiVWsnDNmhYyDH1UZvM3iAXzkK_ht8dB2TFp_YiTOcSYI_hcX12Aiw3vce8JXDpOeqRO9rFaVnkV3wOO-csAudwS4sdG5omsFNxVU6VCHCllHWptW3R0TlYRE4Wc3JGmaI46K84mJ7eBp">
+<!-- Overlay Icon on Hover -->
+<div class="absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-20">
+<span class="material-symbols-outlined text-on-background" style="font-variation-settings: 'FILL' 1;">add_a_photo</span>
+</div>
+</div>
+</div>
+<span class="font-label-md text-label-md text-primary uppercase tracking-widest">Update Photo</span>
+</div>
+<!-- Input Fields -->
+<form class="flex flex-col gap-lg mt-sm">
+<!-- First Name -->
+<div class="flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest pl-unit" for="firstName">Name</label>
+<input class="bg-surface-container-lowest border-0 border-b-2 border-outline-variant text-on-background font-body-lg h-[56px] px-md focus:ring-0 focus:border-primary-container transition-colors w-full" id="firstName" type="text" value="Jax">
+</div>
+<!-- Last Name -->
+<div class="flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest pl-unit" for="lastName">Last Name</label>
+<input class="bg-surface-container-lowest border-0 border-b-2 border-outline-variant text-on-background font-body-lg h-[56px] px-md focus:ring-0 focus:border-primary-container transition-colors w-full" id="lastName" type="text" value="Ironheart">
+</div>
+<!-- Phone Number -->
+<div class="flex flex-col gap-xs">
+<label class="font-label-md text-label-md text-on-surface-variant uppercase tracking-widest pl-unit" for="phone">Phone</label>
+<input class="bg-surface-container-lowest border-0 border-b-2 border-outline-variant text-on-background font-body-lg h-[56px] px-md focus:ring-0 focus:border-primary-container transition-colors w-full" id="phone" type="tel" value="+1 (555) 019-8234">
+</div>
+</form>
+</div>
+<!-- Action Buttons (Sticky on mobile, static on desktop) -->
+<div class="mt-xl flex flex-col-reverse md:flex-row md:justify-end gap-md pb-xl">
+<!-- Ghost Button -->
+<button class="bg-transparent text-on-background border border-outline-variant hover:border-primary-container hover:text-primary-container font-headline-md text-headline-md uppercase min-h-[56px] px-xl flex items-center justify-center transition-all active:scale-95 w-full md:w-auto" type="button">
+                Cancelar
+            </button>
+<!-- Primary Button -->
+<button class="bg-primary-container text-on-primary-container font-headline-md text-headline-md uppercase min-h-[56px] px-xl flex items-center justify-center hover:opacity-90 transition-opacity active:scale-95 w-full md:w-auto" type="submit">
+                Guardar Cambios
+            </button>
+</div>
+</main>
+<!-- BottomNavBar is SUPPRESSED as this is a task-focused screen (Edit Profile) -->
+<script>
+        // Simple script to handle visual feedback on form focus
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('focus', () => {
+                input.parentElement.querySelector('label').classList.add('text-primary-container');
+            });
+            input.addEventListener('blur', () => {
+                input.parentElement.querySelector('label').classList.remove('text-primary-container');
+            });
+        });
+    </script>
+</body></html>

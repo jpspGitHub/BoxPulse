@@ -1,0 +1,283 @@
+<!DOCTYPE html><html class="dark" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Configuración por Cronómetro</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=JetBrains+Mono:wght@600&amp;family=Hanken+Grotesk:wght@400;500&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                            "on-primary": "#650a00",
+                            "on-error": "#690005",
+                            "surface-variant": "#43302c",
+                            "on-tertiary-fixed-variant": "#004d62",
+                            "surface-container": "#2c1b18",
+                            "surface-tint": "#ffb4a5",
+                            "primary": "#ffb4a5",
+                            "on-surface": "#fbdcd6",
+                            "primary-container": "#ff5637",
+                            "on-tertiary": "#003544",
+                            "surface-container-low": "#281714",
+                            "tertiary-fixed-dim": "#64d4fc",
+                            "secondary-fixed-dim": "#f0c03e",
+                            "primary-fixed-dim": "#ffb4a5",
+                            "on-background": "#fbdcd6",
+                            "on-surface-variant": "#e5beb6",
+                            "secondary-container": "#ba9000",
+                            "tertiary-container": "#0e9dc3",
+                            "surface-bright": "#483531",
+                            "surface-container-lowest": "#190a08",
+                            "surface": "#1f0f0c",
+                            "surface-dim": "#1f0f0c",
+                            "secondary-fixed": "#ffdf95",
+                            "on-secondary-container": "#3c2c00",
+                            "on-primary-container": "#590800",
+                            "on-primary-fixed": "#3f0400",
+                            "outline-variant": "#5c403a",
+                            "error-container": "#93000a",
+                            "on-tertiary-fixed": "#001f29",
+                            "secondary": "#f0c03e",
+                            "tertiary-fixed": "#baeaff",
+                            "error": "#ffb4ab",
+                            "on-tertiary-container": "#002e3c",
+                            "on-secondary-fixed-variant": "#594400",
+                            "inverse-surface": "#fbdcd6",
+                            "inverse-on-surface": "#3f2c28",
+                            "on-primary-fixed-variant": "#8e1300",
+                            "on-secondary": "#3e2e00",
+                            "tertiary": "#64d4fc",
+                            "inverse-primary": "#ba1b00",
+                            "background": "#1f0f0c",
+                            "surface-container-high": "#382622",
+                            "outline": "#ac8982",
+                            "on-error-container": "#ffdad6",
+                            "primary-fixed": "#ffdad3",
+                            "surface-container-highest": "#43302c",
+                            "on-secondary-fixed": "#251a00"
+                    },
+                    "borderRadius": {
+                            "DEFAULT": "0.25rem",
+                            "lg": "0.5rem",
+                            "xl": "0.75rem",
+                            "full": "9999px"
+                    },
+                    "spacing": {
+                            "gutter": "16px",
+                            "xs": "4px",
+                            "container-margin": "20px",
+                            "lg": "24px",
+                            "md": "16px",
+                            "unit": "4px",
+                            "sm": "8px",
+                            "xl": "40px",
+                            "2xl": "64px"
+                    },
+                    "fontFamily": {
+                            "headline-lg": [
+                                    "Anton"
+                            ],
+                            "timer-xl": [
+                                    "Anton"
+                            ],
+                            "headline-md": [
+                                    "Anton"
+                            ],
+                            "label-md": [
+                                    "JetBrains Mono"
+                            ],
+                            "body-lg": [
+                                    "Hanken Grotesk"
+                            ],
+                            "body-md": [
+                                    "Hanken Grotesk"
+                            ],
+                            "headline-lg-mobile": [
+                                    "Anton"
+                            ],
+                            "display-lg": [
+                                    "Anton"
+                            ]
+                    },
+                    "fontSize": {
+                            "headline-lg": [
+                                    "48px",
+                                    {
+                                            "lineHeight": "52px",
+                                            "letterSpacing": "0.03em",
+                                            "fontWeight": "400"
+                                    }
+                            ],
+                            "timer-xl": [
+                                    "120px",
+                                    {
+                                            "lineHeight": "110px",
+                                            "fontWeight": "400"
+                                    }
+                            ],
+                            "headline-md": [
+                                    "32px",
+                                    {
+                                            "lineHeight": "36px",
+                                            "fontWeight": "400"
+                                    }
+                            ],
+                            "label-md": [
+                                    "14px",
+                                    {
+                                            "lineHeight": "20px",
+                                            "letterSpacing": "0.05em",
+                                            "fontWeight": "600"
+                                    }
+                            ],
+                            "body-lg": [
+                                    "18px",
+                                    {
+                                            "lineHeight": "28px",
+                                            "fontWeight": "500"
+                                    }
+                            ],
+                            "body-md": [
+                                    "16px",
+                                    {
+                                            "lineHeight": "24px",
+                                            "fontWeight": "400"
+                                    }
+                            ],
+                            "headline-lg-mobile": [
+                                    "36px",
+                                    {
+                                            "lineHeight": "40px",
+                                            "fontWeight": "400"
+                                    }
+                            ],
+                            "display-lg": [
+                                    "80px",
+                                    {
+                                            "lineHeight": "80px",
+                                            "letterSpacing": "0.02em",
+                                            "fontWeight": "400"
+                                    }
+                            ]
+                    }
+            },
+                },
+        }
+    </script>
+<style>
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col antialiased selection:bg-primary-container selection:text-on-primary-container">
+<!-- Top App Bar - Linear Transactional (Close Action) -->
+<header class="flex justify-between items-center w-full px-container-margin h-16 border-b border-outline-variant bg-background z-50">
+<button aria-label="Close" class="w-12 h-12 flex items-center justify-center text-primary transition-colors duration-200 hover:bg-surface-variant rounded-full">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">close</span>
+</button>
+<h1 class="text-headline-md font-headline-md text-primary tracking-wider uppercase">ROUNDLAB</h1>
+<div class="w-12 h-12"></div> <!-- Spacer for centering -->
+</header>
+<!-- Main Content -->
+<main class="flex-grow flex flex-col px-container-margin py-lg gap-xl max-w-3xl mx-auto w-full pb-32">
+<!-- Header Section -->
+<section class="flex flex-col gap-sm">
+<h2 class="text-headline-lg-mobile md:text-headline-lg font-headline-lg-mobile md:font-headline-lg uppercase text-on-surface">Configurar cronómetro</h2>
+<div class="inline-flex items-center gap-2 bg-surface-container py-2 px-4 rounded-full w-fit border border-outline-variant">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">fitness_center</span>
+<span class="text-label-md font-label-md text-on-surface-variant">Bolsa - 4 Boxeadores</span>
+</div>
+</section>
+<!-- Config Grid -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<!-- Round Length -->
+<div class="bg-surface p-md rounded-lg border border-outline-variant flex flex-col gap-sm">
+<label class="text-label-md font-label-md text-on-surface-variant uppercase flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">schedule</span> Largo del round
+                </label>
+<div class="flex items-center justify-between bg-surface-container rounded-lg p-2">
+<button aria-label="Decrease" class="w-12 h-12 bg-surface flex items-center justify-center rounded-md border border-outline-variant text-primary active:border-primary transition-colors">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">remove</span>
+</button>
+<span class="text-headline-md font-headline-md tracking-wider">3:00</span>
+<button aria-label="Increase" class="w-12 h-12 bg-surface flex items-center justify-center rounded-md border border-outline-variant text-primary active:border-primary transition-colors">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">add</span>
+</button>
+</div>
+</div>
+<!-- Rest Length -->
+<div class="bg-surface p-md rounded-lg border border-outline-variant flex flex-col gap-sm">
+<label class="text-label-md font-label-md text-on-surface-variant uppercase flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">pause_circle</span> Descanso
+                </label>
+<div class="flex items-center justify-between bg-surface-container rounded-lg p-2">
+<button aria-label="Decrease" class="w-12 h-12 bg-surface flex items-center justify-center rounded-md border border-outline-variant text-secondary active:border-secondary transition-colors">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">remove</span>
+</button>
+<span class="text-headline-md font-headline-md tracking-wider">1:00</span>
+<button aria-label="Increase" class="w-12 h-12 bg-surface flex items-center justify-center rounded-md border border-outline-variant text-secondary active:border-secondary transition-colors">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">add</span>
+</button>
+</div>
+</div>
+<!-- Rounds Count -->
+<div class="bg-surface p-md rounded-lg border border-outline-variant flex flex-col gap-sm">
+<label class="text-label-md font-label-md text-on-surface-variant uppercase flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">repeat</span> Rounds
+                </label>
+<div class="flex items-center justify-between bg-surface-container rounded-lg p-2">
+<button aria-label="Decrease" class="w-12 h-12 bg-surface flex items-center justify-center rounded-md border border-outline-variant text-on-surface active:border-primary transition-colors">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">remove</span>
+</button>
+<span class="text-headline-md font-headline-md tracking-wider">5</span>
+<button aria-label="Increase" class="w-12 h-12 bg-surface flex items-center justify-center rounded-md border border-outline-variant text-on-surface active:border-primary transition-colors">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">add</span>
+</button>
+</div>
+</div>
+<!-- Initial Prep -->
+<div class="bg-surface p-md rounded-lg border border-outline-variant flex flex-col gap-sm">
+<label class="text-label-md font-label-md text-on-surface-variant uppercase flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">hourglass_empty</span> Prep inicial
+                </label>
+<div class="flex items-center justify-between bg-surface-container rounded-lg p-2">
+<button aria-label="Decrease" class="w-12 h-12 bg-surface flex items-center justify-center rounded-md border border-outline-variant text-tertiary active:border-tertiary transition-colors">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">remove</span>
+</button>
+<span class="text-headline-md font-headline-md tracking-wider">10s</span>
+<button aria-label="Increase" class="w-12 h-12 bg-surface flex items-center justify-center rounded-md border border-outline-variant text-tertiary active:border-tertiary transition-colors">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">add</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Summary & Final Action -->
+<section class="mt-auto flex flex-col gap-md">
+<div class="bg-surface-container-high border border-outline-variant rounded-lg p-md text-center">
+<p class="text-body-lg font-body-lg text-on-surface-variant">
+<span class="text-primary font-bold">5</span> rounds de <span class="text-primary font-bold">3:00</span>. Total: <span class="text-secondary font-bold text-xl">19:00</span>
+</p>
+</div>
+<!-- Sticky Bottom Button for Mobile, regular for Desktop -->
+<div class="fixed bottom-0 left-0 w-full p-container-margin bg-background border-t border-outline-variant md:static md:bg-transparent md:border-none md:p-0 z-40">
+<button class="w-full h-14 bg-primary-container text-on-primary-container flex items-center justify-center rounded-md font-headline-md text-headline-md uppercase tracking-wider hover:bg-primary transition-colors duration-200 shadow-[0px_4px_0px_rgba(0,0,0,0.5)] active:translate-y-1 active:shadow-none">
+                    INICIAR CRONÓMETRO
+                </button>
+</div>
+</section>
+</main>
+</body></html>
